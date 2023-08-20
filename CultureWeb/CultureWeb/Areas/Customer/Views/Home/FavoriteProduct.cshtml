@@ -1,0 +1,229 @@
+﻿@using CultureWeb.Models;
+@using CultureWeb.Utility
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+
+@*@using X.PagedList.Mvc;*@
+@using X.PagedList.Mvc.Core;
+@*@model List<Products>*@
+@model List<Products>
+@{
+    var subCategories = @ViewBag.SubCategories;
+
+}
+@{
+    //var userRole = HttpContextAccessor.HttpContext.Session.GetString("roleName");
+    int count = 0;
+    List<Products> products = HttpContextAccessor.HttpContext.Session.Get<List<Products>>("products");
+    if (products == null)
+    {
+        products = new List<Products>();
+    }
+    count = products.Count();
+
+}
+
+@*!-- product-detail content -->*@
+<div class="bg-main bg-light pb-3">
+    <div class="container">
+            <div class="box pt-5 d-flex justify-content-between">
+                <div class="breadcumb nav-link mt-2">
+                    <a asp-action="Index" class="text-decoration-none text-dark mx-3">@localizer["Home"]</a>
+                    <span><i class='fa-solid fa-chevron-right text-dark'></i></span>
+                    <a asp-area="Customer" asp-controller="Home" asp-action="AllProduct" class="text-decoration-none text-dark mx-3">@localizer["All Products"]</a>
+                    <span><i class='fa-solid fa-chevron-right text-dark'></i></span>
+                <a class="text-decoration-none text-dark mx-3">@localizer["Favorite"]</a>
+
+                </div>
+                <div class="breadcumb nav-link d-flex">
+                    <a class="nav-link mt-2" asp-area="Customer" asp-controller="Home" asp-action="Cart" title="@localizer["Cart"]">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        (@count)
+                    </a>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <a id="login" asp-area="Identity" asp-page="/Account/Login" class="nav-link mt-2 mx-3"><i class="fa fa-heart"></i></a>
+                    }
+                    else
+                    {
+
+                        <a asp-area="Customer" asp-controller="Home" asp-action="FavoriteProduct" class="nav-link mt-2 mx-3" title="@localizer["Favorite"]"><i class="fa fa-heart"></i> (@ViewBag.FavoriteProductCount)</a>
+
+                    }
+
+                    <a href="#" class="text-decoration-none text-dark mx-3 nav-link">
+                        @{
+                            var culture = Context.Features.Get<IRequestCultureFeature>();
+                            var cultureList = locOptions.Value.SupportedUICultures.Select(x => new SelectListItem { Value = x.Name, Text = localizer.GetString(x.Name) }).ToList();
+                            var returnUrl = string.IsNullOrWhiteSpace(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}{Context.Request.QueryString}";
+                        }
+
+                        <form method="post" asp-area="Customer" asp-action="ChangeLanguage" asp-controller="Home" asp-route-returnUrl="@returnUrl">
+                            <select class="form-select bg-light border-none " name="culture" asp-for="@culture.RequestCulture.UICulture.Name" asp-items="cultureList" onchange="this.form.submit();">
+                            </select>
+                        </form>
+                    </a>
+                </div>
+            </div>
+            @if (Model.Count > 0)
+            {
+                <div class="row py-3 pb-5">
+                            <div class="col-12 text-start my-4 mx-3">
+                                <div class="fw-normal fs-5">@localizer["My Favorite List"] </div>
+                            </div>
+                            <div class="col-12 px-4">
+                                <table class="table table-responsive-sm">
+                                    <thead class="bg-gray">
+                                        <tr>                                          
+                                            <th>@localizer["Product"]</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="">
+                                @foreach (var item in Model)
+                                {
+                                           
+                                                <tr class="align-middle ">
+                                                <td class="d-flex">
+                                                    <span>
+                                                        <a asp-action="Detail" asp-controller="Home" asp-route-id="@item.Id" class="text-decoration-none">
+                                                            <img src="~/@item.Image"
+                                                             alt=""
+                                                             style="width: 150px; height: 150px"
+                                                             class="rounded-3 object-fit" />
+                                                        </a>
+                                                    </span>
+                                                    <span class="text-black fw-bolder mx-3 d-flex flex-column">
+                                                        <span class="text-black fs-5 fw-bolder">
+                                                             <a asp-action="Detail" asp-controller="Home" asp-route-id="@item.Id" class="nav-link text-decoration-none">
+                                                            @switch (CultureInfo.CurrentUICulture.Name)
+                                                            {
+                                                                case "en":
+                                                                    @($"{item.Name}")
+                                                                    break;
+                                                                case "km":
+                                                                    @($"{item.Name_kh}")
+                                                                    break;
+                                                                default:
+                                                                    @($"{item.Name}")
+                                                                    break;
+                                                            }
+                                                            </a>
+                                                        </span> 
+                                                    
+                                                        <span class="text-success fs-6">
+                                                            <i class="fa-solid fa-dollar-sign"></i>@item.Price
+                                                        </span>
+                                                    </span>
+                                                </td>
+                                                <td class=" ">
+                                                   
+                                                </td>
+                                                <td class="">
+                                                    
+                                                </td>
+
+
+                                                <td>
+                                                  
+                                                </td>
+                                                <td>
+                                                    <span class="">
+                                                        <form asp-action="RemoveFromFavorites" asp-route-productId="@item.Id" method="post">
+                                                            <button type="submit" class="btn-close close" title="@localizer["Remove from favorite list"]"></button>
+                                                        </form>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            
+                                }
+                                    </tbody>
+                                    <tfoot>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+               
+            }
+            else
+            {
+                <div class="row py-3 pb-5">
+                <div class="col-12 text-start my-4 mx-3">
+                    <div class="fw-normal fs-5">@localizer["My Favorite List"] </div>
+                </div>
+                <div class="col-12 px-4">
+                    <table class="table table-responsive-sm">
+                        <thead class="bg-gray">
+                            <tr>
+                                <th>@localizer["Product"]</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="">                          
+                                <tr class="align-middle ">
+                                    <td class="py-3">
+                                        <span>
+                                        @localizer["No Products in favorite list"]
+                                        </span>                                       
+                                    </td>
+                                    <td >
+                                                      
+                                    </td>  
+                                    <td >
+                                                      
+                                    </td>  
+                                    <td >
+                                                      
+                                    </td>  
+                                    <td >
+                                                      
+                                    </td>
+                                    
+                                </tr>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            }
+    </div>
+
+</div>
+
+<!-- end product-detail content -->
+<!-- alert -->
+<div class="modal fade" id="statusModal" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="status modal-content ">
+            <div class="modal-body d-flex pt-4 align-middle">
+                <div class="mx-2 align-middle">
+                    <i class="fas fa-check-circle fs-3 p-3 bg-success rounded-circle text-white"></i>
+                </div>
+                <div class="px-4 align-middle text-success">
+                    <span class="fw-bold">@localizer["Success"]!</span>
+                    <p class="fs-6">@((TempData["StatusMessage"]?.ToString() != null) ? localizer[TempData["StatusMessage"].ToString()] : "")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (TempData["StatusMessage"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            $('#statusModal').modal('show');
+            setTimeout(function () {
+                $('#statusModal').modal('hide');
+            }, 3000); // Change the value to the desired number of milliseconds (e.g., 3000 for 3 seconds)
+        });
+    </script>
+}

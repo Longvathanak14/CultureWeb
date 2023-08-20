@@ -1,0 +1,201 @@
+﻿@model List<Products>
+@using CultureWeb.Models;
+@using CultureWeb.Utility
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Order Details";
+}
+@* @{
+
+    List<Products> products = HttpContextAccessor.HttpContext.Session.Get<List<Products>>("products");
+
+    if (products == null)
+    {
+        products = new List<Products>();
+    }
+
+} *@
+
+@section Style {
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+}
+
+
+<!-- product-detail content -->
+<div class="bg-main bg-light">
+    <div class="container bg-light pb-5">
+           <div class="box py-5 d-flex justify-content-between">
+                <div class="breadcumb nav-link mt-2">
+                    <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="text-decoration-none text-dark mx-3">@localizer["Home"]</a>
+                    <span><i class='fa-solid fa-chevron-right text-dark'></i></span>
+                    <a asp-area="Customer" asp-controller="Home" asp-action="AllProduct" class="text-decoration-none text-dark mx-3">@localizer["All Products"]</a>
+                        <span><i class='fa-solid fa-chevron-right text-dark'></i></span>
+                    <a class="text-decoration-none text-dark mx-3">@localizer["Checkout"]</a>
+                </div>
+                 <div class="breadcumb nav-link d-flex">
+                    
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <a id="login" asp-area="Identity" asp-page="/Account/Login" class="nav-link mt-2 mx-3"><i class="fa fa-heart"></i> (0)</a>
+                    }
+                    else
+                    {
+
+                    <a asp-area="Customer" asp-controller="Home" asp-action="FavoriteProduct" class="nav-link mt-2 mx-3" title="@localizer["Favorite"]"><i class="fa fa-heart"></i> (@ViewBag.FavoriteProductCount)</a>
+
+                    }
+
+                    <a href="#" class="text-decoration-none text-dark mx-3 nav-link">
+                        @{
+                            var culture = Context.Features.Get<IRequestCultureFeature>();
+                            var cultureList = locOptions.Value.SupportedUICultures.Select(x => new SelectListItem { Value = x.Name, Text = localizer.GetString(x.Name) }).ToList();
+                            var returnUrl = string.IsNullOrWhiteSpace(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}{Context.Request.QueryString}";
+                        }
+
+                        <form method="post" asp-area="Customer" asp-action="ChangeLanguage" asp-controller="Home" asp-route-returnUrl="@returnUrl">
+                            <select class="form-select bg-light border-none " name="culture" asp-for="@culture.RequestCulture.UICulture.Name" asp-items="cultureList" onchange="this.form.submit();">
+                            </select>
+                        </form>
+                    </a>
+                </div>
+            </div>
+        @if (ViewBag.SuccessOrder == false){
+            <form asp-action="Checkout" method="post" enctype="multipart/form-data" >
+            <div asp-validation-summary="ModelOnly" class="text-danger mt-5">
+            </div>
+            <div class="p-4 rounded border row my-3">
+
+
+                    <h4 class="text-center">@localizer["Order Summary"]</h4>
+                <table class="table table-responsive align-midle">
+                    <thead>
+                        <tr>
+                            <th>@localizer["Image"]</th>
+                            <th>@localizer["Product Name"]</th>                           
+                            <th>@localizer["Unit Price"]</th>
+                            <th>@localizer["Quantity"]</th>
+                            <th>@localizer["SubTotal"]</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                         @foreach (var item in Model)
+                        {
+                        <tr>
+                                    <input type="hidden" name="ProductId" value="@item.Id" />
+                            <td class="object-fit"><img src="~/@item.Image" width="70px" height="70px"/></td>
+                                    <td class="fs-6">
+                                        @switch (CultureInfo.CurrentUICulture.Name)
+                                        {
+                                            case "en":
+                                                @($"{item.Name}")
+                                                break;
+                                            case "km":
+                                                @($"{item.Name_kh}")
+                                                break;
+                                            default:
+                                                @($"{item.Name}")
+                                                break;
+                                        }
+                                    </td>                         
+                            <td class="fs-6">$@item.Price</td>
+                            <td class="fs-6" name="Quantity">
+                                        <input type="hidden" name="Quantity" value="@item.Qty" />
+                                @item.Qty
+                            </td>
+                               
+                            <td class="fs-6">$@(item.Price*item.Qty)</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+             
+                <div class="text-end">
+                    <div class="product-info-price">
+                        <h3>@localizer["Total Price"] : $@Model.Sum(c => c.Price * c.Qty)</h3>
+                    </div>
+                </div>
+
+            </div>
+
+                <h4 class="text-center my-5">@localizer["Fill The Information to Checkout order"]</h4>
+            <div class="d-flex justify-content-center pb-5">
+                    <div class="col-12 col-md-6 col-lg-6">
+                    @* <input type="hidden" name="Quantity" value="@Model" /> *@
+                    <div class="form-group  my-2">
+                        <label >@localizer["Your Name"]</label>
+                        <input type="hidden" name="Id" />
+                        <input name="Name" class="form-control" data-val-required="@localizer["The Name field is required."]" required/>
+                        <span  class="text-danger"></span>
+                    </div>              
+                    <div class="form-group  my-2">
+                        <label>@localizer["PhoneNo"]</label>
+                        <input type="number" name="PhoneNo" class="form-control" data-val-required="@localizer["The Phone Number field is required."]" required />
+                        <span  class="text-danger"></span>
+                    </div>              
+
+                    <div class="form-group  my-2">
+                         <label>@localizer["Address"]</label>
+                        <input Name="Address" class="form-control" data-val-required="@localizer["The Address field is required."]" required />
+                        <span Name="Address" class="text-danger"></span>
+                    </div>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        // User is logged in
+                        <div class="form-group my-2">
+                            <label>@localizer["Your Email"]</label>
+                            <input name="Email" class="form-control" value="@User.Identity.Name" readonly />
+                            <span class="text-danger"></span>
+                        </div>
+                    }
+                    else
+                    {
+                        // User is not logged in
+                        <div class="form-group my-2">
+                            <label>@localizer["Your Email"]</label>
+                            <input name="Email" class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                    }
+                 
+                    <div class="form-group ">                                                                     
+                            <div class="product-info text-end">
+                                    <input type="submit" value="@localizer["Submit Order"]" class="btn btn-dark my-4" />
+                            </div>                    
+                    </div>
+                    </div>
+            </div>
+            </form>
+        } 
+        else
+        {
+            <div class="p-4 rounded border row  h-75 mt-5">
+                    <h4 class="text-center text-success">@localizer["Your Ordered Succesfully"]</h4>
+                    <h4 class="text-center text-dark">@localizer["Thank You"]!</h4>              
+            </div>
+        }
+    </div>   
+</div>
+</div>
+<!-- end product-detail content -->
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".datepicker").datepicker({
+                showAnim: "slide",
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
+
+}
+
+
