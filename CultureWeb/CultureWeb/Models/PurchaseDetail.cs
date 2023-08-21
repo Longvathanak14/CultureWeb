@@ -19,5 +19,6 @@ namespace CultureWeb.Models
         public Products Product { get; set; }
 
         public int QtyPurchase { get; set; }
+        public int CostPrice { get; set; }
     }
 }

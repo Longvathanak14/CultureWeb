@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LjIOYUgmPF1qHAiKhMQuE9HFCfo5Sdtl+gs65ieiHyvsnZ8dpaKNft40UGFq5lWPRXP73y7tOjv1hwywhcgl5g==",
+  "dgSpecHash": "riiirFd6LU0/O7+aOK9I5PsDONBrb0RwpCZaIuyjusiMjxWWdhCMzevK9NYFs5A4ECUdnwAtVBq7dT4ghcWCJw==",
   "success": true,
-  "projectFilePath": "D:\\Git\\website-design\\CultureWeb\\CultureWeb\\CultureWeb.csproj",
+  "projectFilePath": "D:\\Git\\CultureWeb\\CultureWeb\\CultureWeb\\CultureWeb.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\CKP2\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\CKP2\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

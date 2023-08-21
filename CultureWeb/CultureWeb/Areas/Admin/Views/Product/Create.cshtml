@@ -116,11 +116,11 @@
                         <input asp-for="ProductColor" class="form-control" data-val-required="@localizer["Product's Color is required."]" />
                         <span asp-validation-for="ProductColor" class="text-danger"></span>
                     </div>
-                    <div class="mt-3 col-lg-6">
-                        <label asp-for="Qty" class="control-label">@localizer["Quantity"]</label>
-                        <input asp-for="Qty" class="form-control" data-val-required="@localizer["Product's Quantity is required."]" />
-                        <span asp-validation-for="Qty" class="text-danger"></span>
-                    </div>
+                   @*  <div class="mt-3 col-lg-6">
+                        <label asp-for="Qty" class="control-label">@localizer["Quantity"]</label> *@
+                        <input asp-for="Qty" type="hidden" value="0" class="form-control" data-val-required="@localizer["Product's Quantity is required."]" />
+                        @* <span asp-validation-for="Qty" class="text-danger"></span>
+                    </div> *@
                     <div class="mt-3 col-lg-6">
                         <div class="form-group row​​ d-flex">                          
                              <input type="checkbox" asp-for="IsAvailable">        

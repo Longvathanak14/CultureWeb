@@ -16,12 +16,13 @@
 </div>
 <div class="row mt-5">
     <div class="col-lg-8">      
-        <form asp-action="Create" method="post" enctype="multipart/form-data">
-            <div class="mb-3">
+        <form asp-action="Create" method="post" class="mb-3 row justify-content-center d-flex" enctype="multipart/form-data">
+            <div class="col-6 mb-3">
                 @if (CultureInfo.CurrentUICulture.Name == "en")
                 {
                     <label for="supplierId" class="form-label">Supplier</label>
-                    <select class="form-select" id="supplierId" name="supplierId">
+                    <select class="form-select" id="supplierId" name="supplierId" required>
+                        <option disabled selected>@localizer["Select Supplier"]</option>
                         @foreach (var supplier in ViewBag.Suppliers)
                         {
                             <option value="@supplier.Id">@supplier.SupplierName</option>
@@ -31,18 +32,19 @@
                 else if (CultureInfo.CurrentUICulture.Name == "km")
                 {
                     <label for="supplierId" class="form-label">Supplier</label>
-                    <select class="form-select" id="supplierId" name="supplierId">
+                    <select class="form-select" id="supplierId" name="supplierId" required>
+                        <option disabled selected>@localizer["Select Supplier"]</option>
                         @foreach (var supplier in ViewBag.Suppliers)
                         {
-                            <option value="@supplier.Id">@supplier.SupplierName</option>
+                            <option value="@supplier.Id">@supplier.SupplierName_kh</option>
                         }
                     </select>
                 }
             </div>
             <h4>Purchase Details</h4>
-            @if (ViewBag.ProductSession != null)
+            @if (Model.Count > 0)
             {
-                <table class="table table-responsive-sm">
+                <table class="table table-responsive-sm align-middle">
                     <thead class="bg-gray">
                         <tr>
                             <th>@localizer["Product"]</th>
@@ -54,13 +56,13 @@
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
-                        {
-
+                        {                           
                             <tr class="align-middle">
+                                <input type="hidden" name="productId" value="@item.Id" />
                                 <td>
                                     <span>
                                         <a asp-action="Details" asp-route-id="@item.Id">
-                                            <img src="~/@item.Image" alt="" style="width: 75px; height: 75px" class="rounded-3 object-fit" />
+                                            <img src="~/@item.Image" alt="" style="width: 55px; height: 55px" class="rounded-3 object-fit" />
                                         </a>
                                     </span>
                                     <span class="text-black fs-6 fw-bolder mx-3">
@@ -87,33 +89,21 @@
                                 </td>
                                 <td>
                                     <div class="d-flex flex-row">
-                                        <form asp-action="RemoveQtyCart" method="post" enctype="multipart/form-data" class="d-flex">
-                                            <input type="hidden" name="removeQuantity" value="@item.Qty" data-product-id="@item.Id" />
-                                            @if (item.Qty == 1)
-                                            {
-                                                <button type="button" class="btn btn-link px-2 text-dark increase-quantity" asp-action="RemoveQty" asp-route-id="@item.Id" disabled="disabled">
-                                                    <i class="fas fa-minus"></i>
-                                                </button>
-                                            }
-                                            else
-                                            {
-                                                <button type="submit" class="btn btn-link px-2 text-dark increase-quantity" asp-action="RemoveQty" asp-route-id="@item.Id">
-                                                    <i class="fas fa-minus"></i>
-                                                </button>
-                                            }
-                                        </form>
-                                        <input min="1" name="currentQuantity" value="@item.Qty" type="text"
-                                               class="form-control text-center border-none quantity focus-none" style="width: 60px;"
-                                               data-product-id="@item.Id" disabled="disabled" readonly="readonly" />
-
-                                        <form asp-action="AddQty" method="post" enctype="multipart/form-data" class="d-flex">
-                                            <input type="hidden" name="addQuantity" value="@item.Qty" data-product-id="@item.Id" />
-
-                                            <button type="submit" class="btn btn-link px-2 text-dark increase-quantity" asp-action="AddQtyCart" asp-route-id="@item.Id">
-                                                <i class="fas fa-plus"></i>
+                                       
+                                        <div class="d-flex flex-row border-1 rounded-2" style="border: 1px solid black; ">
+                                            <button type="button" class="btn btn-link px-2 text-dark"
+                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                <i class="fas fa-minus"></i>
                                             </button>
 
-                                        </form>
+                                            <input min="1" name="quantity" value="1" type="number"
+                                                   class="form-control text-center border-none quantity focus-none bg-white" style="width: 60px;"  />
+
+                                            <button type="button" class="btn btn-link px-2 text-dark"
+                                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
                                     </div>
 
 
@@ -140,7 +130,19 @@
                     </tfoot>
                 </table>
             }
-            <button type="submit" class="btn btn-primary text-end">Create</button>
+             
+            else
+            {
+            <div class="row">
+                <div class="col-12 pb-5" style="display: flex; justify-content: center; align-items: center">
+                    <img src="https://cdn.dribbble.com/users/1121009/screenshots/11030107/media/25be2b86a12dbfd8da02db4cfcbfe50a.jpg?compress=1&resize=1000x750" width="500px" />
+                </div>
+            </div>
+            }
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary text-end">Create</button>
+            </div>
+            
         </form>
     </div>
     <div class="col-lg-4 bg-white rounded-1 p-3">
@@ -164,7 +166,8 @@
                             }
                         </span>
                         <span class="fs-7 mx-3 text-success">                           
-                                $@product.Price                          
+                                $@product.Price    
+                                <span class="text-secondary mx-3">Quantities : @product.Qty</span>                     
                         </span>
                     </span>
                 </div>
@@ -173,13 +176,15 @@
                     <form asp-action="AddToPurchase" method="post" enctype="multipart/form-data" class="d-flex">
                         <div asp-validation-summary="ModelOnly" class="text-danger">
                         </div>
-                        <input type="hidden" name="productId" value="@product.Id" />
+                        <input type="hidden" name="id" value="@product.Id" />
                         @if (ViewBag.ProductInPurchase != null)
-                        {                           
+                        {
+                            
                             <button type="submit" class="btn btn-sm btn-danger px-3" asp-action="RemoveAll" asp-route-id="@product.Id"> @localizer["Remove"]</button>
                         }
                         else
                         {
+                           
                             <button type="submit" class="btn btn-sm btn-dark px-3 mx-2">@localizer["Add"]</button>
                         }
                     </form>
