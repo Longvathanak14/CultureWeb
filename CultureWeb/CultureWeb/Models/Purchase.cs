@@ -11,11 +11,15 @@ namespace CultureWeb.Models
         public string PurchaseNo { get; set; }
         public string UserId { get; set; } // User's identifier who purchased the product
         public virtual ApplicationUser User { get; set; }
+
+        
         public int SupplierId { get; set; }
+        [Required]
 
         [ForeignKey("SupplierId")]
         public virtual Supplier? Suppliers { get; set; } // Navigation property
         public DateTime PurchaseDate { get; set; }
+        [Required]
         public virtual List<PurchaseDetail> PurchaseDetails { get; set; }
     }
 }

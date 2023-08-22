@@ -12260,11 +12260,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Git\\CultureWeb\\CultureWeb\\CultureWeb\\CultureWeb.csproj",
+      "projectUniqueName": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\CultureWeb.csproj",
       "projectName": "CultureWeb",
-      "projectPath": "D:\\Git\\CultureWeb\\CultureWeb\\CultureWeb\\CultureWeb.csproj",
+      "projectPath": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\CultureWeb.csproj",
       "packagesPath": "C:\\Users\\CKP2\\.nuget\\packages\\",
-      "outputPath": "D:\\Git\\CultureWeb\\CultureWeb\\CultureWeb\\obj\\",
+      "outputPath": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\CKP2\\AppData\\Roaming\\NuGet\\NuGet.Config",
