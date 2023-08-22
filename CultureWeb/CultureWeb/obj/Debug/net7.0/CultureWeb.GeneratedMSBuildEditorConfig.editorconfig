@@ -144,6 +144,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHVyY2hhc2VzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Git BBU-Group_Work/CultureWeb/CultureWeb/CultureWeb/Areas/Admin/Views/Purchases/Invoice.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHVyY2hhc2VzXEludm9pY2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Git BBU-Group_Work/CultureWeb/CultureWeb/CultureWeb/Areas/Admin/Views/Reviews/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUmV2aWV3c1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

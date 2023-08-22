@@ -94,25 +94,7 @@ namespace CultureWeb.Areas.Admin.Controllers
             }
             return View(aggregatedProducts);
         }
-
-        //[HttpGet]
-        //public IActionResult Create()
-        //{
-
-        //    ViewBag.Suppliers = _db.Suppliers.ToList();
-        //    ViewBag.Purchase = _db.PurchaseDetails.ToList();
-        //    ViewBag.Products = _db.Products.ToList();
-        //    ViewBag.ProductCount = ViewBag.Products.Count;
-
-        //    List<Products> products = HttpContext.Session.Get<List<Products>>("products");
-        //    if (products == null)
-        //    {
-        //        products = new List<Products>();
-        //    }
-        //    return View(products);
-        //}
-
-        // POST: Create purchase
+    
         [HttpPost]
         public IActionResult Create(Purchase purchase , int Quantity)
         {
@@ -190,54 +172,7 @@ namespace CultureWeb.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //[HttpPost]
-        //public IActionResult Create(Purchase purchase , int quantity ,int productId)
-        //{
-        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        //    ViewBag.Suppliers = _db.Suppliers.ToList();
-        //    ViewBag.Purchase = _db.PurchaseDetails.ToList();
-        //    ViewBag.Products = _db.Products.ToList();
-        //    ViewBag.ProductCount = ViewBag.Products.Count;
-
-        //    List<Products> products = HttpContext.Session.Get<List<Products>>("products");
-        //    if (products != null)
-        //    {
-        //        foreach (var product in products)
-        //        {
-        //            //product.Qty = quantity;
-        //            PurchaseDetail purchaseDetails = new PurchaseDetail();
-        //            purchaseDetails.PorductId = productId;
-        //            purchaseDetails.QtyPurchase = quantity;
-        //            // Initialize the PurchaseDetails property if it's null
-        //            if (purchase.PurchaseDetails == null)
-        //            {
-        //                purchase.PurchaseDetails = new List<PurchaseDetail>();
-        //            }
-
-        //            purchase.PurchaseDetails.Add(purchaseDetails);
-
-        //            var databaseProduct = _db.Products.FirstOrDefault(p => p.Id == product.Id);
-        //            if (databaseProduct != null)
-        //            {
-        //                databaseProduct.Qty += quantity; // Sum the purchased quantity
-        //                _db.Update(databaseProduct);
-        //            }
-        //        }
-        //    }
-        //    purchase.UserId = userId;
-        //    purchase.PurchaseNo = GetPurchaseNo();
-        //    purchase.PurchaseDate = DateTime.Now;
-        //    _db.Purchases.Add(purchase);
-        //    _db.SaveChanges();
-        //    HttpContext.Session.Set("products", new List<Products>());
-        //    TempData["StatusMessage"] = "CreatedSuccessfully";
-        //    return RedirectToAction(nameof(Index));
-
-
-        //}
-
-        // GET: purchase Details
+      
         [HttpGet]
         public ActionResult Details(int id)
         {
@@ -357,6 +292,15 @@ namespace CultureWeb.Areas.Admin.Controllers
             return Redirect(Request.Headers["Referer"].ToString());
         }
 
-
+        [HttpGet]
+        public ActionResult Invoice(int id)
+        {
+            var purchase = _db.Purchases.Include(o => o.Suppliers)
+                                                  .Include(o => o.User)
+                                                  .Include(o => o.PurchaseDetails)
+                                                  .ThenInclude(p => p.Product)
+                                                  .FirstOrDefault(o => o.Id == id);
+            return View(purchase);
+        }
     }
 }
