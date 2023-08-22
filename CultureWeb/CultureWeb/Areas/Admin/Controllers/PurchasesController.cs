@@ -30,17 +30,75 @@ namespace CultureWeb.Areas.Admin.Controllers
             _db = db;
         }
         public IActionResult Index()
-        {
-            var purchase = _db.Purchases.OrderByDescending(o => o.Id).ToList();
-            return View(_db.Purchases.Include(o => o.User).OrderByDescending(o => o.Id).ToList());
+        {        
+            return View(_db.Purchases.Include(o => o.User).Include(o => o.Suppliers).OrderByDescending(o => o.Id).ToList());
         }
 
 
         //Get Create purchase method
+        [HttpGet]
+        public IActionResult Create()
+        {
+
+            ViewBag.Suppliers = _db.Suppliers.ToList();
+            ViewBag.Purchase = _db.PurchaseDetails.ToList();
+            ViewBag.Products = _db.Products.ToList();
+            ViewBag.ProductCount = ViewBag.Products.Count;
+            // Get the product session data and store it in a variable
+            var productsInSession = HttpContext.Session.Get<List<Products>>("products");
+
+            // Pass the variable to the ViewBag
+            ViewBag.ProductsInSession = productsInSession;
+
+            List<Products> products = HttpContext.Session.Get<List<Products>>("products");
+            if (products == null)
+            {
+                products = new List<Products>();
+            }
+            //var productInPurchase = products.FirstOrDefault(c => c.Id == _db.Products.Id);
+            //ViewBag.ProductInPurchase = productInPurchase;
+
+            Dictionary<int, int> productQuantities = new Dictionary<int, int>();
+
+            foreach (var product in products)
+            {
+                if (productQuantities.ContainsKey(product.Id))
+                {
+                    productQuantities[product.Id] += 1; // Increment quantity for existing product
+                }
+                else
+                {
+                    productQuantities[product.Id] = 1; // Initialize quantity for new product
+                }
+            }
+
+            List<Products> aggregatedProducts = new List<Products>();
+            foreach (var kvp in productQuantities)
+            {
+                int productId = kvp.Key;
+                int quantity = kvp.Value;
+
+                // Find the first occurrence of the product in the list
+                var product = products.FirstOrDefault(p => p.Id == productId);
+
+                if (product != null)
+                {
+                    product.Qty = quantity; // Set the aggregated quantity
+
+                    // Check if the product is already added to the aggregated list
+                    if (!aggregatedProducts.Any(p => p.Id == productId))
+                    {
+                        aggregatedProducts.Add(product);
+                    }
+                }
+            }
+            return View(aggregatedProducts);
+        }
+
         //[HttpGet]
         //public IActionResult Create()
         //{
-            
+
         //    ViewBag.Suppliers = _db.Suppliers.ToList();
         //    ViewBag.Purchase = _db.PurchaseDetails.ToList();
         //    ViewBag.Products = _db.Products.ToList();
@@ -51,140 +109,12 @@ namespace CultureWeb.Areas.Admin.Controllers
         //    {
         //        products = new List<Products>();
         //    }
-        //    //var productInPurchase = products.FirstOrDefault(c => c.Id == _db.Products.Id);
-        //    //ViewBag.ProductInPurchase = productInPurchase;
-
-        //    Dictionary<int, int> productQuantities = new Dictionary<int, int>();
-
-        //    foreach (var product in products)
-        //    {
-        //        if (productQuantities.ContainsKey(product.Id))
-        //        {
-        //            productQuantities[product.Id] += 1; // Increment quantity for existing product
-        //        }
-        //        else
-        //        {
-        //            productQuantities[product.Id] = 1; // Initialize quantity for new product
-        //        }
-        //    }
-
-        //    List<Products> aggregatedProducts = new List<Products>();
-        //    foreach (var kvp in productQuantities)
-        //    {
-        //        int productId = kvp.Key;
-        //        int quantity = kvp.Value;
-
-        //        // Find the first occurrence of the product in the list
-        //        var product = products.FirstOrDefault(p => p.Id == productId);
-
-        //        if (product != null)
-        //        {
-        //            product.Qty = quantity; // Set the aggregated quantity
-
-        //            // Check if the product is already added to the aggregated list
-        //            if (!aggregatedProducts.Any(p => p.Id == productId))
-        //            {
-        //                aggregatedProducts.Add(product);
-        //            }
-        //        }
-        //    }
-        //        return View(aggregatedProducts);
-        //} 
-
-        [HttpGet]
-        public IActionResult Create()
-        {
-            
-            ViewBag.Suppliers = _db.Suppliers.ToList();
-            ViewBag.Purchase = _db.PurchaseDetails.ToList();
-            ViewBag.Products = _db.Products.ToList();
-            ViewBag.ProductCount = ViewBag.Products.Count;
-
-            List<Products> products = HttpContext.Session.Get<List<Products>>("products");
-            if (products == null)
-            {
-                products = new List<Products>();
-            }
-            return View(products);
-        }
+        //    return View(products);
+        //}
 
         // POST: Create purchase
-        //[HttpPost]
-        //public IActionResult Create(Purchase purchase)
-        //{
-        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        //    ViewBag.Suppliers = _db.Suppliers.ToList();
-        //    ViewBag.Purchase = _db.PurchaseDetails.ToList();
-        //    ViewBag.Products = _db.Products.ToList();
-        //    ViewBag.ProductCount = ViewBag.Products.Count;
-           
-        //    List<Products> products = HttpContext.Session.Get<List<Products>>("products");
-        //    if (products != null)
-        //    {
-
-        //        Dictionary<int, int> productQuantities = new Dictionary<int, int>();
-
-        //        foreach (var product in products)
-        //        {
-        //            if (productQuantities.ContainsKey(product.Id))
-        //            {
-        //                productQuantities[product.Id] += 1; // Increment quantity for existing product
-        //            }
-        //            else
-        //            {
-        //                productQuantities[product.Id] = 1; // Initialize quantity for new product
-        //            }
-        //        }
-
-        //        //List<Products> aggregatedProducts = new List<Products>();
-        //        foreach (var kvp in productQuantities)
-        //        {
-
-        //            int productId = kvp.Key;
-        //            int quantity = kvp.Value;
-        //            var product = products.FirstOrDefault(p => p.Id == productId);
-        //            if (product != null)
-        //            {
-
-        //                PurchaseDetail purchaseDetails = new PurchaseDetail();
-        //                purchaseDetails.PorductId = productId;
-        //                purchaseDetails.QtyPurchase = quantity;
-        //                // Initialize the PurchaseDetails property if it's null
-        //                if (purchase.PurchaseDetails == null)
-        //                {
-        //                    purchase.PurchaseDetails = new List<PurchaseDetail>();
-        //                }
-
-        //                purchase.PurchaseDetails.Add(purchaseDetails);
-        //                //anOrder.OrderDetails.Add(orderDetails);
-
-        //                var databaseProduct = _db.Products.FirstOrDefault(p => p.Id == product.Id);
-        //                if (databaseProduct != null)
-        //                {
-        //                    databaseProduct.Qty += quantity; // Subtract the ordered quantity
-        //                    _db.Update(databaseProduct);
-        //                }
-
-        //            }
-
-
-        //        }
-
-        //    }
-
-        //    purchase.UserId = userId;
-        //     purchase.PurchaseNo = GetPurchaseNo();
-        //     purchase.PurchaseDate = DateTime.Now;
-        //    _db.Purchases.Add(purchase);
-        //    _db.SaveChanges();
-        //    HttpContext.Session.Set("products", new List<Products>());
-        //    TempData["StatusMessage"] = "CreatedSuccessfully";
-        //    return RedirectToAction(nameof(Index));
-        //}
-    
         [HttpPost]
-        public IActionResult Create(Purchase purchase , int quantity ,int productId)
+        public IActionResult Create(Purchase purchase , int Quantity)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -196,29 +126,60 @@ namespace CultureWeb.Areas.Admin.Controllers
             List<Products> products = HttpContext.Session.Get<List<Products>>("products");
             if (products != null)
             {
+
+                Dictionary<int, int> productQuantities = new Dictionary<int, int>();
+
                 foreach (var product in products)
                 {
-                    //product.Qty = quantity;
-                    PurchaseDetail purchaseDetails = new PurchaseDetail();
-                    purchaseDetails.PorductId = productId;
-                    purchaseDetails.QtyPurchase = quantity;
-                    // Initialize the PurchaseDetails property if it's null
-                    if (purchase.PurchaseDetails == null)
+                    if (productQuantities.ContainsKey(product.Id))
                     {
-                        purchase.PurchaseDetails = new List<PurchaseDetail>();
+                        productQuantities[product.Id] += 1; // Increment quantity for existing product
                     }
-
-                    purchase.PurchaseDetails.Add(purchaseDetails);
-                    //anOrder.OrderDetails.Add(orderDetails);
-
-                    var databaseProduct = _db.Products.FirstOrDefault(p => p.Id == product.Id);
-                    if (databaseProduct != null)
+                    else
                     {
-                        databaseProduct.Qty += quantity; // Subtract the ordered quantity
-                        _db.Update(databaseProduct);
+                        productQuantities[product.Id] = 1; // Initialize quantity for new product
                     }
                 }
+
+                //List<Products> aggregatedProducts = new List<Products>();
+                foreach (var kvp in productQuantities)
+                {
+                    int productId = kvp.Key;
+                    int quantity = Convert.ToInt32(Request.Form["Quantity_" + productId]);
+                    decimal costPrice = Convert.ToDecimal(Request.Form["costPrice_" + productId]);
+
+                    var product = products.FirstOrDefault(p => p.Id == productId);
+                    if (product != null)
+                    {
+                        // Retrieve the cost price for the product from your data source (e.g., database)
+                        var databaseProduct = _db.Products.FirstOrDefault(p => p.Id == productId);
+                        if (databaseProduct != null)
+                        {
+                           // Get the cost price from the database
+
+                            PurchaseDetail purchaseDetails = new PurchaseDetail();
+                            purchaseDetails.PorductId = product.Id;
+                            purchaseDetails.QtyPurchase = quantity;
+                            purchaseDetails.CostPrice = costPrice;
+
+                            // Initialize the PurchaseDetails property if it's null
+                            if (purchase.PurchaseDetails == null)
+                            {
+                                purchase.PurchaseDetails = new List<PurchaseDetail>();
+                            }
+
+                            purchase.PurchaseDetails.Add(purchaseDetails);
+
+                            // Update the product quantity in the database
+                            databaseProduct.Qty += quantity;
+                            _db.Update(databaseProduct);
+                        }
+                    }
+                }
+
+
             }
+
             purchase.UserId = userId;
             purchase.PurchaseNo = GetPurchaseNo();
             purchase.PurchaseDate = DateTime.Now;
@@ -227,10 +188,54 @@ namespace CultureWeb.Areas.Admin.Controllers
             HttpContext.Session.Set("products", new List<Products>());
             TempData["StatusMessage"] = "CreatedSuccessfully";
             return RedirectToAction(nameof(Index));
-          
-
-           
         }
+
+        //[HttpPost]
+        //public IActionResult Create(Purchase purchase , int quantity ,int productId)
+        //{
+        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        //    ViewBag.Suppliers = _db.Suppliers.ToList();
+        //    ViewBag.Purchase = _db.PurchaseDetails.ToList();
+        //    ViewBag.Products = _db.Products.ToList();
+        //    ViewBag.ProductCount = ViewBag.Products.Count;
+
+        //    List<Products> products = HttpContext.Session.Get<List<Products>>("products");
+        //    if (products != null)
+        //    {
+        //        foreach (var product in products)
+        //        {
+        //            //product.Qty = quantity;
+        //            PurchaseDetail purchaseDetails = new PurchaseDetail();
+        //            purchaseDetails.PorductId = productId;
+        //            purchaseDetails.QtyPurchase = quantity;
+        //            // Initialize the PurchaseDetails property if it's null
+        //            if (purchase.PurchaseDetails == null)
+        //            {
+        //                purchase.PurchaseDetails = new List<PurchaseDetail>();
+        //            }
+
+        //            purchase.PurchaseDetails.Add(purchaseDetails);
+
+        //            var databaseProduct = _db.Products.FirstOrDefault(p => p.Id == product.Id);
+        //            if (databaseProduct != null)
+        //            {
+        //                databaseProduct.Qty += quantity; // Sum the purchased quantity
+        //                _db.Update(databaseProduct);
+        //            }
+        //        }
+        //    }
+        //    purchase.UserId = userId;
+        //    purchase.PurchaseNo = GetPurchaseNo();
+        //    purchase.PurchaseDate = DateTime.Now;
+        //    _db.Purchases.Add(purchase);
+        //    _db.SaveChanges();
+        //    HttpContext.Session.Set("products", new List<Products>());
+        //    TempData["StatusMessage"] = "CreatedSuccessfully";
+        //    return RedirectToAction(nameof(Index));
+
+
+        //}
 
         // GET: purchase Details
         [HttpGet]
@@ -319,89 +324,12 @@ namespace CultureWeb.Areas.Admin.Controllers
                 }
                             
                 products.Add(product);
-
                 HttpContext.Session.Set("products", products);
 
             }
             return Redirect(Request.Headers["Referer"].ToString());
         }
-
-        [HttpPost]
-        public IActionResult RemoveQty(int? id, int removeQuantity)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            List<Products> products = HttpContext.Session.Get<List<Products>>("products");
-            if (products != null)
-            {
-                var product = products.FirstOrDefault(c => c.Id == id);
-                if (product != null)
-                {
-                    // reStore the original quantity in the session
-                    //int originalQuantity = HttpContext.Session.GetInt32($"originalQty_{id}") ?? 1;
-                    HttpContext.Session.SetInt32($"originalQty_{id}", removeQuantity);
-
-                    // Remove the product from the cart
-                    products.Remove(product);
-                    HttpContext.Session.Set("products", products);
-                }
-            }
-
-            return RedirectToAction(nameof(Create));
-        }
-
-        [HttpPost]
-        public IActionResult AddQty(int? id, int addQuantity)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            List<Products> products = HttpContext.Session.Get<List<Products>>("products");
-            if (products != null)
-            {
-                var product = products.FirstOrDefault(c => c.Id == id);
-                if (product != null)
-                {
-                    // Store the original quantity in the session
-                    //int originalQuantity = HttpContext.Session.GetInt32($"originalQty_{id}") ?? 1;
-                    HttpContext.Session.SetInt32($"originalQty_{id}", addQuantity);
-
-                    // Add the product
-                    products.Add(product);
-                    HttpContext.Session.Set("products", products);
-                }
-            }
-
-            return Redirect(Request.Headers["Referer"].ToString());
-        }
-
-        //GET Remove from cart action method
-        //[ActionName("Remove")]
-        //public IActionResult RemoveFromPurchase(int? id)
-        //{
-        //    List<Products> products = HttpContext.Session.Get<List<Products>>("products");
-        //    if (products != null)
-        //    {
-        //        var product = products.FirstOrDefault(c => c.Id == id);
-        //        if (product != null)
-        //        {
-        //            // Get the original quantity and add it back to the product
-        //            int originalQuantity = HttpContext.Session.GetInt32($"originalQty_{id}") ?? 1;
-        //            product.Qty += originalQuantity;
-
-        //            _db.Update(product);
-        //            _db.SaveChanges();
-
-        //            // Remove the product from the cart
-        //            products.Remove(product);
-        //            HttpContext.Session.Set("products", products);
-        //        }
-        //    }
-        //    return RedirectToAction(nameof(Create));
-        //}
+      
 
         [HttpPost]
         public IActionResult RemoveAll(int? productId)
@@ -420,10 +348,8 @@ namespace CultureWeb.Areas.Admin.Controllers
                     // Remove the original quantity session data
                     HttpContext.Session.Remove($"originalQty_{productId}");
 
-                    // Remove all quantities of the product from the cart
-                    products.RemoveAll(p => p.Id == productId);
-
-                    TempData["StatusMessage"] = "Successfully removed from cart.";
+                    // Remove all quantities of the product 
+                    products.RemoveAll(p => p.Id == productId);                    
                     HttpContext.Session.Set("products", products);
                 }
             }

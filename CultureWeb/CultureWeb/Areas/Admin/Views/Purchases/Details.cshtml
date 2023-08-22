@@ -105,13 +105,13 @@
                                 </div>
                             </td>
                             <td style="vertical-align: baseline;">
-                                $@item.Product.Price
+                                $@item.CostPrice
                             </td>
                             <td style="vertical-align: baseline;">
                                 @item.QtyPurchase
                             </td>
                             <td style="vertical-align: baseline;">
-                                $@(item.Product.Price * item.QtyPurchase)
+                                $@(item.CostPrice * item.QtyPurchase)
                             </td>
                         </tr>
                     }
@@ -123,7 +123,7 @@
             <div class="col-5"></div>
             <div class="col-7 col-md-12">
                 <div class="text-end">
-                    <h5>@localizer["Total Amount"] :  <span class="text-success fw-bolder h5"> $@Model.PurchaseDetails.Sum(c=>c.Product.Price*c.QtyPurchase)</span></h5>
+                    <h5>@localizer["Total Amount"] :  <span class="text-success fw-bolder h5"> $@Model.PurchaseDetails.Sum(c=>c.CostPrice*c.QtyPurchase)</span></h5>
                 </div>
 
             </div>
