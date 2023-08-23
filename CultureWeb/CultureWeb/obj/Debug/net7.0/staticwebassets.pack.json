@@ -77,6 +77,10 @@
       "PackagePath": "staticwebassets\\Images\\Blog\\bg2_20230807085925541.jpg"
     },
     {
+      "Id": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\Blog\\bg2_20230823161757493.jpg",
+      "PackagePath": "staticwebassets\\Images\\Blog\\bg2_20230823161757493.jpg"
+    },
+    {
       "Id": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\Blog\\bg_20230620114537626.jpg",
       "PackagePath": "staticwebassets\\Images\\Blog\\bg_20230620114537626.jpg"
     },
@@ -135,6 +139,10 @@
     {
       "Id": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\Product\\Roneat Aek_20230821163217932.jpg",
       "PackagePath": "staticwebassets\\Images\\Product\\Roneat Aek_20230821163217932.jpg"
+    },
+    {
+      "Id": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\Product\\Roneat Aek_20230823143516844.jpg",
+      "PackagePath": "staticwebassets\\Images\\Product\\Roneat Aek_20230823143516844.jpg"
     },
     {
       "Id": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\Product\\Skor thom1_20230701145132640.jpg",
@@ -361,6 +369,10 @@
       "PackagePath": "staticwebassets\\Images\\Subcategory\\Roneat Aek_20230807084851704.jpg"
     },
     {
+      "Id": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\Subcategory\\Roneat Aek_20230823141259250.jpg",
+      "PackagePath": "staticwebassets\\Images\\Subcategory\\Roneat Aek_20230823141259250.jpg"
+    },
+    {
       "Id": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\Subcategory\\Skor thom1_20230627114616301.jpg",
       "PackagePath": "staticwebassets\\Images\\Subcategory\\Skor thom1_20230627114616301.jpg"
     },
@@ -403,6 +415,10 @@
     {
       "Id": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\Subcategory\\angkorwat_20230620114718259.jpg",
       "PackagePath": "staticwebassets\\Images\\Subcategory\\angkorwat_20230620114718259.jpg"
+    },
+    {
+      "Id": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\Subcategory\\bg2_20230823141723907.jpg",
+      "PackagePath": "staticwebassets\\Images\\Subcategory\\bg2_20230823141723907.jpg"
     },
     {
       "Id": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\Subcategory\\khem2_20230807090007328.jpg",

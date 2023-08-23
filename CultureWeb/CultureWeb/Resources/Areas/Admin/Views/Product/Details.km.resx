@@ -159,6 +159,9 @@
   <data name="Back1" xml:space="preserve">
     <value>ត្រឡប់ក្រោយ</value>
   </data>
+  <data name="Cost Price" xml:space="preserve">
+    <value>តម្លៃថ្លៃដើម</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>បង្កើត</value>
   </data>
@@ -222,6 +225,9 @@
   <data name="Product Name" xml:space="preserve">
     <value>ឈ្មោះផលិតផល</value>
   </data>
+  <data name="Purchase more" xml:space="preserve">
+    <value>ទិញបន្ថែម</value>
+  </data>
   <data name="Quantity" xml:space="preserve">
     <value>បរិមាណ</value>
   </data>
@@ -242,6 +248,9 @@
   </data>
   <data name="Successfully" xml:space="preserve">
     <value>ជោគជ័យ</value>
+  </data>
+  <data name="Unit Price" xml:space="preserve">
+    <value>តម្លៃលក់</value>
   </data>
   <data name="Update" xml:space="preserve">
     <value>ធ្វើបច្ចុប្បន្នភាព</value>

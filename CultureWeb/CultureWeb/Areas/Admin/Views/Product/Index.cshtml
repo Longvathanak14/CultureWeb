@@ -111,7 +111,16 @@
                                 <span class="fs-7 ">$@Html.DisplayFor(modelItem => product.Price)</span>
                             </td>
                             <td>
-                                <span class="fs-7 ">@Html.DisplayFor(modelItem => product.ProductColor)</span>
+                                <span class="fs-7 ">
+                                 @if (CultureInfo.CurrentUICulture.Name == "en")
+                                {
+                                        @Html.DisplayFor(modelItem => product.ProductColor)
+                                }
+                                else if (CultureInfo.CurrentUICulture.Name == "km")
+                                {
+                                        @Html.DisplayFor(modelItem => product.ProductColor_kh)
+                                }
+                                </span>
                             </td>
                             <td>
                                 <span class="fs-7 ">@Html.DisplayFor(modelItem => product.Qty)</span>

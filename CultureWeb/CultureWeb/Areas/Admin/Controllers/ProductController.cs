@@ -25,7 +25,7 @@ namespace CultureWeb.Areas.Admin.Controllers
         [HttpGet]
         public ViewResult List(string search)
         {
-            var model = from m in _context.Products select m;
+            var model = from m in _context.Products.Include(c => c.SubCategories) select m;
 
             if (!string.IsNullOrEmpty(search))
             {
@@ -56,8 +56,25 @@ namespace CultureWeb.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            ViewData["subCategoryId"] = new SelectList(_context.SubCategories.ToList(), "Id", "Name");
-            ViewData["subCategoryId_kh"] = new SelectList(_context.SubCategories.ToList(), "Id", "Name_kh");
+           
+            // Find the MainCategory with the name "Product"
+            var productMainCategory = _context.MainCategories.FirstOrDefault(mc => mc.Name == "Product");
+
+            if (productMainCategory != null)
+            {
+                // Get the associated SubCategories for the "Product" MainCategory
+                var subCategoriesForProduct = _context.SubCategories
+                    .Where(sc => sc.MainCategoryId == productMainCategory.Id)
+                    .ToList();
+
+                // Populate the SelectList for English names
+                ViewData["subCategoryId"] = new SelectList(subCategoriesForProduct, "Id", "Name");
+
+                // Populate the SelectList for Khmer names
+                ViewData["subCategoryId_kh"] = new SelectList(subCategoriesForProduct, "Id", "Name_kh");
+            }
+         
+
             ViewBag.Attributes = _context.Attributes.ToList();
             return View();
         }
@@ -69,9 +86,25 @@ namespace CultureWeb.Areas.Admin.Controllers
             var searchProduct = _context.Products.FirstOrDefault(c => c.Name == product.Name);
             if (searchProduct != null)
             {
-                ViewBag.message = "This product already exists";
-                ViewData["subCategoryId"] = new SelectList(_context.SubCategories.ToList(), "Id", "Name");
-                ViewData["subCategoryId_kh"] = new SelectList(_context.SubCategories.ToList(), "Id", "Name_kh");
+                ViewBag.message = "This product already exists";             
+                // Find the MainCategory with the name "Product"
+                var productMainCategory = _context.MainCategories.FirstOrDefault(mc => mc.Name == "Product");
+
+                if (productMainCategory != null)
+                {
+                    // Get the associated SubCategories for the "Product" MainCategory
+                    var subCategoriesForProduct = _context.SubCategories
+                        .Where(sc => sc.MainCategoryId == productMainCategory.Id)
+                        .ToList();
+
+                    // Populate the SelectList for English names
+                    ViewData["subCategoryId"] = new SelectList(subCategoriesForProduct, "Id", "Name");
+
+                    // Populate the SelectList for Khmer names
+                    ViewData["subCategoryId_kh"] = new SelectList(subCategoriesForProduct, "Id", "Name_kh");
+                }
+              
+
                 ViewBag.Attributes = _context.Attributes.ToList();
                 return View(product);
             }
@@ -168,6 +201,7 @@ namespace CultureWeb.Areas.Admin.Controllers
                 existingProduct.Qty = product.Qty;
                 existingProduct.SubCategoryId = product.SubCategoryId;
                 existingProduct.ProductColor = product.ProductColor;
+                existingProduct.ProductColor_kh = product.ProductColor_kh;
                 existingProduct.IsAvailable = product.IsAvailable;
                 existingProduct.Information = product.Information;
                 existingProduct.Description = product.Description;
@@ -230,6 +264,7 @@ namespace CultureWeb.Areas.Admin.Controllers
 
             var product = _context.Products
                 .Include(m => m.SubCategories)
+                .Include(m => m.PurchaseDetails)
                 .Include(m => m.ProductAttributes)
                 .ThenInclude(ma => ma.Attribute)
                 .FirstOrDefault(m => m.Id == id);

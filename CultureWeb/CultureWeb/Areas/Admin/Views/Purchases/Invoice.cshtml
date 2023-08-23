@@ -55,7 +55,7 @@
 
                                 </div>
                                 <div class="d-flex flex-column mx-5">
-                                    <span class="fs-7 fw-bolder"> @localizer["Invoice To"] :</span>
+                                    <span class="fs-7 fw-bolder"> @localizer["Purchase From"] :</span>
                                     <span class="fs-7 ">
                                         @localizer["Supplier"] : @if (CultureInfo.CurrentUICulture.Name == "en")
                                         {
@@ -65,10 +65,20 @@
                                         {
                                             @Html.DisplayFor(model => model.Suppliers.SupplierName_kh)
                                         }
+                                    </span>  
+                                    <span class="fs-7 ">
+                                        @localizer["Company"] : 
+                                        @if (CultureInfo.CurrentUICulture.Name == "en")
+                                        {
+                                            @Html.DisplayFor(model => model.Suppliers.CompanyName)
+                                        }
+                                        else if (CultureInfo.CurrentUICulture.Name == "km")
+                                        {
+                                            @Html.DisplayFor(model => model.Suppliers.CompanyName_kh)
+                                        }
                                     </span>
                                     <span class="fs-7 "> @localizer["Phone"] : @Html.DisplayFor(model => model.Suppliers.Phone)</span>
-                                    <span class="fs-7 ">
-                                        @localizer["Supplier"] : 
+                                    <span class="fs-7 ">                                   
                                         @if (CultureInfo.CurrentUICulture.Name == "en")
                                         {
                                             @Html.DisplayFor(model => model.Suppliers.Address)
@@ -76,7 +86,17 @@
                                         else if (CultureInfo.CurrentUICulture.Name == "km")
                                         {
                                             @Html.DisplayFor(model => model.Suppliers.Address_kh)
-                                        }
+                                        }​
+                                        ​ ( 
+                                            @if (CultureInfo.CurrentUICulture.Name == "en")
+                                            {
+                                                @Html.DisplayFor(model => model.Suppliers.Country)
+                                            }
+                                            else if (CultureInfo.CurrentUICulture.Name == "km")
+                                            {
+                                                @Html.DisplayFor(model => model.Suppliers.Country_kh)
+                                            }​
+                                         )
                                     </span>
                                     <span class="fs-7 text-decoration-none"> @Html.DisplayFor(model => model.Suppliers.Email)</span>
 
@@ -98,8 +118,7 @@
                                     <th class="fs-7 py-2">@localizer["Product Name"]</th>
                                     <th class="fs-7 py-2">@localizer["Cost Price"]</th>
                                     <th class="fs-7 py-2">@localizer["Quantity"]</th>
-
-                                    <th class="fs-7 py-2">@localizer["SubTotal"]</th>
+                                    <th class="fs-7 py-2">@localizer["Total Price"]</th>
                                     <th class="fs-7 py-2">@localizer["Other"]</th>
                                 </tr>
                             </thead>

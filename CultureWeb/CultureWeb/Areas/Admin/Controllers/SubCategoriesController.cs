@@ -25,7 +25,7 @@ namespace CultureWeb.Areas.Admin.Controllers
         [HttpGet]
         public ViewResult List(string search)
         {
-            var model = from m in _context.SubCategories select m;
+            var model = from m in _context.SubCategories.Include(c => c.MainCategories) select m;
 
             if (!string.IsNullOrEmpty(search))
             {

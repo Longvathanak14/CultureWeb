@@ -29,6 +29,20 @@ namespace CultureWeb.Areas.Admin.Controllers
         {
             _db = db;
         }
+
+        [HttpGet]
+        public ViewResult List(string search)
+        {
+            var model = from m in _db.Purchases.Include(o => o.User).Include(o => o.Suppliers) select m;
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                model = model.Where(s => s.PurchaseNo!.Contains(search) || s.User.UserName!.Contains(search) || s.Suppliers.SupplierName!.Contains(search) || s.Suppliers.SupplierName_kh!.Contains(search));
+
+            }
+            return View("Index", model);
+        }
+
         public IActionResult Index()
         {        
             return View(_db.Purchases.Include(o => o.User).Include(o => o.Suppliers).OrderByDescending(o => o.Id).ToList());

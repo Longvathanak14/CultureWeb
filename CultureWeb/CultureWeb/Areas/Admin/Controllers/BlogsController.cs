@@ -25,7 +25,7 @@ namespace CultureWeb.Areas.Admin.Controllers
         [HttpGet]
         public ViewResult List(string search)
         {
-            var model = from m in _context.Blogs select m;
+            var model = from m in _context.Blogs.Include(c => c.SubCategories) select m;
 
             if (!string.IsNullOrEmpty(search))
             {
@@ -42,8 +42,23 @@ namespace CultureWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewData["subCategoryId"] = new SelectList(_context.SubCategories.ToList(), "Id", "Name");
-            ViewData["subCategoryId_kh"] = new SelectList(_context.SubCategories.ToList(), "Id", "Name_kh");
+            
+            // Find the MainCategory with the name "Product"
+            var productMainCategory = _context.MainCategories.FirstOrDefault(mc => mc.Name == "Blog");
+
+            if (productMainCategory != null)
+            {
+                // Get the associated SubCategories for the "Product" MainCategory
+                var subCategoriesForProduct = _context.SubCategories
+                    .Where(sc => sc.MainCategoryId == productMainCategory.Id)
+                    .ToList();
+
+                // Populate the SelectList for English names
+                ViewData["subCategoryId"] = new SelectList(subCategoriesForProduct, "Id", "Name");
+
+                // Populate the SelectList for Khmer names
+                ViewData["subCategoryId_kh"] = new SelectList(subCategoriesForProduct, "Id", "Name_kh");
+            }
             return View();
         }
 
@@ -59,8 +74,22 @@ namespace CultureWeb.Areas.Admin.Controllers
             if (searchBlog != null)
             {
                 ViewBag.message = "This product is already exist";
-                ViewData["subCategoryId"] = new SelectList(_context.SubCategories.ToList(), "Id", "Name");
-                ViewData["subCategoryId_kh"] = new SelectList(_context.SubCategories.ToList(), "Id", "Name_kh");
+                // Find the MainCategory with the name "Product"
+                var productMainCategory = _context.MainCategories.FirstOrDefault(mc => mc.Name == "Blog");
+
+                if (productMainCategory != null)
+                {
+                    // Get the associated SubCategories for the "Product" MainCategory
+                    var subCategoriesForProduct = _context.SubCategories
+                        .Where(sc => sc.MainCategoryId == productMainCategory.Id)
+                        .ToList();
+
+                    // Populate the SelectList for English names
+                    ViewData["subCategoryId"] = new SelectList(subCategoriesForProduct, "Id", "Name");
+
+                    // Populate the SelectList for Khmer names
+                    ViewData["subCategoryId_kh"] = new SelectList(subCategoriesForProduct, "Id", "Name_kh");
+                }
 
                 return View(blogs);
             }

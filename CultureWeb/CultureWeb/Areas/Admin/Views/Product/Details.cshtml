@@ -129,7 +129,16 @@
             </div>
             <div class="form-group row">
                 <div class="col-4">
-                    <label asp-for="Price">@localizer["Price"]</label>
+                    <label asp-for="Price">@localizer["Cost Price"]</label>
+                </div>
+                <div class="col-8 fw-bolder">
+                    $@Html.DisplayFor(model => model.PurchaseDetails.FirstOrDefault().CostPrice)
+                </div>
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Price">@localizer["Unit Price"]</label>
                 </div>
                 <div class="col-8 fw-bolder">
                     $@Html.DisplayFor(model => model.Price)
@@ -141,7 +150,15 @@
                     <label asp-for="ProductColor">@localizer["Product Color"]</label>
                 </div>
                 <div class="col-8 fw-bolder">
-                @Html.DisplayFor(model => model.ProductColor)
+               
+                    @if (CultureInfo.CurrentUICulture.Name == "en")
+                    {
+                        @Html.DisplayFor(model => model.ProductColor)
+                    }
+                    else if (CultureInfo.CurrentUICulture.Name == "km")
+                    {
+                        @Html.DisplayFor(model => model.ProductColor_kh)
+                    }
                 </div>
                 <span asp-validation-for="ProductColor" class="text-danger"></span>
             </div>
@@ -169,7 +186,8 @@
                     <label asp-for="Qty">@localizer["Quantity"]</label>
                 </div>
                 <div class="col-8 fw-bolder">
-                @Html.DisplayFor(model => model.Qty)
+                    @Html.DisplayFor(model => model.Qty)​ 
+                    <a asp-action="Create" asp-controller="Purchases" class="btn btn-sm btn-dark mx-4">@localizer["Purchase more"]</a>
                     <span asp-validation-for="Qty" class="text-danger"></span>
                 </div>
             </div>

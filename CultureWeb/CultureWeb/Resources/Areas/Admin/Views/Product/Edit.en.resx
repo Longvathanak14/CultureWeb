@@ -156,6 +156,9 @@
   <data name="Color" xml:space="preserve">
     <value>Color</value>
   </data>
+  <data name="Color in Khmer" xml:space="preserve">
+    <value>Color in Khmer</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>Create</value>
   </data>

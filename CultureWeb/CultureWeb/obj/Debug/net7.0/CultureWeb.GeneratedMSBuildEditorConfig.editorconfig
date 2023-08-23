@@ -72,20 +72,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRGFzaGJvYXJkXERhc2hib2FyZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Git BBU-Group_Work/CultureWeb/CultureWeb/CultureWeb/Areas/Admin/Views/MainCategories/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWFpbkNhdGVnb3JpZXNcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Git BBU-Group_Work/CultureWeb/CultureWeb/CultureWeb/Areas/Admin/Views/MainCategories/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWFpbkNhdGVnb3JpZXNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/Git BBU-Group_Work/CultureWeb/CultureWeb/CultureWeb/Areas/Admin/Views/MainCategories/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWFpbkNhdGVnb3JpZXNcRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Git BBU-Group_Work/CultureWeb/CultureWeb/CultureWeb/Areas/Admin/Views/MainCategories/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWFpbkNhdGVnb3JpZXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Git BBU-Group_Work/CultureWeb/CultureWeb/CultureWeb/Areas/Admin/Views/MainCategories/Index.cshtml]

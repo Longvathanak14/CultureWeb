@@ -12,9 +12,9 @@
 <div class="row">
     <div class="col-12 px-4 mb-4">
         <div class="row pt-options mt-4 mb-3  ">
-            <div class="d-flex justify-content-end">
+           @*  <div class="d-flex justify-content-end">
                 <a asp-action="Create" class="btn btn-dark"><i class="fas fa-plus"></i> @localizer[ "Add new Category"]</a>
-            </div>
+            </div> *@
         </div>
         <div class=" row bg-light shadow rounded-3 p-0">
             <table class="table table-responsive-sm table-hover align-middle mb-0 ">
@@ -71,8 +71,8 @@
                                 <td>
                                     <span>
                                         @Html.ActionLink("", "Details" , new { id=item.Id },new {@class="fa-solid fa-circle-info btn btn-brown btn-sm rounded-circle p-2"})
-                                        @Html.ActionLink("", "Edit", new { id=item.Id },new {@class="fa-solid fa-pen-to-square btn btn-dark btn-sm rounded-circle p-2"})
-                                        @Html.ActionLink("", "Delete", new { id=item.Id },new {@class="fa-solid fa-solid fa-trash btn btn-danger btn-sm rounded-circle p-2"})
+                                        @* @Html.ActionLink("", "Edit", new { id=item.Id },new {@class="fa-solid fa-pen-to-square btn btn-dark btn-sm rounded-circle p-2"})
+                                        @Html.ActionLink("", "Delete", new { id=item.Id },new {@class="fa-solid fa-solid fa-trash btn btn-danger btn-sm rounded-circle p-2"}) *@
 
                                     </span>
                                 </td>

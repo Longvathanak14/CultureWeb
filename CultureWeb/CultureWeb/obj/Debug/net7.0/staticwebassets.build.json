@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "qEY5/XjdXDBjfQkw99NlIfHNwjJRyhWK6UL1dYjT/KQ=",
+  "Hash": "O9Km/N8c2hPq9XimA89OZsR7zox6kNyRvyZxlgTTtIY=",
   "Source": "CultureWeb",
   "BasePath": "_content/CultureWeb",
   "Mode": "Default",
@@ -2006,6 +2006,23 @@
       "OriginalItemSpec": "wwwroot\\Images\\Blog\\bg2_20230807085925541.jpg"
     },
     {
+      "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\Blog\\bg2_20230823161757493.jpg",
+      "SourceId": "CultureWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\",
+      "BasePath": "_content/CultureWeb",
+      "RelativePath": "Images/Blog/bg2_20230823161757493.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\Blog\\bg2_20230823161757493.jpg"
+    },
+    {
       "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\Blog\\game_20230807085540497.jpg",
       "SourceId": "CultureWeb",
       "SourceType": "Discovered",
@@ -2871,6 +2888,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\Product\\Roneat Aek_20230821163217932.jpg"
+    },
+    {
+      "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\Product\\Roneat Aek_20230823143516844.jpg",
+      "SourceId": "CultureWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\",
+      "BasePath": "_content/CultureWeb",
+      "RelativePath": "Images/Product/Roneat Aek_20230823143516844.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\Product\\Roneat Aek_20230823143516844.jpg"
     },
     {
       "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\Product\\Skor thom1_20230701145132640.jpg",
@@ -4046,6 +4080,23 @@
       "OriginalItemSpec": "wwwroot\\Images\\Subcategory\\angkorwat_20230620114718259.jpg"
     },
     {
+      "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\Subcategory\\bg2_20230823141723907.jpg",
+      "SourceId": "CultureWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\",
+      "BasePath": "_content/CultureWeb",
+      "RelativePath": "Images/Subcategory/bg2_20230823141723907.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\Subcategory\\bg2_20230823141723907.jpg"
+    },
+    {
       "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\Subcategory\\khem_20230628161410124.jpg",
       "SourceId": "CultureWeb",
       "SourceType": "Discovered",
@@ -4282,6 +4333,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\Subcategory\\Roneat Aek_20230807084851704.jpg"
+    },
+    {
+      "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\Subcategory\\Roneat Aek_20230823141259250.jpg",
+      "SourceId": "CultureWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\",
+      "BasePath": "_content/CultureWeb",
+      "RelativePath": "Images/Subcategory/Roneat Aek_20230823141259250.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\Subcategory\\Roneat Aek_20230823141259250.jpg"
     },
     {
       "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\Subcategory\\Skor thom1_20230627114616301.jpg",

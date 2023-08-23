@@ -27,6 +27,7 @@ namespace CultureWeb.Areas.Admin.Controllers
         public IActionResult Dashboard()
         {
             decimal totalOrderAmount = CalculateTotalOrderAmount();
+            decimal totalPurchaseAmount = CalculateTotalPurchaseAmount();
             int productCount = _context.Products.Count();
             int blogCount = _context.Blogs.Count();
             int userCount = _context.ApplicationUsers.Count();
@@ -38,6 +39,7 @@ namespace CultureWeb.Areas.Admin.Controllers
             ViewBag.UserCount = userCount;
             ViewBag.OrderCount = OrderCount;
             ViewBag.TotalAmount = totalOrderAmount;
+            ViewBag.TotalPurchaseAmount = totalPurchaseAmount;
 
 
             return View();
@@ -47,6 +49,15 @@ namespace CultureWeb.Areas.Admin.Controllers
             decimal totalAmount = _context.Orders
                 .SelectMany(order => order.OrderDetails)
                 .Sum(orderDetail => orderDetail.Product.Price);
+
+            return totalAmount;
+        }
+
+        public decimal CalculateTotalPurchaseAmount()
+        {
+            decimal totalAmount = _context.Purchases
+                .SelectMany(order => order.PurchaseDetails)
+                .Sum(orderDetail => orderDetail.CostPrice*orderDetail.QtyPurchase);
 
             return totalAmount;
         }

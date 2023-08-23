@@ -9,6 +9,7 @@ namespace CultureWeb.Models
         public Products()
         {
             OrderDetails = new List<OrderDetails>();
+            PurchaseDetails = new List<PurchaseDetail>();
             Reviews = new List<Review>(); // Initialize the Reviews property
         }
 
@@ -30,6 +31,9 @@ namespace CultureWeb.Models
         [Display(Name = "Product Color")]
         public string? ProductColor { get; set; }
 
+        [Required(ErrorMessage = "Product's Color is required.")]
+        public string? ProductColor_kh { get; set; }
+
         [Required]
         [Display(Name = "Available")]
         public bool IsAvailable { get; set; }
@@ -47,6 +51,7 @@ namespace CultureWeb.Models
         public int? Qty { get; set; }
 
         public virtual List<OrderDetails> OrderDetails { get; set; }
+        public virtual List<PurchaseDetail> PurchaseDetails { get; set; }
 
         public ICollection<ProductAttribute> ProductAttributes { get; set; }
 

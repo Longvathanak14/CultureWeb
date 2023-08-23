@@ -291,6 +291,9 @@ namespace CultureWeb.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("ProductColor_kh")
+                        .HasColumnType("longtext");
+
                     b.Property<int?>("Qty")
                         .IsRequired()
                         .HasColumnType("int");

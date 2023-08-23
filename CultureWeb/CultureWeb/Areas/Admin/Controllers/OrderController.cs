@@ -17,7 +17,7 @@ namespace CultureWeb.Areas.Admin.Controllers
             _context = context;
             _webHostEnvironment = webHostEnvironment;
         }
-        // GET: OrderController
+      
 
         [HttpGet]
         public ViewResult List(string search)

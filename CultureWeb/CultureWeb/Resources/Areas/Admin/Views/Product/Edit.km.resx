@@ -165,6 +165,9 @@
   <data name="Color" xml:space="preserve">
     <value>ពណ៌</value>
   </data>
+  <data name="Color in Khmer" xml:space="preserve">
+    <value>ពណ៌ជាភាសាខ្មែរ</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>បង្កើត</value>
   </data>

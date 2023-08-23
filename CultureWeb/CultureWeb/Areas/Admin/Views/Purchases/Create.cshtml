@@ -44,7 +44,7 @@
               
 
             </div>
-            <h4>Purchase Products</h4>
+            <h4>@localizer["Purchase Products"]</h4>
             @if (Model.Count > 0)
             {
                 <table class="table table-responsive-sm align-middle ">
@@ -127,7 +127,7 @@
                     </tfoot>
                 </table>
                 <div class="text-end">
-                    <button type="submit" class="btn btn-dark text-end">Create</button>
+                    <button type="submit" class="btn btn-dark text-end">@localizer["Purchase"]</button>
                 </div>
                
             }
@@ -155,7 +155,7 @@
                 </table>
                 <div class="align-middle text-center">
                     <span class="text-center">
-                        No product to purchase
+                        @localizer["No product to purchase"]
                     </span>
                 </div>
             }
@@ -185,8 +185,8 @@
                             }
                         </span>
                         <span class="fs-7 mx-3 text-success">                           
-                                $@product.Price    
-                                <span class="text-secondary mx-3">Quantities : @product.Qty</span>                     
+                                $@product.Price
+                            <span class="text-secondary mx-3">@localizer["Quantities"] : @product.Qty</span>
                         </span>
                     </span>
                 </div>
@@ -210,7 +210,7 @@
                             </div>
                             <input type="hidden" name="id" value="@product.Id" />
                             <!-- If the product is not in the session, show the "Add" button -->
-                            <button type="submit" class="btn btn-sm btn-dark px-3 mx-2">@localizer["Add"]</button>
+                            <button type="submit" class="btn btn-sm btn-dark px-3 ">@localizer["Add"]</button>
                         </form>
                     }
                    

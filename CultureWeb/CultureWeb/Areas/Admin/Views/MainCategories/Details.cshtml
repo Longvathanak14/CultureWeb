@@ -11,14 +11,7 @@
 
 <!-- Content Row -->
 <div class="row">
-    <div class="col-12  ">
-        <div class="row pt-options  mb-3">
-            <div class="d-flex justify-content-end">
-                <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-dark mx-3">@localizer["Edit"]</a>
-                <!-- Delete button for each item -->           
-                <a type="button" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">@localizer["Delete"]</a>
-            </div>
-        </div>
+    <div class="col-12  ">      
         <div class="bg-white rounded-3 shadow-sm p-3">
             <div class="d-flex justify-content-center h4 text-dark my-2">@localizer["Category Details"]</div>
             <div class="mt-2">

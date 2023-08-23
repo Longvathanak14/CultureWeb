@@ -72,10 +72,14 @@ else
     app.UseHsts();
 }
 
+//DataSeader
 using (var scope = app.Services.CreateScope())
 {
     var serviceProvider = scope.ServiceProvider;
+    //Sead Admin User
     UserRoleInitailizer.InitailizeAsync(serviceProvider).GetAwaiter().GetResult();
+    // Seed MainCategories
+    MainCategorySeeder.Seed(serviceProvider);
 }
 
 app.UseRequestLocalization();

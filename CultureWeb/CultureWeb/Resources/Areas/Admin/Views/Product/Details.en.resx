@@ -153,6 +153,9 @@
   <data name="Color" xml:space="preserve">
     <value>Color</value>
   </data>
+  <data name="Cost Price" xml:space="preserve">
+    <value>Cost Price</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>Create</value>
   </data>
@@ -219,6 +222,9 @@
   <data name="Product Name" xml:space="preserve">
     <value>Product Name</value>
   </data>
+  <data name="Purchase more" xml:space="preserve">
+    <value>Purchase more</value>
+  </data>
   <data name="Quantity" xml:space="preserve">
     <value>Quantity</value>
   </data>
@@ -239,6 +245,9 @@
   </data>
   <data name="Successfully" xml:space="preserve">
     <value>Successfully</value>
+  </data>
+  <data name="Unit Price" xml:space="preserve">
+    <value>Unit Price</value>
   </data>
   <data name="Update" xml:space="preserve">
     <value>Update</value>
