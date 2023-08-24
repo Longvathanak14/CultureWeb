@@ -2,6 +2,7 @@
 @using CultureWeb.Models;
 @using CultureWeb.Utility
 @using Microsoft.AspNetCore.Http
+@inject UserManager<IdentityUser> UserManager
 @inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "Order Details";
@@ -17,9 +18,9 @@
 
 } *@
 
-@section Style {
-    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+@{
+    // // Get the user's details
+    var user = await UserManager.GetUserAsync(User) as ApplicationUser;
 }
 
 
@@ -126,8 +127,8 @@
                     @* <input type="hidden" name="Quantity" value="@Model" /> *@
                     <div class="form-group  my-2">
                         <label >@localizer["Your Name"]</label>
-                        <input type="hidden" name="Id" />
-                        <input name="Name" class="form-control" data-val-required="@localizer["The Name field is required."]" required/>
+                        <input type="hidden" name="Id"/>
+                        <input name="Name" class="form-control" value="@user.LastName @user.FirstName" data-val-required="@localizer["The Name field is required."]" required readonly />
                         <span  class="text-danger"></span>
                     </div>              
                     <div class="form-group  my-2">
@@ -147,7 +148,7 @@
                         // User is logged in
                         <div class="form-group my-2">
                             <label>@localizer["Your Email"]</label>
-                            <input name="Email" class="form-control" value="@User.Identity.Name" readonly />
+                            <input name="Email" class="form-control" value="@user.UserName" readonly />
                             <span class="text-danger"></span>
                         </div>
                     }

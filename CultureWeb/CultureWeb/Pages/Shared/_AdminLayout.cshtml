@@ -43,8 +43,8 @@
             <!-- Main Content -->
             <div id="content">
                 <!-- Topbar -->
-                @await Html.PartialAsync("_Navbar", new CultureWeb.Models.ApplicationUser())
-
+                
+                <partial name="_Navbar" class="d-none-print" />
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid trany ">

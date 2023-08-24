@@ -1,7 +1,7 @@
 ﻿@using CultureWeb.Models
 @using CultureWeb.Data
 @using Microsoft.AspNetCore.Identity
-@model CultureWeb.Models.ApplicationUser
+@using System.Security.Claims;
 
 @inject UserManager<IdentityUser> UserManager 
 
@@ -16,6 +16,10 @@
     DateTime Today = DateTime.Today;
     int contactCount = _db.Contacts.Count(contact => contact.ContactDate.Date == Today);
     List<Contact> contacts = _db.Contacts.Where(contact => contact.ContactDate.Date == Today).ToList();
+}
+@{
+    // // Get the user's details
+    var user = await UserManager.GetUserAsync(User) as ApplicationUser;
 }
 
 
@@ -144,18 +148,19 @@
                         <li class="nav-item dropdown no-arrow">                          
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@UserManager.GetUserName(User)</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@user.UserName</span>
                                 @if (User.Identity.IsAuthenticated)
-                                {@*
-                                    var user =  UserManager.GetUserId(User);
-                                    if (user != null && !string.IsNullOrEmpty(user.Image))
+                                {
+                                                                                                   
+                                    if (user.Image != null )
                                     {
-                                        <img src="@($"~/Images/User/{user.Image}")" asp-append-version="true" class="img-profile rounded-circle" />
+                                        <img src="@($"~/Images/User/{user.Image}")" asp-append-version="true" class="img-profile rounded-circle objit-cover" style="object-fit:cover;" />
                                     }
                                     else
-                                    {*@
+                                    {
                                         <img src="~/Images/user.jpg" class="img-profile rounded-circle" />
-                                   @* }*@
+                                    }
+                                   
                                 }
 
                             </a>
@@ -163,7 +168,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Dashboard" asp-action="Profile">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     @localizer["Profile"]
                                 </a>

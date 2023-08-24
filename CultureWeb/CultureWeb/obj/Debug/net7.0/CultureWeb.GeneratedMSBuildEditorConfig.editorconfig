@@ -72,6 +72,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRGFzaGJvYXJkXERhc2hib2FyZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Git BBU-Group_Work/CultureWeb/CultureWeb/CultureWeb/Areas/Admin/Views/Dashboard/EditProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRGFzaGJvYXJkXEVkaXRQcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Git BBU-Group_Work/CultureWeb/CultureWeb/CultureWeb/Areas/Admin/Views/Dashboard/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRGFzaGJvYXJkXFByb2ZpbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Git BBU-Group_Work/CultureWeb/CultureWeb/CultureWeb/Areas/Admin/Views/MainCategories/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWFpbkNhdGVnb3JpZXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -262,6 +270,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Git BBU-Group_Work/CultureWeb/CultureWeb/CultureWeb/Areas/Customer/Views/Order/Checkout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcT3JkZXJcQ2hlY2tvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Git BBU-Group_Work/CultureWeb/CultureWeb/CultureWeb/Areas/Customer/Views/Profiles/EditProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcUHJvZmlsZXNcRWRpdFByb2ZpbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Git BBU-Group_Work/CultureWeb/CultureWeb/CultureWeb/Areas/Customer/Views/Profiles/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcUHJvZmlsZXNcUHJvZmlsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Git BBU-Group_Work/CultureWeb/CultureWeb/CultureWeb/Areas/Customer/Views/User/Active.cshtml]

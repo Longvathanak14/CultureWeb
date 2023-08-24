@@ -6,17 +6,18 @@ using System.Security.Claims;
 using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Identity;
 
 namespace CultureWeb.Areas.Customer.Controllers
 {
     [Area("Customer")]
     public class OrderController : Controller
     {
-        private ApplicationDbContext _db;
-
+        private ApplicationDbContext _db;       
         public OrderController(ApplicationDbContext db)
         {
             _db = db;
+           
         }
 
         //GET Checkout actioin method
@@ -24,6 +25,8 @@ namespace CultureWeb.Areas.Customer.Controllers
         public IActionResult Checkout()
         {
             ViewBag.SuccessOrder = false;
+
+           
 
             List<Products> products = HttpContext.Session.Get<List<Products>>("products");
             if (products == null)
