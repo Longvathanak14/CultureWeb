@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LcV+j9TUPk5NgFk5vHQoVfdxnP6jlOscIF8oJFp5Itc=",
+  "Hash": "DxouzP8kkO8+zQbNaf+Q66eCZBbE30kucCuJp+iSAPw=",
   "Source": "CultureWeb",
   "BasePath": "_content/CultureWeb",
   "Mode": "Default",
@@ -5185,6 +5185,23 @@
       "OriginalItemSpec": "wwwroot\\Images\\User\\b46d2829-80c6-4671-86ed-7fc6ad57786d_b heand.jpg"
     },
     {
+      "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\User\\bfe5b0ff-993a-4ac8-a2b1-394c70f40c02_DSC_0337 copy.jpg",
+      "SourceId": "CultureWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\",
+      "BasePath": "_content/CultureWeb",
+      "RelativePath": "Images/User/bfe5b0ff-993a-4ac8-a2b1-394c70f40c02_DSC_0337 copy.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\User\\bfe5b0ff-993a-4ac8-a2b1-394c70f40c02_DSC_0337 copy.jpg"
+    },
+    {
       "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\User\\ce6b9eb8-925f-47a7-b201-e28f782e98de_DSC_0337 copy.jpg",
       "SourceId": "CultureWeb",
       "SourceType": "Discovered",
@@ -5236,6 +5253,23 @@
       "OriginalItemSpec": "wwwroot\\Images\\User\\e3144c3c-8bf9-42da-80dc-91446be29c75_longkh.jpg"
     },
     {
+      "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\User\\e6a9b07f-507b-482a-a240-e7bc20f1e3bb_seyla2.JPG",
+      "SourceId": "CultureWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\",
+      "BasePath": "_content/CultureWeb",
+      "RelativePath": "Images/User/e6a9b07f-507b-482a-a240-e7bc20f1e3bb_seyla2.JPG",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\User\\e6a9b07f-507b-482a-a240-e7bc20f1e3bb_seyla2.JPG"
+    },
+    {
       "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\User\\e6fcab0b-1ad8-40d3-a4cf-fe10aa1426c8_try.jpg",
       "SourceId": "CultureWeb",
       "SourceType": "Discovered",
@@ -5253,6 +5287,23 @@
       "OriginalItemSpec": "wwwroot\\Images\\User\\e6fcab0b-1ad8-40d3-a4cf-fe10aa1426c8_try.jpg"
     },
     {
+      "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\User\\e70d1e89-70c6-4f6f-820a-d2770ad1db3d_DSC_0338 copy.jpg",
+      "SourceId": "CultureWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\",
+      "BasePath": "_content/CultureWeb",
+      "RelativePath": "Images/User/e70d1e89-70c6-4f6f-820a-d2770ad1db3d_DSC_0338 copy.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\User\\e70d1e89-70c6-4f6f-820a-d2770ad1db3d_DSC_0338 copy.jpg"
+    },
+    {
       "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\User\\ee701c3c-ea5a-416d-a3db-b5464025bc87_Long.jpg",
       "SourceId": "CultureWeb",
       "SourceType": "Discovered",
@@ -5268,6 +5319,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\User\\ee701c3c-ea5a-416d-a3db-b5464025bc87_Long.jpg"
+    },
+    {
+      "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\User\\fadcea5a-8a2e-40c5-84aa-ce39ae9cbbb0_seyla.JPG",
+      "SourceId": "CultureWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\",
+      "BasePath": "_content/CultureWeb",
+      "RelativePath": "Images/User/fadcea5a-8a2e-40c5-84aa-ce39ae9cbbb0_seyla.JPG",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\User\\fadcea5a-8a2e-40c5-84aa-ce39ae9cbbb0_seyla.JPG"
     },
     {
       "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\jquery\\jquery.min.js",
