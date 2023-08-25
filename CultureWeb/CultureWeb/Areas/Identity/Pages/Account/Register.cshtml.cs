@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using CultureWeb.Models;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.Extensions.Hosting;
+using CultureWeb.Data;
 
 namespace CultureWeb.Areas.Identity.Pages.Account
 {
@@ -25,18 +27,25 @@ namespace CultureWeb.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IWebHostEnvironment _hostEnvironment; // Add this field
+        private readonly ApplicationDbContext _db; // Add this field
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IWebHostEnvironment hostEnvironment,
+             ApplicationDbContext db) // Add IWebHostEnvironment parameter
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _hostEnvironment = hostEnvironment;
+            _db = db; // Set your _db field to the injected DbContext// Initialize the hostEnvironment field
         }
+
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -85,8 +94,8 @@ namespace CultureWeb.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 /*var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };*/
                 var user = new ApplicationUser 
                 { 
@@ -94,8 +103,13 @@ namespace CultureWeb.Areas.Identity.Pages.Account
                     Email = Input.Email,
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
-                    Image = Input.Image
+                    Image = Input.Image,
+                    ImageFile = Input.ImageFile
                 };
+                string uniqueFileName = UploadFile(user, _hostEnvironment);
+
+                user.Image = uniqueFileName;
+                _db.Attach(user);
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -126,10 +140,27 @@ namespace CultureWeb.Areas.Identity.Pages.Account
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
-            }
+            //}
 
             // If we got this far, something failed, redisplay form
             return Page();
         }
+
+        private string UploadFile(ApplicationUser model, IWebHostEnvironment hostEnvironment)
+        {
+            string uniqueFileName = null;
+            if (model.ImageFile != null)
+            {
+                string uploadFolder = Path.Combine(hostEnvironment.WebRootPath, "Images/User/");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ImageFile.FileName;
+                string filePath = Path.Combine(uploadFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.ImageFile.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
+        }
+
     }
 }

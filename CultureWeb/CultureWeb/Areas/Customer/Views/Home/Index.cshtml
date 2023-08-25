@@ -5,6 +5,11 @@
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
 @model PaginatedList<CultureWeb.Models.Products>
+@inject UserManager<IdentityUser> UserManager
+@{
+    // // Get the user's details
+    var user = await UserManager.GetUserAsync(User) as ApplicationUser;
+}
 
 @{
     ViewData["Title"] = "Index";
@@ -43,7 +48,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-        <div class=" col-md-11 col-lg-10 collapse navbar-collapse d-lg-flex justify-content-lg-center" id="collapsibleNavbar">
+        <div class=" col-md-11 col-lg-10 collapse navbar-collapse d-lg-flex justify-content-lg-end" id="collapsibleNavbar">
                 <ul class="navbar-nav ">
                     @if (User.IsInRole("Admin"))
                     {
@@ -61,7 +66,7 @@
                     <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="AllProduct">@localizer["Product"]</a>
                     </li>
                     <li class="nav-item dropdown mx-2">
-                    <a class="nav-link dropdown-toggle" href="./Blog.cshtml" role="button" data-bs-toggle="dropdown">@localizer["Blog"]</a>
+                        <a class="nav-link dropdown-toggle" href="./Blog.cshtml" role="button" data-bs-toggle="dropdown">@localizer["Blog"]</a>
                         <ul class="dropdown-menu bg-brown">                        
                             <li><a asp-action="Last-Blog" asp-controller="Home" asp-area="Customer" class="dropdown-item-2  nav-link">@localizer["Latest Blog"]</a></li>
                             @foreach (var item in ViewBag.SubBlogs)
@@ -92,7 +97,7 @@
                     <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Contact">@localizer["Contact"]</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Cart" title="@localizer["Cart"]" style="margin-left: 2rem;">
+                    <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Cart" title="@localizer["Cart"]">
                             <i class="fa-solid fa-bag-shopping"></i>
                             (@count)
                         </a>
@@ -123,11 +128,33 @@
                         </form>
                     </li>
                     <li class="nav-item dropdown mx-3">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">@localizer["Profile"]</a>
-                        <ul class="dropdown-menu bg-brown text-center">
-                            <partial name="_LoginPartial" />
-                        </ul>
-                    </li>
+                    <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @if (user.Image != null)
+                        {
+                            <img src="@($"~/Images/User/{user.Image}")" asp-append-version="true" class="img-profile rounded-circle objit-cover avatar avatar-sm" width="30px" height="30px" style="object-fit:cover;" />
+                        }
+                        else
+                        {
+                            <img src="~/Images/user.jpg" class="img-profile rounded-circle avatar avatar-sm" width="30px" height="30px" />
+                        }
+                    </a>
+                    <ul class="dropdown-menu bg-brown dropdown-menu-left shadow animated--grow-in">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="Customer" asp-controller="Profiles" asp-action="Profile">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                @localizer["Profile"]
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <form id="logoutForm" class="form-inline nav-link text-white" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button id="logout" type="submit" class=" bg-brown border-none text-white">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    @localizer["Logout"]
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
                 </ul>
             </div>
         </div>

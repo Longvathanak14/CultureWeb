@@ -112,8 +112,8 @@
                         </select>
                     </form>
                 </a>
-                <li class="dropdown no-arrow" >
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                <div class="dropdown no-arrow" >
+                    <a class="nav-link " href="#" id="userDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       @*   <span class="mr-2 d-none d-lg-inline text-gray-600 small">@user.UserName</span> *@
                         @if (User.Identity.IsAuthenticated)
@@ -125,13 +125,19 @@
                             }
                             else
                             {
-                                <img src="~/Images/user.jpg" class="img-profile rounded-circle" />
+                                <img src="~/Images/user.jpg" class="img-profile rounded-circle" width="40px" height="40px" />
                             }
+
+                        }
+                        else{
+
+                            <img src="~/Images/user.jpg" class="img-profile rounded-circle" width="40px" height="40px" />
 
                         }
 
                     </a>
-
+                    @if (User.Identity.IsAuthenticated)
+                    {
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                          aria-labelledby="userDropdown">
@@ -152,8 +158,30 @@
                                 @localizer["Logout"]
                             </button>
                         </form>
-                    </div>
-                </li>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="userDropdown">
+                            <a class="dropdown-item" id="register" asp-area="Identity" asp-page="/Account/Register">
+                                <i class="fa-solid fa-user-plus fa-sm fa-fw mr-2 text-gray-400"></i>
+                                @localizer["Register"]
+                            </a>
+                           @*  <a class="dropdown-item" href="#">
+                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                @localizer["Settings"]
+                            </a> *@
+
+                            <div class="dropdown-divider"></div>
+
+                            <a class="dropdown-item" id="register" asp-area="Identity" asp-page="/Account/Register">
+                                <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                @localizer["Login"]
+                            </a>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
       

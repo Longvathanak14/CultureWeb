@@ -87,7 +87,6 @@
                 <a asp-action="Index" asp-controller="Home" class="text-decoration-none text-dark mx-3">@localizer["Home"]</a>
                 <span><i class="fa-solid fa-chevron-right"></i></span>
                 <a ahref="#" class="text-decoration-none text-dark mx-3">@localizer["Profile"]</a>
-
             </div>
             <div class="breadcumb nav-link d-flex">
                 <a class="nav-link mt-2" asp-area="Customer" asp-controller="Home" asp-action="Cart" title="@localizer["Cart"]">
@@ -100,9 +99,7 @@
                 }
                 else
                 {
-
                     <a asp-area="Customer" asp-controller="Home" asp-action="FavoriteProduct" class="nav-link mt-2 mx-3" title="@localizer["Favorite"]"><i class="fa fa-heart"></i> (@ViewBag.FavoriteProductCount)</a>
-
                 }
 
                 <a href="#" class="text-decoration-none text-dark mx-3 nav-link">

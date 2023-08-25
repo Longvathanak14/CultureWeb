@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "DxouzP8kkO8+zQbNaf+Q66eCZBbE30kucCuJp+iSAPw=",
+  "Hash": "YUNPIl8Rge30FQnJdr7i4BOciaM6zN2K12m+zLnNfS8=",
   "Source": "CultureWeb",
   "BasePath": "_content/CultureWeb",
   "Mode": "Default",
@@ -5319,6 +5319,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\User\\ee701c3c-ea5a-416d-a3db-b5464025bc87_Long.jpg"
+    },
+    {
+      "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\User\\f5367caa-27a2-4457-8b45-e66ea79bc09d_adolf dassler.PNG",
+      "SourceId": "CultureWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\",
+      "BasePath": "_content/CultureWeb",
+      "RelativePath": "Images/User/f5367caa-27a2-4457-8b45-e66ea79bc09d_adolf dassler.PNG",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\User\\f5367caa-27a2-4457-8b45-e66ea79bc09d_adolf dassler.PNG"
     },
     {
       "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\User\\fadcea5a-8a2e-40c5-84aa-ce39ae9cbbb0_seyla.JPG",
