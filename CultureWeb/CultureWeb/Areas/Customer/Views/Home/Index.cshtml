@@ -5,14 +5,9 @@
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
 @model PaginatedList<CultureWeb.Models.Products>
-@inject UserManager<IdentityUser> UserManager
-@{
-    // // Get the user's details
-    var user = await UserManager.GetUserAsync(User) as ApplicationUser;
-}
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Home";
 }
 @{
     //var userRole = HttpContextAccessor.HttpContext.Session.GetString("roleName");
@@ -128,33 +123,8 @@
                         </form>
                     </li>
                     <li class="nav-item dropdown mx-3">
-                    <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        @if (user.Image != null)
-                        {
-                            <img src="@($"~/Images/User/{user.Image}")" asp-append-version="true" class="img-profile rounded-circle objit-cover avatar avatar-sm" width="30px" height="30px" style="object-fit:cover;" />
-                        }
-                        else
-                        {
-                            <img src="~/Images/user.jpg" class="img-profile rounded-circle avatar avatar-sm" width="30px" height="30px" />
-                        }
-                    </a>
-                    <ul class="dropdown-menu bg-brown dropdown-menu-left shadow animated--grow-in">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="Customer" asp-controller="Profiles" asp-action="Profile">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                @localizer["Profile"]
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <form id="logoutForm" class="form-inline nav-link text-white" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                <button id="logout" type="submit" class=" bg-brown border-none text-white">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    @localizer["Logout"]
-                                </button>
-                            </form>
-                        </li>
-                    </ul>
-                </li>
+                        <partial name="_LoginPartial" />
+                    </li>
                 </ul>
             </div>
         </div>

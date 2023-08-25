@@ -21,13 +21,14 @@
         <img src="~/Images/user.jpg" class="img-profile rounded-circle avatar avatar-sm" width="30px" height="30px" />
         }
     </a>
-    <ul class="dropdown-menu bg-brown dropdown-menu-left shadow animated--grow-in">
+    <ul class="dropdown-menu bg-brown dropdown-menu-right shadow animated--grow-in">
         <li class="nav-item">
             <a class="nav-link text-white" asp-area="Customer" asp-controller="Profiles" asp-action="Profile">
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 @localizer["Profile"]
             </a>
         </li>
+        <div class="dropdown-divider"></div>
         <li class="nav-item">
             <form id="logoutForm" class="form-inline nav-link text-white" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button id="logout" type="submit" class=" bg-brown border-none text-white">
@@ -46,16 +47,17 @@ else
         <img src="~/Images/user.jpg" class="img-profile rounded-circle avatar avatar-sm" width="30px" height="30px" />
    
     </a>
-    <ul class="dropdown-menu bg-brown dropdown-menu-left shadow animated--grow-in">
+    <ul class="dropdown-menu bg-brown dropdown-menu-right shadow animated--grow-in">
         <li class="nav-item">
             <a class="nav-link text-white" id="register" asp-area="Identity" asp-page="/Account/Register">
-                <i class="fa-solid fa-user-plus fa-sm fa-fw mr-2 text-gray-400"></i>
+                <i class="fa-solid fa-user-plus fa-sm fa-fw mr-2 text-gray-400" style="margin-right: 2rem;"></i>
                 @localizer["Register"]
             </a>
         </li>
+        <div class="dropdown-divider"></div>
         <li class="nav-item">
             <a class="nav-link text-white" id="login" asp-area="Identity" asp-page="/Account/Login">
-                <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400" style="margin-right: 2rem;"></i>
                 @localizer["Login"]
             </a>
         </li>
