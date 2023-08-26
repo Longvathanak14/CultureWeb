@@ -636,6 +636,18 @@ namespace CultureWeb.Areas.Customer.Controllers
           
             var blogs = _db.Blogs.Include(c => c.SubCategories).Where(p => p.SubCategoryId == blog.SubCategoryId).Take(3);
 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (User.Identity.IsAuthenticated)
+            {
+                int favoriteProductCount = _db.FavoriteProducts.Count(fp => fp.UserId == userId);
+                ViewBag.FavoriteProductCount = favoriteProductCount;
+            }
+            else
+            {
+                int favoriteProductCount = 0; // Set count to 0 for non-authenticated users
+                ViewBag.FavoriteProductCount = favoriteProductCount;
+            }
+
             ViewBag.RelateBlogs = blogs;
             ViewBag.SubBlogs = subCategoriesBlogs;
 

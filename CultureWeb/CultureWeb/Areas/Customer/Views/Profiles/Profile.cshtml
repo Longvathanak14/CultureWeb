@@ -9,6 +9,11 @@
 @using System.Security.Claims;
 @inject IViewLocalizer localizer
 @inject IHttpContextAccessor HttpContextAccessor
+@inject UserManager<IdentityUser> UserManager
+@{
+    // // Get the user's details
+    var user = await UserManager.GetUserAsync(User) as ApplicationUser;
+}
 @{
     //var userRole = HttpContextAccessor.HttpContext.Session.GetString("roleName");
     int count = 0;
@@ -38,13 +43,11 @@
                 </a>
                 @if (!User.Identity.IsAuthenticated)
                 {
-                    <a id="login" asp-area="Identity" asp-page="/Account/Login" class="nav-link mt-2 mx-3"><i class="fa fa-heart"></i></a>
+                    <a id="login" asp-area="Identity" asp-page="/Account/Login" class="nav-link mt-2 mx-3"><i class="fa fa-heart"></i>(0)</a>
                 }
                 else
                 {
-
                     <a asp-area="Customer" asp-controller="Home" asp-action="FavoriteProduct" class="nav-link mt-2 mx-3" title="@localizer["Favorite"]"><i class="fa fa-heart"></i> (@ViewBag.FavoriteProductCount)</a>
-
                 }
 
                 <a href="#" class="text-decoration-none text-dark mx-3 nav-link">
@@ -59,49 +62,227 @@
                         </select>
                     </form>
                 </a>
-            </div>
-        </div>
-        <div class="row">
-        <div class="col-12  d-flex flex-column justify-content-center">
-            <div class="d-flex flex-column align-items-center text-center p-5">
-                <div class="upload rounded-circle ">
-                    @if (!string.IsNullOrEmpty(Model.Image))
+                <div class="dropdown no-arrow">
+                    <a class="nav-link " href="#" id="userDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @*   <span class="mr-2 d-none d-lg-inline text-gray-600 small">@user.UserName</span> *@
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (user.Image != null)
+                            {
+                                <img src="@($"~/Images/User/{user.Image}")" asp-append-version="true" class="img-profile rounded-circle objit-cover" width="40px" height="40px" style="object-fit:cover;" />
+                            }
+                            else
+                            {
+                                <img src="~/Images/user.jpg" class="img-profile rounded-circle" width="40px" height="40px" />
+                            }
+
+                        }
+                        else
+                        {
+
+                            <img src="~/Images/user.jpg" class="img-profile rounded-circle" width="40px" height="40px" />
+
+                        }
+
+                    </a>
+                    @if (User.Identity.IsAuthenticated)
                     {
-                        <img src="@("~/Images/User/"+Model.Image)" asp-append-version="true" width=200 height=200 alt="Profile" class="rounded-circle object-fit" style="object-fit:cover;">
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="userDropdown">
+                            <a class="dropdown-item" asp-area="Customer" asp-controller="Profiles" asp-action="Profile">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                @localizer["Profile"]
+                            </a>
+                         
+
+                            <div class="dropdown-divider"></div>
+
+                            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button id="logout" type="submit" class="dropdown-item">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    @localizer["Logout"]
+                                </button>
+                            </form>
+                        </div>
                     }
                     else
                     {
-                        <img src="~/images/user.jpg" asp-append-version="true" width=200 height=200 alt="Profile" class="rounded-circle object-fit" style="object-fit:cover;">
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="userDropdown">
+                            <a class="dropdown-item" id="register" asp-area="Identity" asp-page="/Account/Register">
+                                <i class="fa-solid fa-user-plus fa-sm fa-fw mr-2 text-gray-400"></i>
+                                @localizer["Register"]
+                            </a>
+                            @*  <a class="dropdown-item" href="#">
+                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                        @localizer["Settings"]
+                        </a> *@
+
+                            <div class="dropdown-divider"></div>
+
+                            <a class="dropdown-item" id="register" asp-area="Identity" asp-page="/Account/Register">
+                                <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                @localizer["Login"]
+                            </a>
+                        </div>
                     }
                 </div>
-                <span class="fw-bold text-dark mt-3 fs-5">
-                    @Html.DisplayFor(model => model.LastName) @Html.DisplayFor(model => model.FirstName)
-                            @if (Model.LockoutEnd > DateTime.Now && Model.LockoutEnd != null)
-                    {
-                        <i class="fas fa-minus-circle text-danger mx-1" title="@localizer["Inactive"]"></i>
-                    }
-                    else
-                    {
-                        <i class="fas fa-check-circle text-success mx-1" title="@localizer["Active"]"></i>
-                    }
-                </span>
-                <span class="mt-1 text-primary fs-6 align-middle">
-                    <i class="fa-solid fa-envelope text-white p-2 bg-gray rounded-circle mx-2"></i>
-                    <span style="top: -10px;">@Html.DisplayFor(model => model.UserName)</span>
-                </span>
-
             </div>
-
-
         </div>
+        <div class="row  d-flex justify-content-center">
+            <div class="mb-5 col-10 shadow bg-white border-0 ">
+                <div class="row">
+                    <div class="col-md-4  d-flex flex-column ">
+                            <div class="d-flex flex-column align-items-center text-center p-5">
+                                <div class="upload rounded-circle ">
+                                    @if (!string.IsNullOrEmpty(Model.Image))
+                                    {
+                                        <img src="@("~/Images/User/"+Model.Image)" asp-append-version="true" width=150 height=150 alt="Profile" class="rounded-circle object-fit" style="object-fit:cover;">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/images/user.jpg" asp-append-version="true" width=150 height=150 alt="Profile" class="rounded-circle object-fit" style="object-fit:cover;">
+                                    }
+                                </div>
+                                <span class="fw-bold text-dark mt-3 fs-5">
+                                    @Html.DisplayFor(model => model.LastName) @Html.DisplayFor(model => model.FirstName)
+                                    @if (Model.LockoutEnd > DateTime.Now && Model.LockoutEnd != null)
+                                    {
+                                        <i class="fas fa-minus-circle text-danger mx-1" title="@localizer["Inactive"]"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fas fa-check-circle text-success mx-1" title="@localizer["Active"]"></i>
+                                    }
+                                </span>
+                                <span class="mt-1 text-primary fs-6 align-middle">
+                                    <i class="fa-solid fa-envelope text-white p-2 bg-gray rounded-circle mx-2"></i>
+                                    <span style="top: -10px;">@Html.DisplayFor(model => model.UserName)</span>
+                                </span>
 
-        <div class=" my-3 d-flex justify-content-end">
-            <div class="pt-options ">
-                <a asp-action="EditProfile" class="btn btn-dark mx-2 " asp-route-id="@Model.Id"> @localizer["Edit"] </a>
+                            </div>
+                    </div>
+                    <div class="col-md-8 border-start px-5 py-3">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active text-dark" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Your Info</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link text-dark" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Your Orders</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                                <form class="row col-md-12 mt-3">
+                                    <div class="mt-3 form-control d-flex flex-wrap">
+                                        <div class="mt-3 form-control d-flex flex-wrap">
+                                            <div class="col-md-3 mt-1">
+                                                <label class="form-label fw-bold mb-1 fs-7">First Name </label><br>
+                                                <span class="mx-2 fs-7">@user.FirstName</span>
+                                            </div>
+                                            <div class="col-md-3 mt-1">
+                                                <label class="form-label fw-bold mb-1 fs-7">Last Name </label><br>
+                                                <span class="mx-2 fs-7">@user.LastName</span>
+                                            </div>
+                                            <div class="col-md-6 mt-1">
+                                                <label class="form-label fw-bold mb-1 fs-7">Full Name </label><br>
+                                                <span class="mx-2 fs-7">@user.LastName @user.FirstName</span>
+                                            </div>
+                                            <div class="col-md-3 mt-3">
+                                                <label class="form-label fw-bold mb-1 fs-7">Gender</label><br>
+                                                <span class="mx-2 fs-7">Male</span>
+                                            </div>
+                                            <div class="col-md-4 mt-3">
+                                                <label class="form-label fw-bold mb-1 fs-7">Date of Birth</label><br>
+                                                <span class="mx-2 fs-7">17 Feb 2002</span>
+                                            </div>
+                                            <div class="col-md-4 mt-3">
+                                                <label class="form-label fw-bold mb-1 fs-7">Joined Date</label><br>
+                                                <span class="mx-2 fs-7">17 Feb 2002</span>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3 form-control d-flex flex-wrap">
+                                            <div class="col-md-8 mt-3">
+                                                <label class="form-label fw-bold mb-1 fs-7">Email</label>
+                                                <span class="mx-2 fs-7 text-primary">@user.UserName</span>
+                                            </div>
+                                            <div class="col-md-10 mt-3">
+                                                <label class="form-label fw-bold mb-1 fs-7">Phone Number</label>
+                                                <span class="mx-2 fs-7">0888737756</span>
+                                            </div>
+
+                                            <div class="col-md-8 mt-3">
+                                                <label class="form-label fw-bold mb-1 fs-7">Address</label>
+                                                <span class="mx-2 fs-7">Siem Reap</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class=" my-3 d-flex justify-content-end">
+                                        <div class="pt-options ">
+                                            <a asp-action="EditProfile" class="btn btn-dark mx-2 " asp-route-id="@Model.Id"> @localizer["Edit"] </a>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                                <form class="row col-md-12 mt-3">
+                                    <table class="table table-hover align-middle mb-0 bg-white shadow rounded-3">
+
+                                        <div class="input-group w-50 my-3">
+                                            <input class="form-control border-end-0 border rounded-pill " type="text" placeholder="search order" id="example-search-input">
+                                            <span class="input-group-append mx-lg-1">
+                                                <button class="btn bg-brown text-white border-start-0 border rounded-pill ms-n3" type="button">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                        <thead class="bg-light">
+
+                                            <tr>
+                                                <th class="fs-7">@localizer["Order No"]</th>
+                                                <th class="fs-7">@localizer["Phone"]</th>
+                                                <th class="fs-7">@localizer["Order Date"]</th>
+                                                <th class="fs-7">@localizer["Actions"]</th>
+                                                <th class="fs-7">@localizer["Actions"]</th>
+                                                <th class="fs-7">@localizer["Actions"]</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var order in ViewBag.UserOrders)
+                                            {
+                                                    <tr>
+                                                    
+                                                        <td>
+                                                            <span class="fs-7">@order.OrderNo</span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="fs-7">@order.PhoneNo</span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="fs-7">@order.OrderDate</span>
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn btn-info btn-sm rounded-pill" asp-action="OrderUserDetail" asp-route-id="@order.Id">Details</a>
+
+                                                        </td>
+                                                    </tr>
+                                            }
+                                      
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+
+                        </div>                  
+
+                    </div>
+                </div>
             </div>
-
         </div>
-</div>
     </div>
 </div>
 <!-- Content Row -->

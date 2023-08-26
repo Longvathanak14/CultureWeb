@@ -151,9 +151,10 @@ namespace CultureWeb.Areas.Customer.Controllers
                 }
 
             }
-                     
 
-            // Set success message in TempData              
+
+            // Set success message in TempData
+            anOrder.UserId = userId;
             anOrder.OrderNo = GetOrderNo();
             anOrder.OrderDate = DateTime.Now;
             _db.Orders.Add(anOrder);

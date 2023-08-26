@@ -49,7 +49,6 @@
                     {
                         <li class="nav-item mx-2"><a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard">@localizer["Dashboard"]</a></li>
                     }
-
                     @if (User.IsInRole("SuperUser"))
                     {
                         <li class="nav-item mx-2"><a class="nav-link" asp-area="Admin" asp-controller="Product" asp-action="Index">@localizer["Super User Dashboard"]</a></li>

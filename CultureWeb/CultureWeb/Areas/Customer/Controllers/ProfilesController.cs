@@ -45,6 +45,12 @@ namespace CultureWeb.Areas.Customer.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get the user's ID
 
+            var userOrders = _context.Orders
+                            .Where(o => o.UserId == userId)
+                            .Include(o => o.OrderDetails) // Include product details if needed
+                            .ToList();
+            ViewBag.UserOrders = userOrders;
+
             if (userId == null)
             {
                 return NotFound(); // Handle the case where the user is not found
@@ -66,6 +72,18 @@ namespace CultureWeb.Areas.Customer.Controllers
                 // Map other properties as needed
             };
 
+           
+            if (User.Identity.IsAuthenticated)
+            {
+                int favoriteProductCount = _context.FavoriteProducts.Count(fp => fp.UserId == userId);
+                ViewBag.FavoriteProductCount = favoriteProductCount;
+            }
+            else
+            {
+                int favoriteProductCount = 0; // Set count to 0 for non-authenticated users
+                ViewBag.FavoriteProductCount = favoriteProductCount;
+            }
+
             return View(profileViewModel);
         }
 
@@ -85,6 +103,17 @@ namespace CultureWeb.Areas.Customer.Controllers
             if (user == null)
             {
                 return NotFound();
+            }
+
+            if (User.Identity.IsAuthenticated)
+            {
+                int favoriteProductCount = _context.FavoriteProducts.Count(fp => fp.UserId == userId);
+                ViewBag.FavoriteProductCount = favoriteProductCount;
+            }
+            else
+            {
+                int favoriteProductCount = 0; // Set count to 0 for non-authenticated users
+                ViewBag.FavoriteProductCount = favoriteProductCount;
             }
 
             return View(user);
@@ -153,6 +182,17 @@ namespace CultureWeb.Areas.Customer.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        [Authorize]
+        public IActionResult OrderUserDetail(int id)
+        {
+            var order = _context.Orders.Include(o => o.OrderDetails)
+                                       .ThenInclude(p => p.Product)
+                                       .FirstOrDefault(o => o.Id == id);
+
+
+            return View(order);
+        }
         private string UploadFile(ApplicationUser model)
         {
             string uniqueFileName = null;

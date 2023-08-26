@@ -2,8 +2,12 @@
 @using CultureWeb.Models;
 @using CultureWeb.Utility
 @using Microsoft.AspNetCore.Http
-@inject UserManager<IdentityUser> UserManager
+
 @inject IHttpContextAccessor HttpContextAccessor
+@inject UserManager<IdentityUser> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User) as ApplicationUser;
+}
 @{
     ViewData["Title"] = "Order Details";
 }
@@ -17,11 +21,6 @@
     }
 
 } *@
-
-@{
-    // // Get the user's details
-    var user = await UserManager.GetUserAsync(User) as ApplicationUser;
-}
 
 
 <!-- product-detail content -->
@@ -60,6 +59,72 @@
                             </select>
                         </form>
                     </a>
+                    <div class="dropdown no-arrow">
+                    <a class="nav-link " href="#" id="userDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @*   <span class="mr-2 d-none d-lg-inline text-gray-600 small">@user.UserName</span> *@
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (user.Image != null)
+                            {
+                                <img src="@($"~/Images/User/{user.Image}")" asp-append-version="true" class="img-profile rounded-circle objit-cover" width="40px" height="40px" style="object-fit:cover;" />
+                            }
+                            else
+                            {
+                                <img src="~/Images/user.jpg" class="img-profile rounded-circle" width="40px" height="40px" />
+                            }
+
+                        }
+                        else
+                        {
+
+                            <img src="~/Images/user.jpg" class="img-profile rounded-circle" width="40px" height="40px" />
+
+                        }
+
+                    </a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="userDropdown">
+                            <a class="dropdown-item" asp-area="Customer" asp-controller="Profiles" asp-action="Profile">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                @localizer["Profile"]
+                            </a>                          
+
+                            <div class="dropdown-divider"></div>
+
+                            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button id="logout" type="submit" class="dropdown-item">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    @localizer["Logout"]
+                                </button>
+                            </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="userDropdown">
+                            <a class="dropdown-item" id="register" asp-area="Identity" asp-page="/Account/Register">
+                                <i class="fa-solid fa-user-plus fa-sm fa-fw mr-2 text-gray-400"></i>
+                                @localizer["Register"]
+                            </a>
+                            @*  <a class="dropdown-item" href="#">
+                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                        @localizer["Settings"]
+                        </a> *@
+
+                            <div class="dropdown-divider"></div>
+
+                            <a class="dropdown-item" id="register" asp-area="Identity" asp-page="/Account/Register">
+                                <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                @localizer["Login"]
+                            </a>
+                        </div>
+                    }
+                </div>
                 </div>
             </div>
         @if (ViewBag.SuccessOrder == false){

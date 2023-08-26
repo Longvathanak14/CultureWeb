@@ -228,6 +228,12 @@
   <data name="Location" xml:space="preserve">
     <value>ផ្ទះលេខ 41 , ផ្លូវ P21 បុរីប៉េងហួត, ភ្នំពេញ</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>ចូលគណនី</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>ចាកចេញ</value>
+  </data>
   <data name="Main Category" xml:space="preserve">
     <value>ក្រុមចម្បង</value>
   </data>
@@ -266,6 +272,9 @@
   </data>
   <data name="Read more" xml:space="preserve">
     <value>អាន​បន្ថែម</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>ចុះឈ្មោះ</value>
   </data>
   <data name="Relate Product" xml:space="preserve">
     <value>ផលិតផលដែលទាក់ទង</value>

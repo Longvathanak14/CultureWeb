@@ -186,6 +186,12 @@
   <data name="Latest Blog" xml:space="preserve">
     <value>អត្ថបទចុងក្រោយ</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>ចូលគណនី</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>ចាកចេញ</value>
+  </data>
   <data name="Main Category" xml:space="preserve">
     <value>ក្រុមចម្បង</value>
   </data>
@@ -203,6 +209,9 @@
   </data>
   <data name="Read more" xml:space="preserve">
     <value>អាន​បន្ថែម</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>ចុះឈ្មោះ</value>
   </data>
   <data name="RELIGION" xml:space="preserve">
     <value>សាសនា</value>

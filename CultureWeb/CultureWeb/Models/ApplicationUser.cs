@@ -13,5 +13,7 @@ namespace CultureWeb.Models
 
         // Navigation property to represent the relationship between users and their reviews
         public virtual List<Review> Reviews { get; set; }
+        public ICollection<Order> Orders { get; set; }
+        public ICollection<Purchase> Purchases { get; set; }
     }
 }

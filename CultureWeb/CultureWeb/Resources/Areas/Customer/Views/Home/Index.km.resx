@@ -180,6 +180,12 @@
   <data name="lkhoun-desc" xml:space="preserve">
     <value>ល្ខោនខោល ជា​ប្រភេទ​របាំ​ប្រពៃណី ដែល​សំដែង​នៅ​ប្រទេស​កម្ពុជា ដែល​គេ​ស្គាល់​ថា​ជា​ល្ខោន​ពាក់​របាំងមុខ​របស់​ខ្មែរ។ វាមានដើមកំណើតនៅសតវត្សទី 19 ក្នុងរជ្ជកាលព្រះបាទអង្គឌួង ហើយត្រូវបានកំណត់លក្ខណៈដោយសំលៀកបំពាក់បិទបាំងដ៏ប្រណិត និងកាយវិការជានិមិត្តរូប។ របាំជាធម្មតាត្រូវបានអនុវត្តជារង្វង់ ដោយវដ្តនីមួយៗផ្តោតលើរឿង ឬប្រធានបទជាក់លាក់។ វាត្រូវបានចាត់ទុកថាជាផ្នែកមួយដ៏សំខាន់នៃបេតិកភណ្ឌវប្បធម៌របស់ប្រទេសកម្ពុជា ហើយជារឿយៗត្រូវបានគេធ្វើនៅក្នុងពិធីបុណ្យ និងព្រឹត្តិការណ៍សំខាន់ៗផ្សេងទៀត។</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>ចូលគណនី</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>ចាកចេញ</value>
+  </data>
   <data name="Main Category" xml:space="preserve">
     <value>ក្រុមចម្បង</value>
   </data>
@@ -191,6 +197,9 @@
   </data>
   <data name="Profile" xml:space="preserve">
     <value>គណនី</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>ចុះឈ្មោះ</value>
   </data>
   <data name="RELIGION" xml:space="preserve">
     <value>សាសនា</value>
@@ -206,6 +215,9 @@
   </data>
   <data name="Role and User manage" xml:space="preserve">
     <value>តួនាទី និងការគ្រប់គ្រងអ្នកប្រើប្រាស់</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
   </data>
   <data name="Sub Category" xml:space="preserve">
     <value>ក្រុមរង</value>

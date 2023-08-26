@@ -9,6 +9,11 @@
 @using System.Security.Claims;
 @inject IViewLocalizer localizer
 @inject IHttpContextAccessor HttpContextAccessor
+@inject UserManager<IdentityUser> UserManager
+@{
+    // // Get the user's details
+    var user = await UserManager.GetUserAsync(User) as ApplicationUser;
+}
 @{
     //var userRole = HttpContextAccessor.HttpContext.Session.GetString("roleName");
     int count = 0;
@@ -95,7 +100,7 @@
                 </a>
                 @if (!User.Identity.IsAuthenticated)
                 {
-                    <a id="login" asp-area="Identity" asp-page="/Account/Login" class="nav-link mt-2 mx-3"><i class="fa fa-heart"></i></a>
+                    <a id="login" asp-area="Identity" asp-page="/Account/Login" class="nav-link mt-2 mx-3"><i class="fa fa-heart"></i>(0)</a>
                 }
                 else
                 {
@@ -114,22 +119,88 @@
                         </select>
                     </form>
                 </a>
+                <div class="dropdown no-arrow">
+                    <a class="nav-link " href="#" id="userDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @*   <span class="mr-2 d-none d-lg-inline text-gray-600 small">@user.UserName</span> *@
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (user.Image != null)
+                            {
+                                <img src="@($"~/Images/User/{user.Image}")" asp-append-version="true" class="img-profile rounded-circle objit-cover" width="40px" height="40px" style="object-fit:cover;" />
+                            }
+                            else
+                            {
+                                <img src="~/Images/user.jpg" class="img-profile rounded-circle" width="40px" height="40px" />
+                            }
+
+                        }
+                        else
+                        {
+
+                            <img src="~/Images/user.jpg" class="img-profile rounded-circle" width="40px" height="40px" />
+
+                        }
+
+                    </a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="userDropdown">
+                            <a class="dropdown-item" asp-area="Customer" asp-controller="Profiles" asp-action="Profile">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                @localizer["Profile"]
+                            </a>                         
+
+                            <div class="dropdown-divider"></div>
+
+                            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button id="logout" type="submit" class="dropdown-item">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    @localizer["Logout"]
+                                </button>
+                            </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="userDropdown">
+                            <a class="dropdown-item" id="register" asp-area="Identity" asp-page="/Account/Register">
+                                <i class="fa-solid fa-user-plus fa-sm fa-fw mr-2 text-gray-400"></i>
+                                @localizer["Register"]
+                            </a>
+                            @*  <a class="dropdown-item" href="#">
+                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                        @localizer["Settings"]
+                        </a> *@
+
+                            <div class="dropdown-divider"></div>
+
+                            <a class="dropdown-item" id="register" asp-area="Identity" asp-page="/Account/Register">
+                                <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                @localizer["Login"]
+                            </a>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
-        <div class="row">
-            <form asp-action="EditProfile" method="post" enctype="multipart/form-data">
+        <div >
+            <form asp-action="EditProfile" class="row" method="post" enctype="multipart/form-data">
                 <div class="col-12  d-flex flex-column justify-content-center">
-                    <div class="d-flex flex-column align-items-center text-center p-5">
-                        <div class="upload rounded-circle position-relative">
+                    <div class="d-flex flex-column align-items-center text-center p-5 row">
+                        <div class="upload rounded-circle position-relative text-center">
                             @if (!string.IsNullOrEmpty(Model.Image))
                             {
-                                <img src="@("~/Images/User/"+Model.Image)" asp-append-version="true" width=200 height=200 alt="Profile" class="rounded-circle object-fit position-relative" style="object-fit: cover;">
+                                <img src="@("~/Images/User/"+Model.Image)" asp-append-version="true" width=200 height=200 alt="Profile" class="rounded-circle object-fit position-relative" style="object-fit: cover; right: 12px;">
                                 <!-- Absolute position for imagePreview -->
                                 <img id="imagePreview" src="#" alt="Image Preview" class="rounded-circle object-fit position-absolute" style="display: none; object-fit: cover; width: 200px; height: 200px; top: 0; left: 0;">
                             }
                             else
                             {
-                                <img src="~/images/user.jpg" asp-append-version="true" width=200 height=200 alt="Profile" class="rounded-circle object-fit position-relative" style="object-fit: cover;">
+                                <img src="~/images/user.jpg" asp-append-version="true" width=200 height=200 alt="Profile" class="rounded-circle object-fit position-relative" style="object-fit: cover; right: 12px;">
                                 <!-- Absolute position for imagePreview -->
                                 <img id="imagePreview" src="#" alt="Image Preview" class="rounded-circle object-fit position-absolute" style="display: none; object-fit: cover; width: 200px; height: 200px; top: 0; left: 0;">
                             }
@@ -139,21 +210,16 @@
                                 <i class="fas fa-camera" style="color: #fff;"></i>
                             </div>
                         </div>
-
-
-
-                        <span class="fw-bold d-flex text-dark mt-3 fs-5">
-                            <input asp-for="FirstName" class="form-control w-75" data-val-required="@localizer["First Name is required."]" />  <input asp-for="LastName" class="form-control w-75 mx-2" data-val-required="@localizer["Last Name is required."]" />
-                            @*   @if (Model.LockoutEnd > DateTime.Now && Model.LockoutEnd != null)
-                            {
-                            <i class="fas fa-minus-circle text-danger mx-1" title="@localizer["Inactive"]"></i>
-                            }
-                            else
-                            {
-                            <i class="fas fa-check-circle text-success mx-1" title="@localizer["Active"]"></i>
-                            } *@
-                        </span>
-                        <span class="mt-1 text-primary fs-6 d-flex"><input asp-for="UserName" class="form-control" data-val-required="@localizer["Email is required."]" ​​​​ aria-required="true" required /></span>
+                        <div class="col-12 col-lg-4 col-md-6">
+                            <span class="fw-bold d-flex text-dark mt-3 fs-5​ row">
+                                <input asp-for="FirstName" class="form-control col-12 col-lg-6 col-md-6 mb-2" data-val-required="@localizer["First Name is required."]" placeholder="@localizer["First Name"]" />
+                                <input asp-for="LastName" class="form-control col-12 col-lg-6 col-md-6 mb-2" data-val-required="@localizer["Last Name is required."]" placeholder="@localizer["Last Name"]" />
+                                <input asp-for="UserName" class="form-control col-12 mb-4" data-val-required="@localizer["Email is required."]" ​​​​ aria-required="true" required placeholder="@localizer["Email"]" />
+                                <a class="btn btn-dark" asp-area="Identity" asp-page="/Account/Manage/ChangePassword">Change Password</a>
+                            </span>
+                        </div>
+                       
+                        
 
                     </div>
 

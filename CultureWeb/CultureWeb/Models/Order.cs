@@ -26,5 +26,8 @@ namespace CultureWeb.Models
         public DateTime OrderDate { get; set; }
 
         public virtual List<OrderDetails> OrderDetails { get; set; }
+
+        public string UserId { get; set; } // User's identifier who purchased the product
+        public virtual ApplicationUser User { get; set; }
     }
 }

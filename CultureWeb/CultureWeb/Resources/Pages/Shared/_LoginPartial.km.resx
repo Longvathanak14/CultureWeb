@@ -123,6 +123,9 @@
   <data name="Logout" xml:space="preserve">
     <value>ចាកចេញ</value>
   </data>
+  <data name="Profile" xml:space="preserve">
+    <value>គណនី</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>ចុះឈ្មោះ</value>
   </data>

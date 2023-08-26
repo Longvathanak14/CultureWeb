@@ -21,7 +21,11 @@
         <img src="~/Images/user.jpg" class="img-profile rounded-circle avatar avatar-sm" width="30px" height="30px" />
         }
     </a>
-    <ul class="dropdown-menu bg-brown dropdown-menu-right shadow animated--grow-in">
+    <ul class="dropdown-menu bg-brown dropdown-menu-right shadow animated--grow-in" style="position: absolute;
+    transform: translate3d(-120px, 40px, 0px);
+    top: 0px;
+    left: 0px;
+    will-change: transform;">
         <li class="nav-item">
             <a class="nav-link text-white" asp-area="Customer" asp-controller="Profiles" asp-action="Profile">
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -42,22 +46,26 @@
 }
 else
 {
-    <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="nav-link " href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   
         <img src="~/Images/user.jpg" class="img-profile rounded-circle avatar avatar-sm" width="30px" height="30px" />
    
     </a>
-    <ul class="dropdown-menu bg-brown dropdown-menu-right shadow animated--grow-in">
+    <ul class="dropdown-menu bg-brown dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown" style="position: absolute;
+    transform: translate3d(-120px, 40px, 0px);
+    top: 0px;
+    left: 0px;
+    will-change: transform;">
         <li class="nav-item">
             <a class="nav-link text-white" id="register" asp-area="Identity" asp-page="/Account/Register">
-                <i class="fa-solid fa-user-plus fa-sm fa-fw mr-2 text-gray-400" style="margin-right: 2rem;"></i>
+                <i class="fa-solid fa-user-plus fa-sm fa-fw mr-2 text-gray-400" style="margin-right: 10px;"></i>
                 @localizer["Register"]
             </a>
         </li>
         <div class="dropdown-divider"></div>
         <li class="nav-item">
             <a class="nav-link text-white" id="login" asp-area="Identity" asp-page="/Account/Login">
-                <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400" style="margin-right: 2rem;"></i>
+                <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400" style="margin-right: 10px;"></i>
                 @localizer["Login"]
             </a>
         </li>

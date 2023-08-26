@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "YUNPIl8Rge30FQnJdr7i4BOciaM6zN2K12m+zLnNfS8=",
+  "Hash": "C9d1aGFNYOj4UibTZCKmVL7x+RjRoqhzhawOboJLFZI=",
   "Source": "CultureWeb",
   "BasePath": "_content/CultureWeb",
   "Mode": "Default",
@@ -5217,6 +5217,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\User\\ce6b9eb8-925f-47a7-b201-e28f782e98de_DSC_0337 copy.jpg"
+    },
+    {
+      "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\User\\cfdf5ad6-ab58-4a36-92e9-57f561e0413b_longkh.jpg",
+      "SourceId": "CultureWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\",
+      "BasePath": "_content/CultureWeb",
+      "RelativePath": "Images/User/cfdf5ad6-ab58-4a36-92e9-57f561e0413b_longkh.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\User\\cfdf5ad6-ab58-4a36-92e9-57f561e0413b_longkh.jpg"
     },
     {
       "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\User\\d4b9ad62-ad18-43e4-a7ef-62f76495d444_DSC_0338 copy.jpg",

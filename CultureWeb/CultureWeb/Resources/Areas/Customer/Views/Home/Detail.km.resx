@@ -123,6 +123,9 @@
   <data name="Add to Cart" xml:space="preserve">
     <value>ដាក់ចូលកន្រ្តក</value>
   </data>
+  <data name="Add to Favorite" xml:space="preserve">
+    <value>ដាក់ទៅចំណូលចិត្ត</value>
+  </data>
   <data name="ago" xml:space="preserve">
     <value>ម៉ោង</value>
   </data>
@@ -255,6 +258,12 @@
   <data name="Log In" xml:space="preserve">
     <value>ចូលគណនី</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>ចូលគណនី</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>ចាកចេញ</value>
+  </data>
   <data name="Main Category" xml:space="preserve">
     <value>ក្រុមចម្បង</value>
   </data>
@@ -303,6 +312,9 @@
   <data name="Read more" xml:space="preserve">
     <value>អាន​បន្ថែម</value>
   </data>
+  <data name="Register" xml:space="preserve">
+    <value>ចុះឈ្មោះ</value>
+  </data>
   <data name="Relate Product" xml:space="preserve">
     <value>ផលិតផលដែលទាក់ទង</value>
   </data>
@@ -341,6 +353,9 @@
   </data>
   <data name="Status" xml:space="preserve">
     <value>ស្ថានភាព</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
   </data>
   <data name="Sub Category" xml:space="preserve">
     <value>ក្រុមរង</value>

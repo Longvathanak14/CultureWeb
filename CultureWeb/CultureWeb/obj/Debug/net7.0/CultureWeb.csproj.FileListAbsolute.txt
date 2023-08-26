@@ -2210,3 +2210,7 @@ D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb\obj\Debug\net7.0\CultureW
 D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb\obj\Debug\net7.0\CultureWeb.Resources.Areas.Admin.Views.Suppliers.Delete.km.resources
 D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb\obj\Debug\net7.0\CultureWeb.Resources.Areas.Admin.Views.Suppliers.Details.en.resources
 D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb\obj\Debug\net7.0\CultureWeb.Resources.Areas.Admin.Views.Suppliers.Details.km.resources
+D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb\obj\Debug\net7.0\CultureWeb.Resources.Areas.Customer.Views.Profiles.Profile.en.resources
+D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb\obj\Debug\net7.0\CultureWeb.Resources.Areas.Customer.Views.Profiles.Profile.km.resources
+D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb\obj\Debug\net7.0\CultureWeb.Resources.Areas.Customer.Views.Profiles.EditProfile.en.resources
+D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb\obj\Debug\net7.0\CultureWeb.Resources.Areas.Customer.Views.Profiles.EditProfile.km.resources

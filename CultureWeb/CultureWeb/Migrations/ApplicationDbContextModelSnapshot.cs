@@ -205,7 +205,13 @@ namespace CultureWeb.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -292,6 +298,7 @@ namespace CultureWeb.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("ProductColor_kh")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int?>("Qty")
@@ -741,6 +748,17 @@ namespace CultureWeb.Migrations
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("CultureWeb.Models.Order", b =>
+                {
+                    b.HasOne("CultureWeb.Models.ApplicationUser", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("CultureWeb.Models.OrderDetails", b =>
                 {
                     b.HasOne("CultureWeb.Models.Order", "Order")
@@ -799,7 +817,7 @@ namespace CultureWeb.Migrations
                         .IsRequired();
 
                     b.HasOne("CultureWeb.Models.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("Purchases")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -812,7 +830,7 @@ namespace CultureWeb.Migrations
             modelBuilder.Entity("CultureWeb.Models.PurchaseDetail", b =>
                 {
                     b.HasOne("CultureWeb.Models.Products", "Product")
-                        .WithMany()
+                        .WithMany("PurchaseDetails")
                         .HasForeignKey("PorductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -925,6 +943,8 @@ namespace CultureWeb.Migrations
 
                     b.Navigation("ProductAttributes");
 
+                    b.Navigation("PurchaseDetails");
+
                     b.Navigation("Reviews");
                 });
 
@@ -942,6 +962,10 @@ namespace CultureWeb.Migrations
 
             modelBuilder.Entity("CultureWeb.Models.ApplicationUser", b =>
                 {
+                    b.Navigation("Orders");
+
+                    b.Navigation("Purchases");
+
                     b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618

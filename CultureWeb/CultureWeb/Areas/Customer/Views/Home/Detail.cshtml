@@ -91,7 +91,7 @@
                  </a>
                 @if (!User.Identity.IsAuthenticated)
                 {
-                    <a id="login" asp-area="Identity" asp-page="/Account/Login" class="nav-link mt-2 mx-3"><i class="fa fa-heart"></i></a>
+                    <a id="login" asp-area="Identity" asp-page="/Account/Login" class="nav-link mt-2 mx-3"><i class="fa fa-heart"></i>(0)</a>
                 }
                 else
                 {
@@ -168,10 +168,7 @@
                                 <i class="fa-solid fa-user-plus fa-sm fa-fw mr-2 text-gray-400"></i>
                                 @localizer["Register"]
                             </a>
-                           @*  <a class="dropdown-item" href="#">
-                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                @localizer["Settings"]
-                            </a> *@
+                          
 
                             <div class="dropdown-divider"></div>
 
@@ -257,7 +254,16 @@
                         </div>
                         <div class="product-info-detail row">
                             <span class="product-info-detail-title fw-bolder col-3">@localizer["Color"] </span>
-                            <span href="#" class="col-9"> @Html.DisplayFor(model => model.ProductColor)</span>
+                            <span href="#" class="col-9">
+                                @if (CultureInfo.CurrentUICulture.Name == "en")
+                                {
+                                    @Html.DisplayFor(model => model.ProductColor)
+                                }
+                                else if (CultureInfo.CurrentUICulture.Name == "km")
+                                {
+                                   @Html.DisplayFor(model => model.ProductColor_kh)
+                                }
+                            </span>
                         </div>
                         <div class="product-info-detail row">
                             <span class="product-info-detail-title fw-bolder col-3">@localizer["Product Type"]</span>
@@ -305,7 +311,7 @@
 
 
 
-                        <div class="d-flex ">
+                        <div class="d-flex mt-3">
                             <div>
                                 <form asp-action="Detail" method="post" enctype="multipart/form-data" class="d-flex">
                                     <div asp-validation-summary="ModelOnly" class="text-danger">
@@ -417,7 +423,17 @@
                        
                         <div class="product-info-detail row">
                             <span class="product-info-detail-title fw-bolder col-3">@localizer["Color"] </span>
-                            <span href="#" class="col-9"> @Html.DisplayFor(model => model.ProductColor)</span>
+                            <span href="#" class="col-9"> 
+                                 @if (CultureInfo.CurrentUICulture.Name == "en")
+                                {
+                                    @Html.DisplayFor(model => model.ProductColor)
+                                }
+                                else if (CultureInfo.CurrentUICulture.Name == "km")
+                                {
+                                    @Html.DisplayFor(model => model.ProductColor_kh)
+                                }
+                                
+                             </span>
                         </div>
                         <div class="product-info-detail row">
                             <span class="product-info-detail-title fw-bolder col-3">@localizer["Product Type"]</span>
@@ -462,7 +478,7 @@
                             </span>
                         </div>
 
-                        <div class="d-flex ">                          
+                        <div class="d-flex mt-3">                          
                             <div>
                                 @if (!User.Identity.IsAuthenticated)
                                 {

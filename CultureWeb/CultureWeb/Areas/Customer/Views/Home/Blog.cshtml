@@ -33,7 +33,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class=" col-md-11 col-lg-10 collapse navbar-collapse d-lg-flex justify-content-lg-center" id="collapsibleNavbar">
+        <div class=" col-md-11 col-lg-10 collapse navbar-collapse d-lg-flex justify-content-lg-end" id="collapsibleNavbar">
             <ul class="navbar-nav ">
                 @if (User.IsInRole("Admin"))
                 {
@@ -82,7 +82,7 @@
                     <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Contact">@localizer["Contact"]</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Cart" title="@localizer["Cart"]" style="margin-left: 2rem;">
+                    <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Cart" title="@localizer["Cart"]" >
                         <i class="fa-solid fa-bag-shopping"></i>
                         (@count)
                     </a>
@@ -113,10 +113,7 @@
                     </form>
                 </li>
                 <li class="nav-item dropdown mx-3">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">@localizer["Profile"]</a>
-                    <ul class="dropdown-menu bg-brown text-center">
-                        <partial name="_LoginPartial" />
-                    </ul>
+                    <partial name="_LoginPartial" />
                 </li>
             </ul>
         </div>
