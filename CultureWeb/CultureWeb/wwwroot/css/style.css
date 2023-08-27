@@ -119,6 +119,13 @@ ul>.drop-list:hover{
 .border-none{
   border: none;
 }
+
+.vh-50 {
+    height: 100vh !important
+}
+.vh-70 {
+    height: 70vh !important
+}
 .pr-0{
   padding-right: 0;
 }

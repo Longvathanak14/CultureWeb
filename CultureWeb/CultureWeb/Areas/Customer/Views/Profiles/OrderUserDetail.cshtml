@@ -34,7 +34,7 @@
             <div class="breadcumb nav-link mt-2">
                 <a asp-action="Index" asp-controller="Home" class="text-decoration-none text-dark mx-3">@localizer["Home"]</a>
                 <span><i class="fa-solid fa-chevron-right"></i></span>
-                <a ahref="#" class="text-decoration-none text-dark mx-3">@localizer["Profile"]</a>
+                <a asp-action="Profile" asp-controller="Profiles" class="text-decoration-none text-dark mx-3">@localizer["Profile"]</a>
 
             </div>
             <div class="breadcumb nav-link d-flex">
@@ -221,7 +221,7 @@
             <div class="col-12">
                 <div class="col-5"></div>
                 <div class="col-7 col-md-12">
-                    <div class="text-end">
+                    <div class="text-end mb-3">
                         <h5>@localizer["Total Amount"] :  <span class="text-success fw-bolder h5"> $@Model.OrderDetails.Sum(c=>c.Product.Price*c.QtyOrder)</span></h5>
                     </div>
 

@@ -214,7 +214,16 @@
                             <span class="fw-bold d-flex text-dark mt-3 fs-5​ row">
                                 <input asp-for="FirstName" class="form-control col-12 col-lg-6 col-md-6 mb-2" data-val-required="@localizer["First Name is required."]" placeholder="@localizer["First Name"]" />
                                 <input asp-for="LastName" class="form-control col-12 col-lg-6 col-md-6 mb-2" data-val-required="@localizer["Last Name is required."]" placeholder="@localizer["Last Name"]" />
-                                <input asp-for="UserName" class="form-control col-12 mb-4" data-val-required="@localizer["Email is required."]" ​​​​ aria-required="true" required placeholder="@localizer["Email"]" />
+                                <input asp-for="UserName" class="form-control col-12 mb-2" data-val-required="@localizer["Email is required."]" ​​​​ aria-required="true" required placeholder="@localizer["Email"]" />
+                                <select asp-for="Gender" class="form-select mb-2" aria-label="Default select example">
+                                    <option selected readonly>Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input asp-for="Phone" type="number" class="form-control col-12 mb-2" data-val-required="@localizer["Phone is required."]" ​​​​ aria-required="true" required placeholder="@localizer["Phone number"]" />
+                                <input asp-for="Address" class="form-control col-12 mb-2" data-val-required="@localizer["Address is required."]" ​​​​ aria-required="true" required placeholder="@localizer["Address"]" />
+                                <input asp-for="BirthDate" type="date" class="form-control col-12 mb-4" data-val-required="@localizer["birth of date is required."]" ​​​​ aria-required="true" required placeholder="@localizer["Birth of date"]" />
                                 <a class="btn btn-dark" asp-area="Identity" asp-page="/Account/Manage/ChangePassword">Change Password</a>
                             </span>
                         </div>

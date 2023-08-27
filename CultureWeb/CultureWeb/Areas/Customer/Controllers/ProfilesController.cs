@@ -69,6 +69,11 @@ namespace CultureWeb.Areas.Customer.Controllers
                 LastName = user.LastName,
                 UserName = user.UserName,
                 Image = user.Image,
+                Gender = user.Gender,
+                Phone = user.Phone,
+                Address = user.Address,
+                BirthDate = user.BirthDate
+,
                 // Map other properties as needed
             };
 

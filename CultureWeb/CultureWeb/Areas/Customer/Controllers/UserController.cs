@@ -54,6 +54,7 @@ namespace CultureWeb.Areas.Customer.Controllers
                 user.Image = uniqueFileName;
                 _db.Attach(user);
 
+                user.JoinDate = DateTime.Now;
                 var result = await _userManager.CreateAsync(user, user.PasswordHash);
                 if (result.Succeeded)
                 {
