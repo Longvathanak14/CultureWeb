@@ -116,10 +116,24 @@
                             var returnUrl = string.IsNullOrWhiteSpace(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}{Context.Request.QueryString}";
                         }
 
-                        <form method="post" asp-area="Customer" asp-action="ChangeLanguage" asp-controller="Home" asp-route-returnUrl="@returnUrl">
-                            <select class="form-select bg-brown border-none nav-link" name="culture" asp-for="@culture.RequestCulture.UICulture.Name" asp-items="cultureList" onchange="this.form.submit();">
-                            </select>
-                        </form>
+                        <div class="btn-group">
+                            <form method="post" asp-area="Customer" asp-action="ChangeLanguage" asp-controller="Home" asp-route-returnUrl="@returnUrl">
+                                <a type="button" class="nav-link text-dark" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-language fs-4"></i>
+                                </a>
+                                <div class="dropdown-menu">
+                                    <button class="dropdown-item" type="submit" name="culture" value="en">
+                                        <img src="~/images/en.png" class="flag-icon" width="20px" height="15px" />
+                                        @localizer["English"]
+                                    </button>
+                                    <button class="dropdown-item" type="submit" name="culture" value="km">
+                                        <img src="~/images/km.png" class="flag-icon" width="20px" height="15px" />
+                                        @localizer["Khmer"]
+                                    </button>
+                                    <!-- Add more language options as needed -->
+                                </div>
+                            </form>
+                        </div>
                     </li>
                     <li class="nav-item dropdown mx-3">
                         <partial name="_LoginPartial" />

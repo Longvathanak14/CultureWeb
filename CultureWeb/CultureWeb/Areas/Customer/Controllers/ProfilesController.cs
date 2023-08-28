@@ -164,6 +164,10 @@ namespace CultureWeb.Areas.Customer.Controllers
             user.LastName = model.LastName;
             user.UserName = model.UserName;
             user.Image = model.Image;
+            user.Gender = model.Gender;
+            user.Phone = model.Phone;
+            user.Address = model.Address;
+            user.BirthDate = model.BirthDate;
 
 
 

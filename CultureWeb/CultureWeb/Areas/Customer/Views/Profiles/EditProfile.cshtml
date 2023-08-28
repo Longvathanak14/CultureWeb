@@ -221,9 +221,9 @@
                                     <option value="Female">Female</option>
                                     <option value="Other">Other</option>
                                 </select>
-                                <input asp-for="Phone" type="number" class="form-control col-12 mb-2" data-val-required="@localizer["Phone is required."]" ​​​​ aria-required="true" required placeholder="@localizer["Phone number"]" />
-                                <input asp-for="Address" class="form-control col-12 mb-2" data-val-required="@localizer["Address is required."]" ​​​​ aria-required="true" required placeholder="@localizer["Address"]" />
-                                <input asp-for="BirthDate" type="date" class="form-control col-12 mb-4" data-val-required="@localizer["birth of date is required."]" ​​​​ aria-required="true" required placeholder="@localizer["Birth of date"]" />
+                                <input asp-for="Phone" type="number" class="form-control col-12 mb-2"   placeholder="@localizer["Phone number"]"/>
+                                <textarea asp-for="Address" cols="20" rows="5" class="form-control mb-2" placeholder="@localizer["Address"]"></textarea>
+                                <input asp-for="BirthDate" type="date" class="form-control col-12 mb-4" placeholder="@localizer["Birth Of Date"]" />
                                 <a class="btn btn-dark" asp-area="Identity" asp-page="/Account/Manage/ChangePassword">Change Password</a>
                             </span>
                         </div>

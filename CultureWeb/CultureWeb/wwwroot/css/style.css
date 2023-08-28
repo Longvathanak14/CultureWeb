@@ -596,3 +596,41 @@ a {
 .quantity:focus{
     border: none !important;
 }
+
+
+/*///table-profile responsive
+
+@media (max-width: 575.98px) {
+    .table-responsive-sm{
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .table-responsive-sm > .table-bordered {
+        border: 0;
+    }
+}*/
+
+@media (max-width: 575.98px){
+    .table-responsive-sm {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch
+    }
+
+    .table-responsive-sm > .table-bordered {
+        border: 0;
+    }
+}
+
+@media (min-width:768px){
+    .drop-sm-right {
+        position: absolute;
+        transform: translate3d(-120px, 40px, 0px);
+        top: 0px;
+        left: 0px;
+        will-change: transform;
+    }
+}

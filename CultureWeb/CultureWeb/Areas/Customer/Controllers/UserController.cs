@@ -112,6 +112,10 @@ namespace CultureWeb.Areas.Customer.Controllers
             userInfo.FirstName = user.FirstName;
             userInfo.LastName = user.LastName;
             userInfo.Image = user.Image;
+            userInfo.Gender = user.Gender;
+            userInfo.Phone = user.Phone;
+            userInfo.Address = user.Address;
+            userInfo.BirthDate = user.BirthDate;
 
             var result = await _userManager.UpdateAsync(userInfo);
             if (result.Succeeded)
