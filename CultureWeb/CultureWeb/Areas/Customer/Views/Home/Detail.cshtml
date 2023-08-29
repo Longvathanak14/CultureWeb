@@ -67,135 +67,134 @@
 <!-- product-detail content -->
 <div class="bg-main bg-light">
     <div class="container">
-        <div class="box py-5 d-flex justify-content-between">
-            <div class="breadcumb nav-link mt-2">
-                <a asp-action="Index" class="text-decoration-none text-dark mx-3">@localizer["Home"]</a>
-                <span><i class="fa-solid fa-chevron-right"></i></span>
-                <a asp-area="Customer" asp-controller="Home" asp-action="AllProduct" class="text-decoration-none text-dark mx-3">@localizer["All Products"]</a>
-                <span><i class="fa-solid fa-chevron-right"></i></span>
-                <a href="#" class="text-decoration-none text-dark mx-3">
-                    @if (CultureInfo.CurrentUICulture.Name == "en")
-                    {
-                        @Html.DisplayFor(model => model.Name)
-                    }
-                    else if (CultureInfo.CurrentUICulture.Name == "km")
-                    {
-                        @Html.DisplayFor(model => model.Name_kh)
-                    }
-                </a>
-            </div>
-             <div class="breadcumb nav-link d-flex">
-                <a class="nav-link mt-2" asp-area="Customer" asp-controller="Home" asp-action="Cart" title="@localizer["Cart"]">
-                            <i class="fa-solid fa-bag-shopping"></i>
-                            (@count)
-                 </a>
-                @if (!User.Identity.IsAuthenticated)
-                {
-                    <a id="login" asp-area="Identity" asp-page="/Account/Login" class="nav-link mt-2 mx-3"><i class="fa fa-heart"></i>(0)</a>
-                }
-                else
-                {
+        
+        <nav class="navbar navbar-expand-md navbar-dark mb-3">
+            <div class="container-fluid  text-start">
+                <div class="col-10 col-lg-6 col-md-6">
+                    <a asp-action="Index" class="text-decoration-none text-dark">@localizer["Home"]</a>
+                    <span><i class='fa-solid fa-chevron-right text-dark mx-2'></i></span>
+                    <a asp-area="Customer" asp-controller="Home" asp-action="AllProduct" class="text-decoration-none text-dark">@localizer["All Products"]</a>
+                   
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                    <i class="fa-solid fa-bars text-dark"></i>
+                </button>
 
-                    <a asp-area="Customer" asp-controller="Home" asp-action="FavoriteProduct" class="nav-link mt-2 mx-3" title="@localizer["Favorite"]"><i class="fa fa-heart"></i> (@ViewBag.FavoriteProductCount)</a>
-                  
-                }
-               
-                <a href="#" class="text-decoration-none text-dark mx-3 nav-link">
-                    @{
-                        var culture = Context.Features.Get<IRequestCultureFeature>();
-                        var cultureList = locOptions.Value.SupportedUICultures.Select(x => new SelectListItem { Value = x.Name, Text = localizer.GetString(x.Name) }).ToList();
-                        var returnUrl = string.IsNullOrWhiteSpace(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}{Context.Request.QueryString}";
-                    }
-
-                    <form method="post" asp-area="Customer" asp-action="ChangeLanguage" asp-controller="Home" asp-route-returnUrl="@returnUrl">
-                        <select class="form-select bg-light border-none " name="culture" asp-for="@culture.RequestCulture.UICulture.Name" asp-items="cultureList" onchange="this.form.submit();">
-                        </select>
-                    </form>
-                </a>
-                <div class="dropdown no-arrow" >
-                    <a class="nav-link " href="#" id="userDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      @*   <span class="mr-2 d-none d-lg-inline text-gray-600 small">@user.UserName</span> *@
-                        @if (User.Identity.IsAuthenticated)
-                        {
-
-                            if (user.Image != null)
+                <div class="col-2 col-lg-6 col-md-6 collapse navbar-collapse d-lg-flex d-md-flex justify-content-lg-end justify-content-md-end" id="collapsibleNavbar">
+                    <ul class="navbar-nav ">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Cart" title="@localizer["Cart"]">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                                (@count)
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            @if (!User.Identity.IsAuthenticated)
                             {
-                                <img src="@($"~/Images/User/{user.Image}")" asp-append-version="true" class="img-profile rounded-circle objit-cover" width="40px" height="40px" style="object-fit:cover;" />
+                                <a id="login" asp-area="Identity" asp-page="/Account/Login" class="nav-link text-dark" title="@localizer["Favorite"]"><i class="fa fa-heart"></i> (0)</a>
                             }
                             else
                             {
-                                <img src="~/Images/user.jpg" class="img-profile rounded-circle" width="40px" height="40px" />
+
+                                <a asp-area="Customer" asp-controller="Home" asp-action="FavoriteProduct" class="nav-link text-dark" title="@localizer["Favorite"]"><i class="fa fa-heart"></i> (@ViewBag.FavoriteProductCount)</a>
+
+                            }
+                        </li>
+                        <li class="nav-item dropdown ">
+                            @{
+                                var culture = Context.Features.Get<IRequestCultureFeature>();
+                                var cultureList = locOptions.Value.SupportedUICultures.Select(x => new SelectListItem { Value = x.Name, Text = localizer.GetString(x.Name) }).ToList();
+                                var returnUrl = string.IsNullOrWhiteSpace(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}{Context.Request.QueryString}";
+                            }
+                            <form method="post" asp-area="Customer" asp-action="ChangeLanguage" asp-controller="Home" asp-route-returnUrl="@returnUrl">
+                                <a class="nav-link text-dark" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-language fs-4"></i>
+                                </a>
+                                <ul class="dropdown-menu bg-white shadow animated--grow-in drop-sm-right" aria-labelledby="userDropdown">
+                                    <button class="dropdown-item bg-white border-none text-dark" type="submit" name="culture" value="en">
+                                        <img src="~/images/en.png" class="flag-icon " width="20px" height="15px" style="margin-right: 6px; color: white !important;" />
+                                        @localizer["English"]
+                                    </button>
+                                    <div class="dropdown-divider"></div>
+                                    <button class="dropdown-item bg-white border-none text-dark" type="submit" name="culture" value="km">
+                                        <img src="~/images/km.png" class="flag-icon" width="20px" height="15px" style="margin-right: 6px; color: white !important;" />
+                                        @localizer["Khmer"]
+                                    </button>
+                                    <!-- Add more language options as needed -->
+                                </ul>
+                            </form>
+                        </li>
+                        <li class="nav-item dropdown">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @if (user.Image != null)
+                                    {
+                                        <img src="@($"~/Images/User/{user.Image}")" asp-append-version="true" class="img-profile rounded-circle objit-cover avatar avatar-sm" width="30px" height="30px" style="object-fit:cover;" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Images/user.jpg" class="img-profile rounded-circle avatar avatar-sm" width="30px" height="30px" />
+                                    }
+                                </a>
+                                <ul class="dropdown-menu bg-white shadow animated--grow-in drop-sm-right">
+                                    <li class="dropdown-item">
+                                        <a class="nav-link text-dark" asp-area="Customer" asp-controller="Profiles" asp-action="Profile">
+                                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            @localizer["Profile"]
+                                        </a>
+                                    </li>
+                                    <div class="dropdown-divider"></div>
+
+                                    <form id="logoutForm" class="form-inline nav-link text-dark" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                        <button id="logout" type="submit" class="dropdown-item bg-white border-none text-dark">
+                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            @localizer["Logout"]
+                                        </button>
+                                    </form>
+
+                                </ul>
+
+                            }
+                            else
+                            {
+                                <a class="nav-link " href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="~/Images/user.jpg" class="img-profile rounded-circle avatar avatar-sm" width="30px" height="30px" />
+                                </a>
+                                <ul class="dropdown-menu bg-white  shadow animated--grow-in drop-sm-right" aria-labelledby="userDropdown">
+                                    <li class="dropdown-item-2">
+                                        <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">
+                                            <i class="fa-solid fa-user-plus fa-sm fa-fw mr-2 text-gray-400" style="margin-right: 10px;"></i>
+                                            @localizer["Register"]
+                                        </a>
+                                    </li>
+                                    <div class="dropdown-divider"></div>
+                                    <li class="dropdown-item-2">
+                                        <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">
+                                            <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400" style="margin-right: 10px;"></i>
+                                            @localizer["Login"]
+                                        </a>
+                                    </li>
+                                </ul>
+
                             }
 
-                        }
-                        else{
-
-                            <img src="~/Images/user.jpg" class="img-profile rounded-circle" width="40px" height="40px" />
-
-                        }
-
-                    </a>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                    <!-- Dropdown - User Information -->
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                         aria-labelledby="userDropdown">
-                        <a class="dropdown-item" asp-area="Customer" asp-controller="Profiles" asp-action="Profile">
-                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                            @localizer["Profile"]
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                            @localizer["Settings"]
-                        </a>
-
-                        <div class="dropdown-divider"></div>
-
-                        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                            <button id="logout" type="submit" class="dropdown-item">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                @localizer["Logout"]
-                            </button>
-                        </form>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                             aria-labelledby="userDropdown">
-                            <a class="dropdown-item" id="register" asp-area="Identity" asp-page="/Account/Register">
-                                <i class="fa-solid fa-user-plus fa-sm fa-fw mr-2 text-gray-400"></i>
-                                @localizer["Register"]
-                            </a>
-                          
-
-                            <div class="dropdown-divider"></div>
-
-                            <a class="dropdown-item" id="register" asp-area="Identity" asp-page="/Account/Register">
-                                <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                @localizer["Login"]
-                            </a>
-                        </div>
-                    }
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
-      
+        </nav>
 
         @if (Model.IsAvailable == true)
         {
             <div class="row ">
                 <div class="col-12 col-md-6 col-lg-6 mb-4">
-
                     <img src="~/@Model.Image" width="100%" height="400px" class="object-fit" style="object-fit: cover;" />
-
-
                 </div>
                 <div class="col-12 col-md-6 col-lg-6">
                     <div class="product-info px-2 px-lg-4">
-                        <div class="d-flex justify-content-between">
-                            <h1>
+                        <div class="row">
+                            <h1 class="col-6">
                                 @if (CultureInfo.CurrentUICulture.Name == "en")
                                 {
                                     @Html.DisplayFor(model => model.Name)
@@ -205,7 +204,7 @@
                                     @Html.DisplayFor(model => model.Name_kh)
                                 }
                             </h1>
-                            <div>
+                            <div class="col-6">
                                 <!-- Display the average rating for the product -->
                                 @if (Model.Reviews.Any())
                                 {
@@ -310,52 +309,52 @@
 
 
 
-
-                        <div class="d-flex mt-3">
-                            <div>
-                                <form asp-action="Detail" method="post" enctype="multipart/form-data" class="d-flex">
+                        @* button *@
+                        <div class="d-flex flex-wrap mt-3">
+                            <div class="mb-3">
+                                                           
+                                    <form asp-action="Detail" method="post" enctype="multipart/form-data" class="d-flex">
                                     <div asp-validation-summary="ModelOnly" class="text-danger">
                                     </div>
-                                   
+                                        @if (product != null)
+                                        {
+                                            <input type="hidden" name="productId" value="@Model.Id" />
+                                        <button type="submit" class="btn btn-danger" asp-action="RemoveAll" asp-route-id="@Model.Id" style="margin-right: 16px;"><i class="fa-solid fa-cart-shopping"></i> @localizer["Remove from Cart"]</button>
+                                        }
+                                        else
+                                        {
+                                            
+                                            <div class="d-flex flex-row border-1 rounded-2" style="border: 1px solid black; " >
+                                                <button type="button" class="btn btn-link px-2 text-dark"
+                                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
 
+                                                <input min="1" name="quantity" value="1" max="@Model.Qty"  type="number"
+                                                class="form-control text-center border-none quantity focus-none" style="width: 60px;" disable="disable" readonly="readonly" />
 
-                                    @if (product != null)
-                                    {
-                                        <input type="hidden" name="productId" value="@Model.Id" />
-                                        <button type="submit" class="btn btn-danger px-3" asp-action="RemoveAll" asp-route-id="@Model.Id"><i class="fa-solid fa-cart-shopping"></i> @localizer["Remove from Cart"]</button>
-                                    }
-                                    else
-                                    {
-                                        <div class="d-flex flex-row border-1 rounded-2" style="border: 1px solid black; " >
-                                            <button type="button" class="btn btn-link px-2 text-dark"
-                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
-
-                                            <input min="1" name="quantity" value="1" max="@Model.Qty"  type="number"
-                                           class="form-control text-center border-none quantity focus-none" style="width: 60px;" disable="disable" readonly="readonly" />
-
-                                            <button type="button" class="btn btn-link px-2 text-dark"
-                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
-                                        </div>
-                                        <button type="submit" class="btn btn-dark px-3 mx-2" @(Model.Qty <= 0 || Model.IsAvailable == false ? "disabled" : "")><i class="fa-solid fa-cart-shopping"></i> @localizer["Add to Cart"]</button>
-
-                                    }
-                                </form>
+                                                <button type="button" class="btn btn-link px-2 text-dark"
+                                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </div>
+                                            <button type="submit" class="btn btn-dark mx-2" @(Model.Qty <= 0 || Model.IsAvailable == false ? "disabled" : "")><i class="fa-solid fa-cart-shopping"></i> @localizer["Add to Cart"]</button>
+                                      
+                                        }
+                                  </form>
+                               
                             </div>
-                            <div>
+                            <div class="">
                                 @if (!User.Identity.IsAuthenticated)
                                 {
-                                    <a id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-dark mx-3"><i class="far fa-heart"></i> @localizer["Add to Favorite"]</a>
+                                    <a id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-dark"><i class="far fa-heart"></i> @localizer["Add to Favorite"]</a>
                                 }
                                 else
                                 {
                                     @if (!(bool)ViewBag.IsProductInFavorite)
                                     {
                                         <form asp-action="AddToFavorites" asp-route-productId="@Model.Id" method="post">
-                                            <button type="submit" class="btn btn-outline-dark mx-3">
+                                            <button type="submit" class="btn btn-outline-dark ">
                                                 <i class="far fa-heart"></i> @localizer["Add to Favorite"]
                                             </button>
                                         </form>
@@ -363,7 +362,7 @@
                                     else
                                     {
                                         <form asp-action="RemoveFromFavorites" asp-route-productId="@Model.Id" method="post">
-                                            <button type="submit" class="btn btn-outline-dark mx-3">
+                                            <button type="submit" class="btn btn-outline-dark ">
                                                 <i class="far fa-heart"></i> @localizer["Remove from Favorites"]
                                             </button>
                                         </form>
@@ -589,11 +588,11 @@
                                                             <i class='fas fa-star text-danger'></i>
                                                         }
                                                     </span>
-                                                    <div>
+                                                    <div​ class="">
                                                         <h6 class="fw-bold">@review.ReviewTitle</h6>
                                                         <p>@review.ReviewText</p>
                                                         @*<p>By: @review.User.FirstName</p>*@
-                                                    </div>
+                                                    </div​>
                                                     <div class="d-flex">
                                                         <div>
                                                             @if (!string.IsNullOrEmpty(review.User.Image))
@@ -687,7 +686,7 @@
                                                             <label>@localizer["Review Title"]</label>
                                                             <input class="form-control" name="ReviewTitle" required>
                                                         </div>
-                                                        <div class="form-group">
+                                                        <div class="form-group mt-3">
                                                             <label>@localizer["Comment"]</label>
                                                             <!-- Change the input element to textarea for multiline text -->
                                                             <textarea class="form-control" name="ReviewText" id="reviewText" rows="5" required></textarea>

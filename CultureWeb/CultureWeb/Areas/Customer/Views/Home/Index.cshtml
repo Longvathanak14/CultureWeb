@@ -60,7 +60,7 @@
                     <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="AllProduct">@localizer["Product"]</a>
                     </li>
                     <li class="nav-item dropdown mx-2">
-                        <a class="nav-link dropdown-toggle" href="./Blog.cshtml" role="button" data-bs-toggle="dropdown">@localizer["Blog"]</a>
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">@localizer["Blog"]</a>
                         <ul class="dropdown-menu bg-brown">                        
                             <li><a asp-action="Last-Blog" asp-controller="Home" asp-area="Customer" class="dropdown-item-2  nav-link">@localizer["Latest Blog"]</a></li>
                             @foreach (var item in ViewBag.SubBlogs)
@@ -108,33 +108,31 @@
 
                         }
                     </li>
-                   
-                    <li class="nav-item">
+
+                <li class="nav-item dropdown ">
                         @{
                             var culture = Context.Features.Get<IRequestCultureFeature>();
                             var cultureList = locOptions.Value.SupportedUICultures.Select(x => new SelectListItem { Value = x.Name, Text = localizer.GetString(x.Name) }).ToList();
                             var returnUrl = string.IsNullOrWhiteSpace(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}{Context.Request.QueryString}";
                         }
-
-                        <div class="btn-group">
-                            <form method="post" asp-area="Customer" asp-action="ChangeLanguage" asp-controller="Home" asp-route-returnUrl="@returnUrl">
-                                <a type="button" class="nav-link text-dark" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-language fs-4"></i>
-                                </a>
-                                <div class="dropdown-menu">
-                                    <button class="dropdown-item" type="submit" name="culture" value="en">
-                                        <img src="~/images/en.png" class="flag-icon" width="20px" height="15px" />
-                                        @localizer["English"]
-                                    </button>
-                                    <button class="dropdown-item" type="submit" name="culture" value="km">
-                                        <img src="~/images/km.png" class="flag-icon" width="20px" height="15px" />
-                                        @localizer["Khmer"]
-                                    </button>
-                                    <!-- Add more language options as needed -->
-                                </div>
-                            </form>
-                        </div>
-                    </li>
+                    <form method="post" asp-area="Customer" asp-action="ChangeLanguage" asp-controller="Home" asp-route-returnUrl="@returnUrl">
+                        <a class="nav-link " href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-language fs-4"></i>
+                        </a>
+                        <ul class="dropdown-menu bg-brown shadow animated--grow-in drop-sm-right" aria-labelledby="userDropdown">
+                            <button class="dropdown-item-2 bg-brown border-none text-white" type="submit" name="culture" value="en">
+                                <img src="~/images/en.png" class="flag-icon " width="20px" height="15px" style="margin-right: 6px; color: white !important;" />
+                                    @localizer["English"]
+                            </button>                         
+                            <div class="dropdown-divider"></div>                         
+                            <button class="dropdown-item-2 bg-brown border-none text-white" type="submit" name="culture" value="km">
+                                <img src="~/images/km.png" class="flag-icon" width="20px" height="15px" style="margin-right: 6px; color: white !important;" />
+                                    @localizer["Khmer"]
+                            </button>
+                            <!-- Add more language options as needed -->                                                 
+                        </ul>
+                    </form>
+                </li>
                     <li class="nav-item dropdown mx-3">
                         <partial name="_LoginPartial" />
                     </li>
@@ -143,12 +141,9 @@
         </div>
     </nav>
      <section>
-    <div class="col-12 p-4">
-        <div class="py-lg-5"></div>
-        <div class="py-lg-5"></div>
-        <div class="py-lg-5"></div>
-        <div class="py-lg-4"></div>
-    </div>
+        <div class="col-12 p-4 vh-35">
+           
+        </div>
      </section>
      <section>
          <div class="col-12 bg-white py-2 px-4">

@@ -120,8 +120,14 @@ ul>.drop-list:hover{
   border: none;
 }
 
+.vh-25 {
+    height: 25vh !important
+}
+.vh-35 {
+    height: 35vh !important
+}
 .vh-50 {
-    height: 100vh !important
+    height: 50vh !important
 }
 .vh-70 {
     height: 70vh !important
@@ -628,7 +634,7 @@ a {
 @media (min-width:768px){
     .drop-sm-right {
         position: absolute;
-        transform: translate3d(-120px, 40px, 0px);
+        transform: translate3d(-120px, 0px, 0px);
         top: 0px;
         left: 0px;
         will-change: transform;

@@ -192,6 +192,9 @@
   <data name="en" xml:space="preserve">
     <value>អង់គ្លេស</value>
   </data>
+  <data name="English" xml:space="preserve">
+    <value>អង់គ្លេស</value>
+  </data>
   <data name="Favorite" xml:space="preserve">
     <value>ចំណូលចិត្ត</value>
   </data>
@@ -221,6 +224,9 @@
   </data>
   <data name="Just now" xml:space="preserve">
     <value>ឥឡូវនេះ</value>
+  </data>
+  <data name="Khmer" xml:space="preserve">
+    <value>ភាសាខ្មែរ</value>
   </data>
   <data name="Khmer Cultural Heritage" xml:space="preserve">
     <value>គេហទំព័រមរតកវប្បធម៌ខ្មែរ</value>
@@ -325,7 +331,7 @@
     <value>យកចេញពីកន្រ្តក</value>
   </data>
   <data name="Remove from Favorites" xml:space="preserve">
-    <value>ដកចេញពីបញ្ជីដែលចង់បាន</value>
+    <value>ដកចេញពីចំណូលចិត្ត</value>
   </data>
   <data name="Review" xml:space="preserve">
     <value>ការវាយតម្លៃ</value>
@@ -374,6 +380,12 @@
   </data>
   <data name="Successfully" xml:space="preserve">
     <value>ផលិតផលត្រូវបានបញ្ចូលទៅក្នុងកន្រ្តក</value>
+  </data>
+  <data name="Successfully added to cart." xml:space="preserve">
+    <value>បានដាក់ចូលកន្រ្តកដោយជោគជ័យ</value>
+  </data>
+  <data name="Successfully removed from cart." xml:space="preserve">
+    <value>បានដកចេញកន្រ្តកដោយជោគជ័យ</value>
   </data>
   <data name="SuccessfullyRemove" xml:space="preserve">
     <value>ផលិតផលត្រូវបានដកចេញពីក្នុងកន្រ្តក</value>

@@ -96,7 +96,7 @@
                     }
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item dropdown">
                     @{
                         var culture = Context.Features.Get<IRequestCultureFeature>();
                         var cultureList = locOptions.Value.SupportedUICultures.Select(x => new SelectListItem { Value = x.Name, Text = localizer.GetString(x.Name) }).ToList();
@@ -104,8 +104,21 @@
                     }
 
                     <form method="post" asp-area="Customer" asp-action="ChangeLanguage" asp-controller="Home" asp-route-returnUrl="@returnUrl">
-                        <select class="form-select bg-brown border-none nav-link" name="culture" asp-for="@culture.RequestCulture.UICulture.Name" asp-items="cultureList" onchange="this.form.submit();">
-                        </select>
+                        <a class="nav-link " href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-language fs-4"></i>
+                        </a>
+                        <ul class="dropdown-menu bg-brown shadow animated--grow-in drop-sm-right" aria-labelledby="userDropdown">
+                            <button class="dropdown-item-2 bg-brown border-none text-white" type="submit" name="culture" value="en">
+                                <img src="~/images/en.png" class="flag-icon " width="20px" height="15px" style="margin-right: 6px; color: white !important;" />
+                                @localizer["English"]
+                            </button>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item-2 bg-brown border-none text-white" type="submit" name="culture" value="km">
+                                <img src="~/images/km.png" class="flag-icon" width="20px" height="15px" style="margin-right: 6px; color: white !important;" />
+                                @localizer["Khmer"]
+                            </button>
+                            <!-- Add more language options as needed -->
+                        </ul>
                     </form>
                 </li>
                 <li class="nav-item dropdown mx-3">

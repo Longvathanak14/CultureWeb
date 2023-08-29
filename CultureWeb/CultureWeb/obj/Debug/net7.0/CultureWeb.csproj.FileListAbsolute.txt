@@ -2672,3 +2672,4 @@ D:\git hub\CultureWeb\CultureWeb\CultureWeb\obj\Debug\net7.0\refint\CultureWeb.d
 D:\git hub\CultureWeb\CultureWeb\CultureWeb\obj\Debug\net7.0\CultureWeb.pdb
 D:\git hub\CultureWeb\CultureWeb\CultureWeb\obj\Debug\net7.0\CultureWeb.genruntimeconfig.cache
 D:\git hub\CultureWeb\CultureWeb\CultureWeb\obj\Debug\net7.0\ref\CultureWeb.dll
+D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb\obj\Debug\net7.0\CultureWeb.Resources.Areas.Customer.Views.Profiles.OrderUserDetail.km.resources

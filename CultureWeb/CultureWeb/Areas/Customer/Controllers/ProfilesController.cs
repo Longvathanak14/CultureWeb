@@ -199,7 +199,17 @@ namespace CultureWeb.Areas.Customer.Controllers
                                        .ThenInclude(p => p.Product)
                                        .FirstOrDefault(o => o.Id == id);
 
-
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get the user's ID
+            if (User.Identity.IsAuthenticated)
+            {
+                int favoriteProductCount = _context.FavoriteProducts.Count(fp => fp.UserId == userId);
+                ViewBag.FavoriteProductCount = favoriteProductCount;
+            }
+            else
+            {
+                int favoriteProductCount = 0; // Set count to 0 for non-authenticated users
+                ViewBag.FavoriteProductCount = favoriteProductCount;
+            }
             return View(order);
         }
         private string UploadFile(ApplicationUser model)
