@@ -61,7 +61,7 @@
        
         <nav class="navbar navbar-expand-md navbar-dark mb-3">
             <div class="container-fluid text-start">
-                <div class="col-8 col-lg-6 col-md-6">
+                <div class="col-10 col-lg-6 col-md-6">
                     <a asp-action="Index" class="text-decoration-none text-dark ">@localizer["Home"]</a>
                     <span><i class="fa-solid fa-chevron-right mx-3"></i></span>
                     <a asp-area="Customer" asp-controller="Home" asp-action="Blog-Category" class="text-decoration-none text-dark ">@localizer["Blog"]</a>
@@ -82,7 +82,7 @@
                     <i class="fa-solid fa-bars text-dark"></i>
                 </button>
 
-                <div class="col-4 col-lg-6 col-md-6 collapse navbar-collapse d-lg-flex d-md-flex justify-content-lg-end justify-content-md-end" id="collapsibleNavbar">
+                <div class="col-2 col-lg-6 col-md-6 collapse navbar-collapse d-lg-flex d-md-flex justify-content-lg-end justify-content-md-end" id="collapsibleNavbar">
                     <ul class="navbar-nav ">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Cart" title="@localizer["Cart"]">
@@ -261,7 +261,7 @@
                         <div>
                             <h4 class="fw-bolder my-4">@localizer["Cambodia's"]</h4>
                            <div>
-                                <a asp-action="Blog-Category" asp-controller="Home" asp-area="Customer" class="btn btn-outline-danger m-1">@localizer["Latest Blog"]</a>
+                                <a asp-action="Last-Blog" asp-controller="Home" asp-area="Customer" class="btn btn-outline-danger m-1">@localizer["Latest Blog"]</a>
                                @foreach (var subblogs in ViewBag.SubBlogs)
                                 {
                                     <a asp-action="Blog" asp-controller="Home" asp-area="Customer" class="btn btn-outline-danger m-1" asp-route-id="@subblogs.Name">

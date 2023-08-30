@@ -294,6 +294,9 @@
   <data name="Socail Activity" xml:space="preserve">
     <value>សកម្មភាពសង្គម</value>
   </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
   <data name="Sub Category" xml:space="preserve">
     <value>ក្រុមរង</value>
   </data>

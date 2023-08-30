@@ -7,24 +7,36 @@
 @{
     ViewData["Title"] = "Cart";
 }
-
+@{
+    //var userRole = HttpContextAccessor.HttpContext.Session.GetString("roleName");
+    int count = 0;
+    count = Model.Count();
+}
 <!-- product-detail content -->
 <div class="bg-main bg-light min-vh-100">
     <div class="container">
        
         <nav class="navbar navbar-expand-md navbar-dark mb-3">
             <div class="container-fluid text-start">
-                <div class="col-8 col-lg-6 col-md-6">
+                <div class="col-10 col-lg-6 col-md-6">
                     <a asp-action="Index" class="text-decoration-none text-dark">@localizer["Home"]</a>
-                    <span><i class='fa-solid fa-chevron-right text-dark mx-3'></i></span>             
+                    <span><i class='fa-solid fa-chevron-right text-dark mx-3'></i></span>
+                    <a asp-action="AllProduct" class="text-decoration-none text-dark">@localizer["Product"]</a>
+                    <span><i class='fa-solid fa-chevron-right text-dark mx-3'></i></span>
                     <a class="text-decoration-none text-dark ">@localizer["Cart"]</a>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                     <i class="fa-solid fa-bars text-dark"></i>
                 </button>
 
-                <div class="col-4 col-lg-6 col-md-6 collapse navbar-collapse d-lg-flex d-md-flex justify-content-lg-end justify-content-md-end" id="collapsibleNavbar">
-                    <ul class="navbar-nav ">                      
+                <div class="col-2 col-lg-6 col-md-6 collapse navbar-collapse d-lg-flex d-md-flex justify-content-lg-end justify-content-md-end" id="collapsibleNavbar">
+                    <ul class="navbar-nav ">   
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Cart" title="@localizer["Cart"]">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                                (@count)
+                            </a>
+                        </li>
                         <li class="nav-item">
                             @if (!User.Identity.IsAuthenticated)
                             {
@@ -134,7 +146,7 @@
                     <thead class="bg-gray">
                         <tr>
                             <th>@localizer["Product"]</th>
-                            <th>@localizer["Price"]</th>
+                            @* <th>@localizer["Price"]</th> *@
                             <th>@localizer["Quantity"]</th>
                             <th>@localizer["SubTotal"]</th>
                             <th></th>
@@ -145,34 +157,36 @@
                             {
                                 
                                 <tr class="align-middle">
-                                    <td>
+                                    <td class="d-flex">
                                         <span>
                                             <a asp-action="Details" asp-route-id="@item.Id">
                                                 <img src="~/@item.Image" alt="" style="width: 75px; height: 75px" class="rounded-3 object-fit" />
                                             </a>
                                         </span>
-                                        <span class="text-black fs-6 fw-bolder mx-3">
-                                            <a asp-action="Details" asp-route-id="@item.Id" class="text-black fs-6 fw-bolder mx-3">
-                                                @switch (CultureInfo.CurrentUICulture.Name)
-                                                {
-                                                    case "en":
-                                                        @item.Name
-                                                        break;
-                                                    case "km":
-                                                        @item.Name_kh
-                                                        break;
-                                                    default:
-                                                        @item.Name
-                                                        break;
-                                                }
+                                        <span class="d-flex flex-column mx-3">
+                                            <span class="text-black fs-6 fw-bolder">
+                                                <a asp-action="Details" asp-route-id="@item.Id" class="text-black fs-6 fw-bolder ">
+                                                    @switch (CultureInfo.CurrentUICulture.Name)
+                                                    {
+                                                        case "en":
+                                                            @item.Name
+                                                            break;
+                                                        case "km":
+                                                            @item.Name_kh
+                                                            break;
+                                                        default:
+                                                            @item.Name
+                                                            break;
+                                                    }
                                                 </a>
+                                            </span>
+                                            <span class="text-success">
+                                                $@item.Price
+                                            </span>
                                         </span>
+                                        
                                     </td>
-                                    <td>
-                                        <span class="text-success">
-                                            <i class="fa-solid fa-dollar-sign"></i>@item.Price
-                                        </span>
-                                    </td>
+                                   
                                     <td>
                                         <div class="d-flex flex-row">
                                             <form asp-action="RemoveQtyCart" method="post" enctype="multipart/form-data" class="d-flex">
@@ -208,7 +222,7 @@
                                     </td>
                                     <td>
                                         <span class="text-success">
-                                            <i class="fa-solid fa-dollar-sign"></i>@(item.Price * item.Qty) 
+                                            $@(item.Price * item.Qty) 
                                         </span>
                                     </td>
                                     <td>
@@ -238,7 +252,15 @@
                     </div>
                     <div class="product-info">
                         <div class="product-info-detail mx-2">
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <a id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-success">@localizer["Checkout"]</a>
+                            }
+                            else
+                            {
                                 <a asp-area="Customer" asp-action="Checkout" asp-controller="Order" class="btn btn-success">@localizer["Checkout"]</a>
+                            }
+                           
                         </div>
                     </div>
                 </div>

@@ -144,13 +144,13 @@
   <data name="Cambodia's" xml:space="preserve">
     <value>របស់កម្ពុជា</value>
   </data>
+  <data name="Cart" xml:space="preserve">
+    <value>កន្រ្តក</value>
+  </data>
   <data name="Category" xml:space="preserve">
     <value>ក្រុម</value>
   </data>
   <data name="Checkout" xml:space="preserve">
-    <value>ពិនិត្យ​មុន​ពេល​ចេញ</value>
-  </data>
-  <data name="Check​out​" xml:space="preserve">
     <value>ពិនិត្យចេញ</value>
   </data>
   <data name="Color" xml:space="preserve">
@@ -177,6 +177,9 @@
   <data name="en" xml:space="preserve">
     <value>អង់គ្លេស</value>
   </data>
+  <data name="English" xml:space="preserve">
+    <value>អង់គ្លេស</value>
+  </data>
   <data name="Favorite" xml:space="preserve">
     <value>ចំណូលចិត្ត</value>
   </data>
@@ -197,6 +200,9 @@
   </data>
   <data name="Image" xml:space="preserve">
     <value>រូបភាព</value>
+  </data>
+  <data name="Khmer" xml:space="preserve">
+    <value>ភាសាខ្មែរ</value>
   </data>
   <data name="Khmer Cultural Heritage" xml:space="preserve">
     <value>គេហទំព័រមរតកវប្បធម៌ខ្មែរ</value>

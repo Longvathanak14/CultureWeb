@@ -78,13 +78,13 @@
                 <li class="nav-item mx-2">
                     <a class="nav-link active" asp-area="Customer" asp-controller="Home" asp-action="Contact">@localizer["Contact"]</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mx-2">
                     <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Cart" title="@localizer["Cart"]" >
                         <i class="fa-solid fa-bag-shopping"></i>
                         (@count)
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mx-2">
                     @if (!User.Identity.IsAuthenticated)
                     {
                         <a id="login" asp-area="Identity" asp-page="/Account/Login" class="nav-link" title="@localizer["Favorite"]"><i class="fa fa-heart"></i> (0)</a>
@@ -97,7 +97,7 @@
                     }
                 </li>
 
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown mx-2">
                     @{
                         var culture = Context.Features.Get<IRequestCultureFeature>();
                         var cultureList = locOptions.Value.SupportedUICultures.Select(x => new SelectListItem { Value = x.Name, Text = localizer.GetString(x.Name) }).ToList();

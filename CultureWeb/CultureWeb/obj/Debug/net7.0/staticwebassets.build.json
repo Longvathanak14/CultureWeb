@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "t5CqpG2RUKOdSUtlPp5Y0X3BB5wxJsHt5UCH0cFcAHM=",
+  "Hash": "XPoqBuANd+VcHy2TvEE6NSSaFJDaNfgcpuby4ezDISY=",
   "Source": "CultureWeb",
   "BasePath": "_content/CultureWeb",
   "Mode": "Default",
@@ -3993,6 +3993,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\R.jpg"
+    },
+    {
+      "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\remax_logo.png",
+      "SourceId": "CultureWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\",
+      "BasePath": "_content/CultureWeb",
+      "RelativePath": "Images/remax_logo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\remax_logo.png"
     },
     {
       "Identity": "D:\\Git BBU-Group_Work\\CultureWeb\\CultureWeb\\CultureWeb\\wwwroot\\Images\\Screenshot 2023-03-22 143827.jpg",
