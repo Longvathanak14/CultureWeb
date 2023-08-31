@@ -1,0 +1,12 @@
+D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb.Service\bin\Debug\net7.0\CultureWeb.Service.deps.json
+D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb.Service\bin\Debug\net7.0\CultureWeb.Service.dll
+D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb.Service\bin\Debug\net7.0\CultureWeb.Service.pdb
+D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb.Service\obj\Debug\net7.0\CultureWeb.Service.csproj.AssemblyReference.cache
+D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb.Service\obj\Debug\net7.0\CultureWeb.Service.GeneratedMSBuildEditorConfig.editorconfig
+D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb.Service\obj\Debug\net7.0\CultureWeb.Service.AssemblyInfoInputs.cache
+D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb.Service\obj\Debug\net7.0\CultureWeb.Service.AssemblyInfo.cs
+D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb.Service\obj\Debug\net7.0\CultureWeb.Service.csproj.CoreCompileInputs.cache
+D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb.Service\obj\Debug\net7.0\CultureWeb.Service.dll
+D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb.Service\obj\Debug\net7.0\refint\CultureWeb.Service.dll
+D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb.Service\obj\Debug\net7.0\CultureWeb.Service.pdb
+D:\Git BBU-Group_Work\CultureWeb\CultureWeb\CultureWeb.Service\obj\Debug\net7.0\ref\CultureWeb.Service.dll
