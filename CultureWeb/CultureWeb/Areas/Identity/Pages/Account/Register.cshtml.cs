@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
@@ -17,6 +16,7 @@ using CultureWeb.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.Extensions.Hosting;
 using CultureWeb.Data;
+using CultureWeb.Services;
 
 namespace CultureWeb.Areas.Identity.Pages.Account
 {
@@ -26,7 +26,7 @@ namespace CultureWeb.Areas.Identity.Pages.Account
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        private readonly IEmailService _emailSender;
         private readonly IWebHostEnvironment _hostEnvironment; // Add this field
         private readonly ApplicationDbContext _db; // Add this field
 
@@ -34,7 +34,7 @@ namespace CultureWeb.Areas.Identity.Pages.Account
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender,
+            IEmailService emailSender,
             IWebHostEnvironment hostEnvironment,
              ApplicationDbContext db) // Add IWebHostEnvironment parameter
         {
@@ -115,18 +115,16 @@ namespace CultureWeb.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
+                    var userId = await _userManager.GetUserIdAsync(user);
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);          
+                    var value = new { userId = user.Id, code = code, returnUrl = returnUrl };
+                    var callbackUrl = Url.Page("/Account/ConfirmEmail", "Identity", value, Request.Scheme);
+                  
+                    var message = new Message(new string[] { Input.Email! }, "Confirm your email", $"Please confirm to verify  your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    _emailSender.SendEmail(message);
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    if (_userManager.Options.SignIn.RequireConfirmedAccount = true)
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
                     }

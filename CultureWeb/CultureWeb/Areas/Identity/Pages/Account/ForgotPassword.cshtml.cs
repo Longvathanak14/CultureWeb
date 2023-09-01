@@ -78,11 +78,10 @@ namespace CultureWeb.Areas.Identity.Pages.Account
                 if (user != null)
                 {
                     var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                    var value = new { token = token, email = user.Email };
+                    var value = new { token = token, email = email };
                     var forgotPasswordLink = Url.Page("/Account/ResetPassword", "Identity" , value, Request.Scheme);
 
-                    var message = new Message(new string[] { user.Email! }, "Forgot Password Link", forgotPasswordLink);
-                   
+                    var message = new Message(new string[] { user.Email! }, "Forgot Password Link", $"Please reset your password by clicking <a href='{HtmlEncoder.Default.Encode(forgotPasswordLink)}'>here</a>.");            
 
                     _emailSender.SendEmail(message);
 

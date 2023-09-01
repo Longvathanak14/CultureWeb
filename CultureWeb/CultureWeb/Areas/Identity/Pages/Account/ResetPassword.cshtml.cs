@@ -47,24 +47,22 @@ namespace CultureWeb.Areas.Identity.Pages.Account
 
         public IActionResult OnGet(string token, string email)
         {
-            var model = new InputModel { Code = token , Email = email };
-
-            return Page(Page);
-
-
-            //if (code == null)
-            //{
-            //    return BadRequest("A code must be supplied for password reset.");
-            //}
-            //else
-            //{
-            //    Input = new InputModel
-            //    {
-            //        Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
-            //    };
-            //    return Page();
-            //}
+            if (token == null)
+            {
+                return BadRequest("A code must be supplied for password reset.");
+            }     
+            else
+            {
+                Input = new InputModel
+                {
+                    Email = email,
+                    Code = token
+                };
+                return Page();
+            }
         }
+
+
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -74,21 +72,19 @@ namespace CultureWeb.Areas.Identity.Pages.Account
             }
 
             var user = await _userManager.FindByEmailAsync(Input.Email);
-            if (user == null)
+            if (user != null)
             {
-                // Don't reveal that the user does not exist
-                return RedirectToPage("./ResetPasswordConfirmation");
-            }
+                // Don't reveal that the user does not exist                        
+                var result = await _userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
+                if (result.Succeeded)
+                {
+                    return RedirectToPage("./ResetPasswordConfirmation");
+                }
 
-            var result = await _userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
-            if (result.Succeeded)
-            {
-                return RedirectToPage("./ResetPasswordConfirmation");
-            }
-
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
             }
             return Page();
         }

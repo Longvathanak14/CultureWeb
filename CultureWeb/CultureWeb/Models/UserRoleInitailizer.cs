@@ -30,6 +30,7 @@ namespace CultureWeb.Models
                 ApplicationUser user = new()
                 {
                     Email = email,
+                    EmailConfirmed = true,
                     UserName = email,
                     PasswordHash = password,
                     FirstName = "Admin",
