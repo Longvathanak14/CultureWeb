@@ -15,10 +15,12 @@ namespace CultureWeb.Areas.Identity.Pages.Account
     public class ConfirmEmailModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly ILogger<ConfirmEmailModel> _logger;
 
-        public ConfirmEmailModel(UserManager<IdentityUser> userManager)
+        public ConfirmEmailModel(UserManager<IdentityUser> userManager, ILogger<ConfirmEmailModel> logger)
         {
             _userManager = userManager;
+            _logger = logger; // Inject the logger
         }
 
         [TempData]
@@ -26,16 +28,16 @@ namespace CultureWeb.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnGetAsync(string userId, string code)
         {
-            if (userId == null || code == null)
-            {
-                return RedirectToPage("/Index");
-            }
+            _logger.LogInformation($"Received userId: {userId}, code: {code}");
 
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(userId); // Find user by userId
             if (user == null)
             {
+                _logger.LogError($"User with ID '{userId}' not found in the database.");
                 return NotFound($"Unable to load user with ID '{userId}'.");
             }
+
+            var email = await _userManager.GetEmailAsync(user); // Get user's email
 
             if (userId != null || code != null)
             {

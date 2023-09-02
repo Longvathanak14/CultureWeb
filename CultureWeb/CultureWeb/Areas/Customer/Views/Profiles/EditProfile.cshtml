@@ -229,8 +229,7 @@
                         <div class="col-12 col-lg-4 col-md-6">
                             <span class="fw-bold d-flex text-dark mt-3 fs-5​ row">
                                 <input asp-for="FirstName" class="form-control col-12 col-lg-6 col-md-6 mb-2" data-val-required="@localizer["First Name is required."]" placeholder="@localizer["First Name"]" />
-                                <input asp-for="LastName" class="form-control col-12 col-lg-6 col-md-6 mb-2" data-val-required="@localizer["Last Name is required."]" placeholder="@localizer["Last Name"]" />
-                                <input asp-for="UserName" class="form-control col-12 mb-2" data-val-required="@localizer["Email is required."]" ​​​​ aria-required="true" required placeholder="@localizer["Email"]" />
+                                <input asp-for="LastName" class="form-control col-12 col-lg-6 col-md-6 mb-2" data-val-required="@localizer["Last Name is required."]" placeholder="@localizer["Last Name"]" />                               
                                 <select asp-for="Gender" class="form-select mb-2" aria-label="Default select example">
                                     <option selected readonly>Select Gender</option>
                                     <option value="Male">Male</option>
@@ -240,6 +239,8 @@
                                 <input asp-for="Phone" type="number" class="form-control col-12 mb-2"   placeholder="@localizer["Phone number"]"/>
                                 <textarea asp-for="Address" cols="20" rows="5" class="form-control mb-2" placeholder="@localizer["Address"]"></textarea>
                                 <input asp-for="BirthDate" type="date" class="form-control col-12 mb-4" placeholder="@localizer["Birth Of Date"]" />
+                                
+                                <a class="btn btn-dark mb-2" asp-area="Identity" asp-page="/Account/Manage/Email">Change Email</a>
                                 <a class="btn btn-dark" asp-area="Identity" asp-page="/Account/Manage/ChangePassword">Change Password</a>
                             </span>
                         </div>
@@ -279,6 +280,7 @@
                 reader.onload = function (e) {
                     imagePreview.src = e.target.result;
                     imagePreview.style.display = "block";
+                    imagePreview.style.backgroundColor = "white";
                 };
 
                 reader.readAsDataURL(input.files[0]);

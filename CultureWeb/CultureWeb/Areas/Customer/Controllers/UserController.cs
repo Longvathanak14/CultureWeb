@@ -6,6 +6,7 @@ using CultureWeb.Models;
 using System.Data;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using CultureWeb.Services;
 
 namespace CultureWeb.Areas.Customer.Controllers
 {
@@ -16,11 +17,13 @@ namespace CultureWeb.Areas.Customer.Controllers
         UserManager<IdentityUser> _userManager;
         ApplicationDbContext _db;
         private readonly IWebHostEnvironment _hostEnvironment;
-        public UserController(UserManager<IdentityUser> userManager, ApplicationDbContext db, IWebHostEnvironment hostEnvironment)
+        private readonly IEmailService _emailSender;
+        public UserController(UserManager<IdentityUser> userManager, ApplicationDbContext db, IWebHostEnvironment hostEnvironment ,  IEmailService emailSender)
         {
             _userManager = userManager;
             _db = db;
             _hostEnvironment = hostEnvironment;
+            _emailSender = emailSender;
         }
 
         [HttpGet]
@@ -52,6 +55,7 @@ namespace CultureWeb.Areas.Customer.Controllers
             
                 string uniqueFileName = UploadFile(user);
                 user.Image = uniqueFileName;
+                user.Email = user.UserName;
                 _db.Attach(user);
 
                 user.JoinDate = DateTime.Now;
@@ -59,6 +63,26 @@ namespace CultureWeb.Areas.Customer.Controllers
                 if (result.Succeeded)
                 {
                     var isSaveRole = await _userManager.AddToRoleAsync(user, "User");
+                    
+                    var email = user.Email;
+                    var userId = await _userManager.GetUserIdAsync(user);
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.Page(
+                        "/Account/ConfirmEmail",
+                        null,
+                        new { area = "Identity", userId = user.Id, code = code },
+                        Request.Scheme,
+                        Request.Host.Value);
+
+
+
+                var message = new Message(
+                        new string[] { user.Email! },
+                        "Confirm your email",
+                        $"Please confirm to verify your account by <a href=\"{callbackUrl}\"'>clicking here</a>.");
+
+                    _emailSender.SendEmail(message);
+
                     TempData["save"] = "User has been created successfully";
                     return RedirectToRoute(new { controller = "User", action = "Index" });
                 }

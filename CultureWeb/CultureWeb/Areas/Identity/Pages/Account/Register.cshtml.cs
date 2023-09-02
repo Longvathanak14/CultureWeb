@@ -17,6 +17,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.Extensions.Hosting;
 using CultureWeb.Data;
 using CultureWeb.Services;
+using System.Net;
 
 namespace CultureWeb.Areas.Identity.Pages.Account
 {
@@ -104,7 +105,8 @@ namespace CultureWeb.Areas.Identity.Pages.Account
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
                     Image = Input.Image,
-                    ImageFile = Input.ImageFile
+                    ImageFile = Input.ImageFile,
+                    JoinDate = DateTime.Now
                 };
                 string uniqueFileName = UploadFile(user, _hostEnvironment);
 
@@ -114,17 +116,26 @@ namespace CultureWeb.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
+                    var email = Input.Email;
                     var userId = await _userManager.GetUserIdAsync(user);
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);          
-                    var value = new { userId = user.Id, code = code, returnUrl = returnUrl };
-                    var callbackUrl = Url.Page("/Account/ConfirmEmail", "Identity", value, Request.Scheme);
-                  
-                    var message = new Message(new string[] { Input.Email! }, "Confirm your email", $"Please confirm to verify  your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.Page(
+                         "/Account/ConfirmEmail",
+                         "Identity",
+                         new { userId = user.Id, code = code }, // Include code parameter
+                         Request.Scheme);
 
-                    _emailSender.SendEmail(message);
+                        var message = new Message(
+                            new string[] { Input.Email! },
+                            "Confirm your email",
+                            $"Please confirm to verify your account by <a href={callbackUrl}'>clicking here</a>.");
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount = true)
+               
+
+                     _emailSender.SendEmail(message);
+
+
+                if (_userManager.Options.SignIn.RequireConfirmedAccount = true)
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
                     }

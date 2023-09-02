@@ -230,8 +230,8 @@
                         <div class="product-info-detail d-flex align-middle mb-2">
                             <div class="product-info-price fs-2 text-success">$@Html.DisplayFor(model => model.Price)</div>
                             <div class="product-info-price fs-7 text-danger mx-2 align-content-center">
-                                <span class="text-decoration-line-through ">$@Html.DisplayFor(model => model.Price)</span>
-                                <span class="product-info-price text-light bg-danger mx-3 rounded-1 align-content-center" style="font-size: 12px !important; padding: 2px !important;">-10%</span>
+                                <span class="text-decoration-line-through ">$00.00</span>
+                                <span class="product-info-price text-light bg-danger mx-3 rounded-1 align-content-center" style="font-size: 12px !important; padding: 2px !important;">-0%</span>
                             </div>
 
                         </div>
@@ -780,7 +780,7 @@
                                 }
                             </p>
                             <div class="product-bottom-details">
-                                <div class="product-price"><small>$296.00</small>$@relate_product.Price</div>
+                                <div class="product-price"><small>$00.00</small>$@relate_product.Price</div>
                                  <div class="product-links">
                                      <div>
                                         @if (!User.Identity.IsAuthenticated)
