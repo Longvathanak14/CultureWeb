@@ -1,0 +1,93 @@
+﻿@model CultureWeb.Models.ProductPrice
+
+@{
+    ViewData["Title"] = @localizer["Product's Price details"];
+
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-3">
+    <div class="pt-title ">
+        <p class="fs-6"><a asp-action="Index" class="fs-5 text-danger">@localizer["Product's Price List"] </a> <i class="fa-solid fa-chevron-right"></i> @localizer["Product's Price details"]</p>
+    </div>
+   
+</div>
+
+<!-- Assign Attribute Modal -->
+
+<form asp-action="" method="post" enctype="multipart/form-data">
+    <div class="p-4 rounded border row">
+        <div asp-validation-summary="ModelOnly" class="text-danger">
+        </div>
+        <div class="col-12 col-md-6 col-lg-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label >@localizer["Product Name"]</label>
+                </div>
+                <div class="col-8 fw-bolder">
+                    <input type="hidden" asp-for="Id" />
+                    @if (CultureInfo.CurrentUICulture.Name == "en")
+                    {
+                        @Html.DisplayFor(model => model.Products.Name)
+                    }
+                    else if (CultureInfo.CurrentUICulture.Name == "km")
+                    {
+                        @Html.DisplayFor(model => model.Products.Name_kh)
+                    }                  
+                </div>
+               
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label >@localizer["Cost Price"]</label>
+                </div>
+                <div class="col-8 fw-bolder">
+                    $@Html.DisplayFor(model => model.Products.PurchaseDetails.FirstOrDefault().CostPrice)
+                </div>
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>@localizer["Unit Price"]</label>
+                </div>
+                <div class="col-8 fw-bolder">
+                     $@Html.DisplayFor(model => model.UnitPrice)
+                </div>               
+            </div>
+                <div class="form-group row">
+                <div class="col-4">
+                    <label>@localizer["Discount Amount"]</label>
+                </div>
+                <div class="col-8 fw-bolder">               
+                     $@Html.DisplayFor(model => model.Discount_Amount)
+                </div>          
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>@localizer["Discount Percent"] </label>
+                </div>
+                <div class="col-8 fw-bolder">
+                    $@Html.DisplayFor(model => model.Discount_Percent)                  
+                </div>              
+            </div>                                        
+        </div>       
+        <div class="col-12 col-md-6 col-lg-4">
+            <img src="~/@Model.Products.Image" width="100%" height="250px" style="border-radius: 5px;border: 1px solid #efefef" class="object-fit" />
+        </div>
+        <div class="form-group d-flex justify-content-end mt-2">
+            <a type="button" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-dark mx-2">@localizer["Edit"]</a>
+            <a type="button" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">@localizer["Delete"]</a>
+               
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Initialize CKEditor
+        CKEDITOR.replace('description');
+    </script>
+}
+

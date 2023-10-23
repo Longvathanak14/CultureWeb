@@ -1,0 +1,85 @@
+﻿@model CultureWeb.Models.ProductPrice
+
+@{
+    ViewData["Title"] = @localizer["Product's Price​ edit"];
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="pt-title ">
+        <p class="fs-6">
+            <a asp-action="Index" class="fs-5 text-danger">@localizer["Product Price"] </a> <i class="fa-solid fa-chevron-right"></i> @localizer["Product's Price​ edit"]
+        </p>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-12 d-flex justify-content-center px-lg-5 px-2">
+        <form asp-controller="ProductPrices" asp-action="Edit" method="post" class="row d-flex justify-content-center" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id"/>
+            <div class="col-lg-6">
+                <div class="row">
+
+                    @if (CultureInfo.CurrentUICulture.Name == "en")
+                    {
+                        <div class="mt-3 col-lg-12">
+                            <label for="ProductId">@localizer["Product"]:</label>
+                            <select asp-for="ProductId" asp-items="ViewBag.ProId" class="form-control" data-val-required="@localizer["Product is required."]">
+                                <option disabled selected>@localizer["Select Product"]</option>
+                            </select>
+                            @*<input asp-for="ProductTypeId" class="form-control"/>*@
+                            <span asp-validation-for="ProductId" class="text-danger"></span>
+                        </div>
+                    }
+                    else if (CultureInfo.CurrentUICulture.Name == "km")
+                    {
+                        <div class="mt-3 col-lg-12">
+                            <label for="ProductId">@localizer["Product"]:</label>
+                            <select asp-for="ProductId" asp-items="ViewBag.mainId_kh" class="form-control" data-val-required="@localizer["Product is required."]">
+                                <option disabled selected>@localizer["Select Product"]</option>
+                            </select>
+                            @*<input asp-for="ProductTypeId" class="form-control"/>*@
+                            <span asp-validation-for="ProductId" class="text-danger"></span>
+                        </div>
+                    }
+                    <div class="mt-3 col-lg-12">
+                        <label asp-for="UnitPrice" class="control-label">@localizer["Unit Price"]</label>
+                        <input asp-for="UnitPrice" class="form-control" data-val-required="@localizer["Unit Price is required."]" />
+                        <span asp-validation-for="UnitPrice" class="text-danger"></span>
+                    </div>
+                    <div class="mt-3 col-lg-12">
+                        <label asp-for="Discount_Amount" class="control-label">@localizer["Discount Amount"]</label>
+                        <input asp-for="Discount_Amount" class="form-control" data-val-required="@localizer["Discount Amount is required."]" />
+                        <span asp-validation-for="Discount_Amount" class="text-danger"></span>
+                    </div>
+                    <div class="mt-3 col-lg-12">
+                        <label asp-for="Discount_Percent" class="control-label">@localizer["Discount Percent"]</label>
+                        <input asp-for="Discount_Percent" class="form-control" data-val-required="@localizer["Discount Percent is required."]" />
+                        <span asp-validation-for="Discount_Percent" class="text-danger"></span>
+                    </div>
+
+                </div>
+            </div>
+            <div class=" my-3 d-flex justify-content-between">
+                <div class="pt-options ">
+                    <a asp-action="Index" class="btn btn-danger mx-2">@localizer["Back"]  </a>
+                </div>
+                <div class="">
+                    <button type="submit" value="Create" class="btn btn-dark form-control float-sm-end px-4">@localizer["Update"]</button>
+                </div>
+
+            </div>
+        </form>
+
+
+    </div>
+</div>
+
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
