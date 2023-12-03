@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CultureWeb")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7f2c8a11fee651d82f9d2f7d2f1d2f9a909677cf")]
 [assembly: System.Reflection.AssemblyProductAttribute("CultureWeb")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CultureWeb")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

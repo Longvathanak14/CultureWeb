@@ -83,70 +83,8 @@ namespace CultureWeb.Areas.Admin.Controllers
         }
 
         // POST: Create
-        //[HttpPost]
-        //public async Task<IActionResult> Create(Products product, IFormFile image , List<int> selectedAttributes)
-        //{
-        //    var searchProduct = _context.Products.FirstOrDefault(c => c.Name == product.Name);
-        //    if (searchProduct != null)
-        //    {
-        //        ViewBag.message = "This product already exists";             
-        //        // Find the MainCategory with the name "Product"
-        //        var productMainCategory = _context.MainCategories.FirstOrDefault(mc => mc.Name == "Product");
-
-        //        if (productMainCategory != null)
-        //        {
-        //            // Get the associated SubCategories for the "Product" MainCategory
-        //            var subCategoriesForProduct = _context.SubCategories
-        //                .Where(sc => sc.MainCategoryId == productMainCategory.Id)
-        //                .ToList();
-
-        //            // Populate the SelectList for English names
-        //            ViewData["subCategoryId"] = new SelectList(subCategoriesForProduct, "Id", "Name");
-
-        //            // Populate the SelectList for Khmer names
-        //            ViewData["subCategoryId_kh"] = new SelectList(subCategoriesForProduct, "Id", "Name_kh");
-        //        }
-
-
-        //        ViewBag.Attributes = _context.Attributes.ToList();
-        //        return View(product);
-        //    }
-
-        //    if (image != null)
-        //    {
-        //        var name = Path.GetFileNameWithoutExtension(image.FileName);
-        //        var extension = Path.GetExtension(image.FileName);
-        //        var fileName = name + "_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + extension;
-        //        var path = Path.Combine(_webHostEnvironment.WebRootPath + "/Images/Product/", fileName);
-        //        await image.CopyToAsync(new FileStream(path, FileMode.Create));
-        //        product.Image = "Images/Product/" + fileName;
-        //    }
-
-        //    if (selectedAttributes != null)
-        //    {
-        //        foreach (var attributeId in selectedAttributes)
-        //        {
-        //            var attribute = await _context.Attributes.FindAsync(attributeId);
-        //            if (attribute != null)
-        //            {
-        //                if (product.ProductAttributes == null)
-        //                    product.ProductAttributes = new List<ProductAttribute>();
-
-        //                product.ProductAttributes.Add(new ProductAttribute { 
-        //                    AttributeId = attributeId 
-        //                });
-        //            }
-        //        }
-        //    }
-
-        //    _context.Products.Add(product);
-        //    await _context.SaveChangesAsync();
-        //    TempData["StatusMessage"] = "CreatedSuccessfully";
-        //    return RedirectToAction(nameof(Index));
-        //}
-
         [HttpPost]
-        public async Task<IActionResult> Create(Products product, List<IFormFile> additionalImages, IFormFile mainImage, List<int> selectedAttributes)
+        public async Task<IActionResult> Create(Products product, IFormFile image, List<int> selectedAttributes)
         {
             var searchProduct = _context.Products.FirstOrDefault(c => c.Name == product.Name);
             if (searchProduct != null)
@@ -169,65 +107,21 @@ namespace CultureWeb.Areas.Admin.Controllers
                     ViewData["subCategoryId_kh"] = new SelectList(subCategoriesForProduct, "Id", "Name_kh");
                 }
 
+
                 ViewBag.Attributes = _context.Attributes.ToList();
                 return View(product);
             }
 
-            // Handle the main product image upload
-            if (mainImage != null)
+            if (image != null)
             {
-                var name = Path.GetFileNameWithoutExtension(mainImage.FileName);
-                var extension = Path.GetExtension(mainImage.FileName);
+                var name = Path.GetFileNameWithoutExtension(image.FileName);
+                var extension = Path.GetExtension(image.FileName);
                 var fileName = name + "_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + extension;
                 var path = Path.Combine(_webHostEnvironment.WebRootPath + "/Images/Product/", fileName);
-                await mainImage.CopyToAsync(new FileStream(path, FileMode.Create));
+                await image.CopyToAsync(new FileStream(path, FileMode.Create));
                 product.Image = "Images/Product/" + fileName;
             }
 
-            // Create a ProductImage instance to store additional image URLs
-            var productImage = new ProductImage
-            {
-                // Set other properties of ProductImage
-                ProductId = product.Id // Associate with the product
-            };
-
-            // Handle additional image uploads if provided
-            if (additionalImages != null && additionalImages.Count >= 3)
-            {
-                for (int i = 0; i < 3; i++)
-                {
-                    var imageFile = additionalImages[i];
-                    if (imageFile != null && imageFile.Length > 0)
-                    {
-                        var name = Path.GetFileNameWithoutExtension(imageFile.FileName);
-                        var extension = Path.GetExtension(imageFile.FileName);
-                        var fileName = name + "_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + extension;
-                        var path = Path.Combine(_webHostEnvironment.WebRootPath, "Images/ProductImage", fileName);
-
-                        using (var stream = new FileStream(path, FileMode.Create))
-                        {
-                            await imageFile.CopyToAsync(stream);
-                        }
-
-                        // Set the corresponding ImageUrl property based on the loop index
-                        switch (i)
-                        {
-                            case 0:
-                                productImage.ImageUrl1 = "Images/ProductImage/" + fileName;
-                                break;
-                            case 1:
-                                productImage.ImageUrl2 = "Images/ProductImage/" + fileName;
-                                break;
-                            case 2:
-                                productImage.ImageUrl3 = "Images/ProductImage/" + fileName;
-                                break;
-                        }
-                    }
-                }
-            }
-
-
-            // Add selected attributes to the product
             if (selectedAttributes != null)
             {
                 foreach (var attributeId in selectedAttributes)
@@ -245,18 +139,125 @@ namespace CultureWeb.Areas.Admin.Controllers
                     }
                 }
             }
-            // Add the product to the database first
+
             _context.Products.Add(product);
-            await _context.SaveChangesAsync(); // Save the product
-
-            // Add the product image to the database
-            _context.ProductImages.Add(productImage);
-            await _context.SaveChangesAsync(); // Save the product image
-
-
+            await _context.SaveChangesAsync();
             TempData["StatusMessage"] = "CreatedSuccessfully";
             return RedirectToAction(nameof(Index));
         }
+
+        //[HttpPost]
+        //public async Task<IActionResult> Create(Products product, List<IFormFile> additionalImages, IFormFile mainImage, List<int> selectedAttributes)
+        //{
+        //    var searchProduct = _context.Products.FirstOrDefault(c => c.Name == product.Name);
+        //    if (searchProduct != null)
+        //    {
+        //        ViewBag.message = "This product already exists";
+        //        // Find the MainCategory with the name "Product"
+        //        var productMainCategory = _context.MainCategories.FirstOrDefault(mc => mc.Name == "Product");
+
+        //        if (productMainCategory != null)
+        //        {
+        //            // Get the associated SubCategories for the "Product" MainCategory
+        //            var subCategoriesForProduct = _context.SubCategories
+        //                .Where(sc => sc.MainCategoryId == productMainCategory.Id)
+        //                .ToList();
+
+        //            // Populate the SelectList for English names
+        //            ViewData["subCategoryId"] = new SelectList(subCategoriesForProduct, "Id", "Name");
+
+        //            // Populate the SelectList for Khmer names
+        //            ViewData["subCategoryId_kh"] = new SelectList(subCategoriesForProduct, "Id", "Name_kh");
+        //        }
+
+        //        ViewBag.Attributes = _context.Attributes.ToList();
+        //        return View(product);
+        //    }
+
+        //    // Handle the main product image upload
+        //    if (mainImage != null)
+        //    {
+        //        var name = Path.GetFileNameWithoutExtension(mainImage.FileName);
+        //        var extension = Path.GetExtension(mainImage.FileName);
+        //        var fileName = name + "_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + extension;
+        //        var path = Path.Combine(_webHostEnvironment.WebRootPath + "/Images/Product/", fileName);
+        //        await mainImage.CopyToAsync(new FileStream(path, FileMode.Create));
+        //        product.Image = "Images/Product/" + fileName;
+        //    }
+
+        //    // Create a ProductImage instance to store additional image URLs
+        //    var productImage = new ProductImage
+        //    {
+        //        // Set other properties of ProductImage
+        //        ProductId = product.Id // Associate with the product
+        //    };
+
+        //    // Handle additional image uploads if provided
+        //    if (additionalImages != null && additionalImages.Count >= 3)
+        //    {
+        //        for (int i = 0; i < 3; i++)
+        //        {
+        //            var imageFile = additionalImages[i];
+        //            if (imageFile != null && imageFile.Length > 0)
+        //            {
+        //                var name = Path.GetFileNameWithoutExtension(imageFile.FileName);
+        //                var extension = Path.GetExtension(imageFile.FileName);
+        //                var fileName = name + "_" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + extension;
+        //                var path = Path.Combine(_webHostEnvironment.WebRootPath, "Images/ProductImage", fileName);
+
+        //                using (var stream = new FileStream(path, FileMode.Create))
+        //                {
+        //                    await imageFile.CopyToAsync(stream);
+        //                }
+
+        //                // Set the corresponding ImageUrl property based on the loop index
+        //                switch (i)
+        //                {
+        //                    case 0:
+        //                        productImage.ImageUrl1 = "Images/ProductImage/" + fileName;
+        //                        break;
+        //                    case 1:
+        //                        productImage.ImageUrl2 = "Images/ProductImage/" + fileName;
+        //                        break;
+        //                    case 2:
+        //                        productImage.ImageUrl3 = "Images/ProductImage/" + fileName;
+        //                        break;
+        //                }
+        //            }
+        //        }
+        //    }
+
+
+        //    // Add selected attributes to the product
+        //    if (selectedAttributes != null)
+        //    {
+        //        foreach (var attributeId in selectedAttributes)
+        //        {
+        //            var attribute = await _context.Attributes.FindAsync(attributeId);
+        //            if (attribute != null)
+        //            {
+        //                if (product.ProductAttributes == null)
+        //                    product.ProductAttributes = new List<ProductAttribute>();
+
+        //                product.ProductAttributes.Add(new ProductAttribute
+        //                {
+        //                    AttributeId = attributeId
+        //                });
+        //            }
+        //        }
+        //    }
+        //    // Add the product to the database first
+        //    _context.Products.Add(product);
+        //    await _context.SaveChangesAsync(); // Save the product
+
+        //    // Add the product image to the database
+        //    _context.ProductImages.Add(productImage);
+        //    await _context.SaveChangesAsync(); // Save the product image
+
+
+        //    TempData["StatusMessage"] = "CreatedSuccessfully";
+        //    return RedirectToAction(nameof(Index));
+        //}
 
 
 
