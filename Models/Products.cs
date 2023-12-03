@@ -11,6 +11,7 @@ namespace CultureWeb.Models
             OrderDetails = new List<OrderDetails>();
             PurchaseDetails = new List<PurchaseDetail>();
             Reviews = new List<Review>(); // Initialize the Reviews property           
+            ProductImages = new List<ProductImage>();
         }
 
         public int Id { get; set; }
@@ -21,8 +22,8 @@ namespace CultureWeb.Models
 
         [Required(ErrorMessage = "Product's Name in Khmer is required.")]
         public string Name_kh { get; set; }
-        public string? Description_kh { get; set; }      
-        public string? Image { get; set; }
+        public string? Description_kh { get; set; }
+       /* public List<string> Image{ get; set; }*/ // List of image URLs
 
         [Required(ErrorMessage = "Product's Color is required.")]
         [Display(Name = "Product Color")]
@@ -56,7 +57,7 @@ namespace CultureWeb.Models
         public virtual List<Review> Reviews { get; set; }
        
         public virtual ProductPrice ProductPrices { get; set; }
-        public virtual ProductImage ProductImages { get; set; }
+        public List<ProductImage> ProductImages { get; set; }
 
 
     }
