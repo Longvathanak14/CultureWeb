@@ -82,8 +82,8 @@ namespace CultureWeb.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: Create
-        [HttpPost]
+        //POST: Create
+       [HttpPost]
         public async Task<IActionResult> Create(Products product, IFormFile image, List<int> selectedAttributes)
         {
             var searchProduct = _context.Products.FirstOrDefault(c => c.Name == product.Name);

@@ -12474,19 +12474,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Lenovo\\.nuget\\packages\\": {}
+    "C:\\Users\\CKP2\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\git hub\\CultureWeb\\CultureWeb.csproj",
+      "projectUniqueName": "D:\\Git Ez Startup\\cultureweb\\CultureWeb.csproj",
       "projectName": "CultureWeb",
-      "projectPath": "D:\\git hub\\CultureWeb\\CultureWeb.csproj",
-      "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-      "outputPath": "D:\\git hub\\CultureWeb\\obj\\",
+      "projectPath": "D:\\Git Ez Startup\\cultureweb\\CultureWeb.csproj",
+      "packagesPath": "C:\\Users\\CKP2\\.nuget\\packages\\",
+      "outputPath": "D:\\Git Ez Startup\\cultureweb\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\CKP2\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12596,7 +12596,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
