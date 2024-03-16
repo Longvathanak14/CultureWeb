@@ -49,7 +49,7 @@ namespace CultureWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Attributes");
+                    b.ToTable("Attributes", (string)null);
                 });
 
             modelBuilder.Entity("CultureWeb.Models.Blog", b =>
@@ -96,7 +96,7 @@ namespace CultureWeb.Migrations
 
                     b.HasIndex("SubCategoryId");
 
-                    b.ToTable("Blogs");
+                    b.ToTable("Blogs", (string)null);
                 });
 
             modelBuilder.Entity("CultureWeb.Models.Contact", b =>
@@ -126,7 +126,7 @@ namespace CultureWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contacts");
+                    b.ToTable("Contacts", (string)null);
                 });
 
             modelBuilder.Entity("CultureWeb.Models.FavoriteProduct", b =>
@@ -149,7 +149,7 @@ namespace CultureWeb.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("FavoriteProducts");
+                    b.ToTable("FavoriteProducts", (string)null);
                 });
 
             modelBuilder.Entity("CultureWeb.Models.MainCategory", b =>
@@ -174,7 +174,7 @@ namespace CultureWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MainCategories");
+                    b.ToTable("MainCategories", (string)null);
                 });
 
             modelBuilder.Entity("CultureWeb.Models.Order", b =>
@@ -213,7 +213,7 @@ namespace CultureWeb.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("CultureWeb.Models.OrderDetails", b =>
@@ -237,7 +237,7 @@ namespace CultureWeb.Migrations
 
                     b.HasIndex("PorductId");
 
-                    b.ToTable("OrderDetails");
+                    b.ToTable("OrderDetails", (string)null);
                 });
 
             modelBuilder.Entity("CultureWeb.Models.ProductAttribute", b =>
@@ -258,33 +258,7 @@ namespace CultureWeb.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductAttribute");
-                });
-
-            modelBuilder.Entity("CultureWeb.Models.ProductImage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageUrl1")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("ImageUrl2")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("ImageUrl3")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId")
-                        .IsUnique();
-
-                    b.ToTable("ProductImages");
+                    b.ToTable("ProductAttribute", (string)null);
                 });
 
             modelBuilder.Entity("CultureWeb.Models.ProductPrice", b =>
@@ -310,7 +284,7 @@ namespace CultureWeb.Migrations
                     b.HasIndex("ProductId")
                         .IsUnique();
 
-                    b.ToTable("ProductPrices");
+                    b.ToTable("ProductPrices", (string)null);
                 });
 
             modelBuilder.Entity("CultureWeb.Models.Products", b =>
@@ -361,7 +335,7 @@ namespace CultureWeb.Migrations
 
                     b.HasIndex("SubCategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("CultureWeb.Models.Purchase", b =>
@@ -390,7 +364,7 @@ namespace CultureWeb.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Purchases");
+                    b.ToTable("Purchases", (string)null);
                 });
 
             modelBuilder.Entity("CultureWeb.Models.PurchaseDetail", b =>
@@ -417,7 +391,7 @@ namespace CultureWeb.Migrations
 
                     b.HasIndex("PurchaseId");
 
-                    b.ToTable("PurchaseDetails");
+                    b.ToTable("PurchaseDetails", (string)null);
                 });
 
             modelBuilder.Entity("CultureWeb.Models.Review", b =>
@@ -456,7 +430,7 @@ namespace CultureWeb.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("CultureWeb.Models.SubCategory", b =>
@@ -489,7 +463,7 @@ namespace CultureWeb.Migrations
 
                     b.HasIndex("MainCategoryId");
 
-                    b.ToTable("SubCategories");
+                    b.ToTable("SubCategories", (string)null);
                 });
 
             modelBuilder.Entity("CultureWeb.Models.Supplier", b =>
@@ -550,7 +524,7 @@ namespace CultureWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Suppliers");
+                    b.ToTable("Suppliers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -861,17 +835,6 @@ namespace CultureWeb.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("CultureWeb.Models.ProductImage", b =>
-                {
-                    b.HasOne("CultureWeb.Models.Products", "Product")
-                        .WithOne("ProductImages")
-                        .HasForeignKey("CultureWeb.Models.ProductImage", "ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("CultureWeb.Models.ProductPrice", b =>
                 {
                     b.HasOne("CultureWeb.Models.Products", "Products")
@@ -1028,9 +991,6 @@ namespace CultureWeb.Migrations
                     b.Navigation("OrderDetails");
 
                     b.Navigation("ProductAttributes");
-
-                    b.Navigation("ProductImages")
-                        .IsRequired();
 
                     b.Navigation("ProductPrices")
                         .IsRequired();
