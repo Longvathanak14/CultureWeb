@@ -29,7 +29,8 @@ namespace CultureWeb.Data
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<PurchaseDetail> PurchaseDetails { get; set; }
-        public DbSet<ProductPrice> ProductPrices { get; set; }       
+        public DbSet<ProductPrice> ProductPrices { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{

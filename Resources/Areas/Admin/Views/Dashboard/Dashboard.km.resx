@@ -171,9 +171,6 @@
   <data name="Product" xml:space="preserve">
     <value>ផលិតផល</value>
   </data>
-  <data name="Purchase" xml:space="preserve">
-    <value>នាំចូល</value>
-  </data>
   <data name="Sat" xml:space="preserve">
     <value>សៅរ៍</value>
   </data>
@@ -185,9 +182,6 @@
   </data>
   <data name="Thu" xml:space="preserve">
     <value>ព្រ.ហ</value>
-  </data>
-  <data name="Total Cost" xml:space="preserve">
-    <value>ចំណាយសរុប</value>
   </data>
   <data name="Totaly" xml:space="preserve">
     <value>សរុប</value>
