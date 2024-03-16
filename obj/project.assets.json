@@ -12479,11 +12479,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Git Ez Startup\\cultureweb\\CultureWeb.csproj",
+      "projectUniqueName": "D:\\Thesis\\CultureWeb\\CultureWeb.csproj",
       "projectName": "CultureWeb",
-      "projectPath": "D:\\Git Ez Startup\\cultureweb\\CultureWeb.csproj",
+      "projectPath": "D:\\Thesis\\CultureWeb\\CultureWeb.csproj",
       "packagesPath": "C:\\Users\\CKP2\\.nuget\\packages\\",
-      "outputPath": "D:\\Git Ez Startup\\cultureweb\\obj\\",
+      "outputPath": "D:\\Thesis\\CultureWeb\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\CKP2\\AppData\\Roaming\\NuGet\\NuGet.Config",
